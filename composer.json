@@ -26,9 +26,21 @@
     ],
     "scripts": {
         "complete": ["@loc", "@cpd", "@dep", "@met"],
-        "loc": "phploc vendor/shopsys/shopsys/src",
-        "cpd": "phpcpd vendor/shopsys/shopsys/src",
-        "dep": "pdepend --jdepend-chart=output/pdepend/pdepend.svg --overview-pyramid=output/pdepend/pyramid.svg vendor/shopsys/shopsys/src",
-        "met": "phpmetrics --report-html=output/php-metrics --exclude=Tests,tests ./vendor/shopsys/shopsys/src"
+        "loc": [
+            "phploc vendor/shopsys/shopsys/src",
+            "phploc vendor/sylius/sylius/src"
+        ],
+        "cpd": [
+            "phpcpd vendor/shopsys/shopsys/src",
+            "phploc vendor/sylius/sylius/src"
+        ],
+        "dep": [
+            "pdepend --overview-pyramid=output/shopsys/pdepend/pyramid.svg --jdepend-chart=output/shopsys/pdepend/pdepend.svg  vendor/shopsys/shopsys/src",
+            "pdepend --overview-pyramid=output/sylius/pdepend/pyramid.svg --jdepend-chart=output/sylius/pdepend/pdepend.svg  vendor/sylius/sylius/src"
+        ],
+        "met": [
+            "phpmetrics --report-html=output/shopsys/php-metrics --exclude=Tests,tests ./vendor/shopsys/shopsys/src",
+            "phpmetrics --report-html=output/sylius/php-metrics --exclude=Tests,tests ./vendor/sylius/sylius/src"
+        ]
     }
 }
