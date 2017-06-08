@@ -1,8 +1,7 @@
 {
     "require": {
-        "shopsys/shopsys": "dev-master"
-    },
-    "require-dev": {
+        "shopsys/shopsys": "dev-master",
+        "pdepend/pdepend": "^2.5",
         "phploc/phploc": "^4.0"
     },
     "repositories": [
@@ -10,7 +9,7 @@
             "type": "package",
             "package": {
                 "name": "shopsys/shopsys",
-                "version": "@dev",
+                "version": "dev-master",
                 "type": "package",
                 "source": {
                     "url": "git@git.shopsys-framework.com:shopsys/shopsys-framework.git",
