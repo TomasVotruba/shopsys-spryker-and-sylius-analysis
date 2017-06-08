@@ -1,8 +1,11 @@
 {
     "require": {
         "shopsys/shopsys": "dev-master",
+        "sylius/sylius": "1.0.0-beta.2",
+        "phploc/phploc": "^4.0",
+        "sebastian/phpcpd": "^3.0",
         "pdepend/pdepend": "^2.5",
-        "phploc/phploc": "^4.0"
+        "phpmetrics/phpmetrics": "^2.2"
     },
     "repositories": [
         {
@@ -18,5 +21,12 @@
                 }
             }
         }
-    ]
+    ],
+    "scripts": {
+        "complete-analysis": ["@loc", "@cpd", "@dep"],
+        "loc": "phploc vendor/shopsys/shopsys/src",
+        "cpd": "phpcpd vendor/shopsys/shopsys/src",
+        "dep": "pdepend --jdepend-chart=output/pdepend/pdepend.svg --overview-pyramid=output/pdepend/pyramid.svg vendor/shopsys/shopsys/src",
+        "metrics": "phpmetrics --report-html=output/php-metrics ./vendor/shopsys/shopsys/src"
+    }
 }
