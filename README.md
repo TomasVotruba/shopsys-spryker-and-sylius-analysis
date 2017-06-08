@@ -59,9 +59,16 @@ Interesting for advanced programmers, more technical and relevant to real code m
 ```bash
 "phpmetrics/phpmetrics": "^2.2"
 ```
- 
-- **Lcom (lack of cohesion in methods) / Cyclomatic complexity** 
-- **Difficulty / Loc (lines of code)** 
+
+- **Maintainability / complexity** image from index
+
+See *Object oriented metrics* section in generated results
+
+- **average LCOM** (lack of cohesion in methods)  
+- **logical lines of code by class**
+- **logical lines of code by method**
+
+*This section can be extended, as [PHP Metrics](https://github.com/phpmetrics/PhpMetrics) generate very complex yet visually clear results.*
 
 
 ## Install
@@ -95,6 +102,19 @@ See `scripts` section in the end of [`composer.json`](composer.json) for more.
 
 ## View Generated Results of Some Tools  
 
-- [see pdepend.svg](output/pdepend/pdepend.svg)
-- [see pyramid.svg](output/pdepend/pyramid.svg)
-- [see PHP Metrics report](output/php-metrics/)
+Run local server to `/output` directory:
+
+```bash
+php -S localhost:8001 -t output
+```
+
+And open particular files:
+
+- [see pdepend.svg](http://localhost:8001/pdepend/pdepend.svg)
+- [see pyramid.svg](http://localhost:8001/pdepend/pyramid.svg)
+- [see PHP Metrics report](http://localhost:8001/php-metrics/)
+
+
+### Notes
+
+- PHPMetrics excludes `/vendor` by default, so `--exlude=...` filter have to be added manually.

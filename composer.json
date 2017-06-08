@@ -29,6 +29,6 @@
         "loc": "phploc vendor/shopsys/shopsys/src",
         "cpd": "phpcpd vendor/shopsys/shopsys/src",
         "dep": "pdepend --jdepend-chart=output/pdepend/pdepend.svg --overview-pyramid=output/pdepend/pyramid.svg vendor/shopsys/shopsys/src",
-        "met": "phpmetrics --report-html=output/php-metrics ./vendor/shopsys/shopsys/src"
+        "met": "phpmetrics --report-html=output/php-metrics --exclude=Tests,tests ./vendor/shopsys/shopsys/src"
     }
 }
