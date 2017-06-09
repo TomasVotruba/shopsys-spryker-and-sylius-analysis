@@ -1,30 +1,4 @@
-# Static Analytics and Code Complexity of Shopsys FW, Sylius and ...? 
-
-## Used Tools
-
-```json
-"phploc/phploc": "^4.0",
-"sebastian/phpcpd": "^3.0",
-"pdepend/pdepend": "^2.5",
-"phpmetrics/phpmetrics": "^2.2"
-```
-
-## Sources of Inspiration 
-
-- 1. [Code complexity: Symfony vs. Laravel](https://medium.com/@taylorotwell/measuring-code-complexity-64356da605f9)
-- 2. [critics of some metrics](https://news.ycombinator.com/item?id=13364649)
-- 3. [Gist by @pmjones - Laravel complexity over time](https://gist.github.com/pmjones/20109b503a4636fc58046382e7dece75)  
-- 4. [Diploma Thesis by @mhujer on Continuous Integration, sections 3.4-3.8](https://blog.martinhujer.cz/bp/)
-- 5. [Visualize Code Quality via PHPMetrics](https://www.sitepoint.com/visualize-codes-quality-phpmetrics/)
-- 6. [Average Code Metric Values in PHP](https://kaosktrl.wordpress.com/2012/08/18/php-code-metrics-statistics/)
-
-Based on feedback on the post, thesis and after insightful consultancy with @mhujer, I've created 2 groups of metrics - *Basic* & *Advanced*.
-
-
-### A. Basic 
-
-Catchy and sexy for laics, but not telling much technical (see [Source 2.](https://news.ycombinator.com/item?id=13364649))
-These can grab your attention very well.
+# Code Complexity of Shopsys FW, Sylius and Spryker 
 
 ```bash
 "sebastian/phpcpd": "^3.0",
@@ -40,45 +14,30 @@ These can grab your attention very well.
 - **Method complexity**
 - **Duplicated code**
 
-### B. Advanced 
-
-Interesting for advanced programmers, more technical and relevant to real code maintainability.
-
 ```bash
 "pdepend/pdepend": "^2.5",
 ```
 
-
-- **visualization of code by PDepend Pyramid** [metrics of expalined](https://pdepend.org/documentation/handbook/reports/overview-pyramid.html), 
+- **Visualization of Code by PDepend Pyramid** [metrics of expalined](https://pdepend.org/documentation/handbook/reports/overview-pyramid.html), 
  
     "The Overview Pyramid provides a simple and size independent way to get a first impression of a software system, and this without an expensive source code analysis."
-
-- `pdepend.svg` rather than metrics provdies **weak and strong classes** in application
 
 
 ```bash
 "phpmetrics/phpmetrics": "^2.2"
 ```
 
-- **Maintainability / complexity** image from index
+- **Maintainability / Complexity** image from index
 
 See *Object oriented metrics* section in generated results
 
-- **average LCOM** (lack of cohesion in methods)  
-- **logical lines of code by class**
-- **logical lines of code by method**
-
-*This section can be extended, as [PHP Metrics](https://github.com/phpmetrics/PhpMetrics) generate very complex yet visually clear results.*
-
+- **Average LCOM** (lack of cohesion in methods)  
+- **Logical lines of code by class**
+- **Logical lines of code by method**
 
 ## Install
 
-Clone this repository and install dependencies: 
-
-```bash
-composer install
-```
-
+See [Setup page](/docs/setup.md)
 
 ## Run
 
@@ -118,3 +77,16 @@ And open particular files:
 ### Notes
 
 - PHPMetrics excludes `/vendor` by default, so `--exlude=...` filter have to be added manually.
+
+
+
+### Resources
+ 
+If you want to read more about code complexity, you can read sources used for this analysis. 
+
+- [Code complexity: Symfony vs. Laravel](https://medium.com/@taylorotwell/measuring-code-complexity-64356da605f9)
+    - [critics of some metrics](https://news.ycombinator.com/item?id=13364649)
+    - [Gist by @pmjones - Laravel complexity over time](https://gist.github.com/pmjones/20109b503a4636fc58046382e7dece75)  
+- [Diploma Thesis by @mhujer on Continuous Integration, sections 3.4-3.8](https://blog.martinhujer.cz/bp/)
+- [Visualize Code Quality via PHPMetrics](https://www.sitepoint.com/visualize-codes-quality-phpmetrics/)
+    - [Average Code Metric Values in PHP](https://kaosktrl.wordpress.com/2012/08/18/php-code-metrics-statistics/)

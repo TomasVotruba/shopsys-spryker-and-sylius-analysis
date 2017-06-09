@@ -1,9 +1,5 @@
 {
     "require": {
-        "shopsys/shopsys": "dev-master#7d0fb979",
-        "sylius/sylius": "1.0.0-beta.2"
-    },
-    "require-dev": {
         "phploc/phploc": "^4.0",
         "sebastian/phpcpd": "^3.0",
         "pdepend/pdepend": "^2.5",
