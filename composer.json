@@ -1,34 +1,22 @@
 {
+    "name": "tomasvotruba/shopsys-analysis",
     "require": {
         "phploc/phploc": "^4.0",
         "sebastian/phpcpd": "^3.0",
         "pdepend/pdepend": "^2.5",
         "phpmetrics/phpmetrics": "^2.2"
     },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "shopsys/shopsys",
-                "version": "dev-master",
-                "type": "package",
-                "source": {
-                    "url": "git@git.shopsys-framework.com:shopsys/shopsys-framework.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        }
-    ],
     "scripts": {
         "complete": ["@loc", "@cpd", "@dep", "@met"],
         "loc": [
-            "phploc vendor/shopsys/shopsys/src",
-            "phploc vendor/sylius/sylius/src"
+            "phploc project/shopsys/src",
+            "phploc project/sylius/src",
+            "phploc project/spryker/vendor/spryker"
         ],
         "cpd": [
-            "phpcpd vendor/shopsys/shopsys/src",
-            "phploc vendor/sylius/sylius/src"
+            "phpcpd project/shopsys/src",
+            "phpcpd project/sylius/src",
+            "phpcpd project/spryker/vendor/spryker"
         ],
         "dep": [
             "pdepend --overview-pyramid=output/shopsys/pdepend/pyramid.svg --jdepend-chart=output/shopsys/pdepend/pdepend.svg  vendor/shopsys/shopsys/src",
