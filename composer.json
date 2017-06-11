@@ -4,27 +4,28 @@
         "phploc/phploc": "^4.0",
         "sebastian/phpcpd": "^3.0",
         "pdepend/pdepend": "^2.5",
-        "phpmetrics/phpmetrics": "^2.2"
+        "phpmetrics/phpmetrics": "^1.5"
     },
     "scripts": {
-        "complete": ["@loc", "@cpd", "@dep", "@met"],
         "loc": [
             "phploc project/shopsys/src",
             "phploc project/sylius/src",
             "phploc project/spryker/vendor/spryker"
         ],
         "cpd": [
-            "phpcpd project/shopsys/src",
-            "phpcpd project/sylius/src",
-            "phpcpd project/spryker/vendor/spryker"
+            "phpcpd project/shopsys/src || true",
+            "phpcpd project/sylius/src || true",
+            "phpcpd project/spryker/vendor/spryker || true"
         ],
         "dep": [
-            "pdepend --overview-pyramid=output/shopsys/pdepend/pyramid.svg --jdepend-chart=output/shopsys/pdepend/pdepend.svg  vendor/shopsys/shopsys/src",
-            "pdepend --overview-pyramid=output/sylius/pdepend/pyramid.svg --jdepend-chart=output/sylius/pdepend/pdepend.svg  vendor/sylius/sylius/src"
+            "pdepend --overview-pyramid=output/shopsys/pdepend-pyramid.svg project/shopsys/src",
+            "pdepend --overview-pyramid=output/sylius/pdepend-pyramid.svg project/sylius/src",
+            "pdepend --overview-pyramid=output/sylius/pdepend-pyramid.svg project/spryker/vendor/spryker"
         ],
         "met": [
-            "phpmetrics --report-html=output/shopsys/php-metrics --exclude=Tests,tests ./vendor/shopsys/shopsys/src",
-            "phpmetrics --report-html=output/sylius/php-metrics --exclude=Tests,tests ./vendor/sylius/sylius/src"
+            "phpmetrics --report-html=output/shopsys/php-metrics project/shopsys/src",
+            "phpmetrics --report-html=output/sylius/php-metrics project/sylius/src",
+            "phpmetrics --report-html=output/sylius/php-metrics --exclude=Tests,tests project/spryker/vendor/spryker"
         ]
     }
 }
