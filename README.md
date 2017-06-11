@@ -24,7 +24,7 @@
 
 
 ```bash
-"phpmetrics/phpmetrics": "^2.2"
+"phpmetrics/phpmetrics": "^1.5"
 ```
 
 - **Maintainability / Complexity** image from index
@@ -39,15 +39,9 @@ See *Object oriented metrics* section in generated results
 
 See [Setup page](/docs/setup.md)
 
-## Run
+## Run Analysis
 
-To make is easy for you, there is prepared shortcut script in [`composer.json`](composer.json) that runs all 4 tools on all projects to compare.
-
-```bash
-composer complete 
-```
-
-Or you can run all 4 tools by themselves:
+You can run 4 anylysing tools by themselves using short :
 
 ```bash
 composer loc
