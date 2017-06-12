@@ -18,9 +18,7 @@
 "pdepend/pdepend": "^2.5",
 ```
 
-- **Visualization of Code by PDepend Pyramid** [metrics of expalined](https://pdepend.org/documentation/handbook/reports/overview-pyramid.html), 
- 
-    "The Overview Pyramid provides a simple and size independent way to get a first impression of a software system, and this without an expensive source code analysis."
+> "The Overview Pyramid provides a simple and size independent way to get a first impression of a software system, and this without an expensive source code analysis."
 
 
 ```bash
@@ -41,13 +39,13 @@ See [Setup page](/docs/setup.md)
 
 ## Run Analysis
 
-You can run 4 anylysing tools by themselves using short :
+You can run 4 analysing tools:
 
 ```bash
-composer loc
-composer cpd
-composer dep
-composer met
+composer loc # 1. lines of code, avg. class and method complexity
+composer cpd # 2. % of duplicated code
+composer dep # 3. visual pyramid
+composer met # 4. php metrics output
 ```
 
 See `scripts` section in the end of [`composer.json`](composer.json) for more.
@@ -55,32 +53,20 @@ See `scripts` section in the end of [`composer.json`](composer.json) for more.
 
 ## View Generated Results of Some Tools  
 
-Run local server to `/output` directory:
+All output can be found in `/output` per project.
 
-```bash
-php -S localhost:8001 -t output
-```
 
-And open particular files:
+### Resources
 
-- [see pdepend.svg](http://localhost:8001/pdepend/pdepend.svg)
-- [see pyramid.svg](http://localhost:8001/pdepend/pyramid.svg)
-- [see PHP Metrics report](http://localhost:8001/php-metrics/)
+If you want to read more about code complexity, you can read sources used for this analysis: 
+
+- [Code complexity: Symfony vs. Laravel](https://medium.com/@taylorotwell/measuring-code-complexity-64356da605f9)
+    - [critics of some metrics](https://news.ycombinator.com/item?id=13364649)
+- [Diploma Thesis by @mhujer on Continuous Integration, sections 3.4-3.8](https://blog.martinhujer.cz/bp/)
+- [Visualization of Code by PDepend Pyramid - metrics of expalined](https://pdepend.org/documentation/handbook/reports/overview-pyramid.html) 
+- [Visualize Code Quality via PHPMetrics](https://www.sitepoint.com/visualize-codes-quality-phpmetrics/)
 
 
 ### Notes
 
-- PHPMetrics excludes `/vendor` by default, so `--exlude=...` filter have to be added manually.
-
-
-
-### Resources
- 
-If you want to read more about code complexity, you can read sources used for this analysis. 
-
-- [Code complexity: Symfony vs. Laravel](https://medium.com/@taylorotwell/measuring-code-complexity-64356da605f9)
-    - [critics of some metrics](https://news.ycombinator.com/item?id=13364649)
-    - [Gist by @pmjones - Laravel complexity over time](https://gist.github.com/pmjones/20109b503a4636fc58046382e7dece75)  
-- [Diploma Thesis by @mhujer on Continuous Integration, sections 3.4-3.8](https://blog.martinhujer.cz/bp/)
-- [Visualize Code Quality via PHPMetrics](https://www.sitepoint.com/visualize-codes-quality-phpmetrics/)
-    - [Average Code Metric Values in PHP](https://kaosktrl.wordpress.com/2012/08/18/php-code-metrics-statistics/)
+- PHPMetrics excludes `/vendor` by default, so `--exlude=...` filter have to be added manually to override and reset this default settings.

@@ -4,7 +4,10 @@
         "phploc/phploc": "^4.0",
         "sebastian/phpcpd": "^3.0",
         "pdepend/pdepend": "^2.5",
-        "phpmetrics/phpmetrics": "^1.5"
+        "phpmetrics/phpmetrics": "^1.10"
+    },
+    "conflict": {
+        "phpmetrics/phpmetrics": ">=2.0"
     },
     "scripts": {
         "loc": [
@@ -20,7 +23,7 @@
         "dep": [
             "pdepend --overview-pyramid=output/shopsys/pdepend-pyramid.svg project/shopsys/src",
             "pdepend --overview-pyramid=output/sylius/pdepend-pyramid.svg project/sylius/src",
-            "pdepend --overview-pyramid=output/sylius/pdepend-pyramid.svg project/spryker/vendor/spryker"
+            "pdepend --overview-pyramid=output/spryker/pdepend-pyramid.svg project/spryker/vendor/spryker"
         ],
         "met": [
             "phpmetrics --report-html=output/shopsys/php-metrics project/shopsys/src",
