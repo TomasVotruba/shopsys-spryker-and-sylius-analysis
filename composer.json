@@ -6,9 +6,6 @@
         "pdepend/pdepend": "^2.5",
         "phpmetrics/phpmetrics": "^1.10"
     },
-    "conflict": {
-        "phpmetrics/phpmetrics": ">=2.0"
-    },
     "scripts": {
         "loc": [
             "phploc project/shopsys/src",
@@ -26,9 +23,9 @@
             "pdepend --overview-pyramid=output/spryker/pdepend-pyramid.svg project/spryker/vendor/spryker"
         ],
         "met": [
-            "phpmetrics --report-html=output/shopsys/php-metrics project/shopsys/src",
-            "phpmetrics --report-html=output/sylius/php-metrics project/sylius/src",
-            "phpmetrics --report-html=output/sylius/php-metrics --exclude=Tests,tests project/spryker/vendor/spryker"
+            "phpmetrics --report-html=output/shopsys/php-metrics/index.html project/shopsys/src",
+            "phpmetrics --report-html=output/sylius/php-metrics/index.html project/sylius/src",
+            "phpmetrics --report-html=output/spryker/php-metrics/index.html --excluded-dirs=Tests,tests project/spryker/vendor/spryker"
         ]
     }
 }
