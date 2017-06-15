@@ -69,4 +69,4 @@ If you want to read more about code complexity, you can read sources used for th
 
 ### Notes
 
-- PHPMetrics excludes `/vendor` by default, so `--exlude=...` filter have to be added manually to override and reset this default settings.
+- PHPMetrics excludes `/vendor` (and [other directories](https://github.com/phpmetrics/PhpMetrics/blob/d0a127cd2da8e75a56b7a27eff7a153c6fed83e6/src/Hal/Application/Config/TreeBuilder.php#L48)) by default, so `--exlude=...` filter have to be added manually to override and reset this default settings.

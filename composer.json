@@ -9,23 +9,23 @@
     "scripts": {
         "loc": [
             "phploc project/shopsys/src",
-            "phploc project/sylius/src",
-            "phploc project/spryker/vendor/spryker"
+            "phploc project/sylius/src --exclude spec --exclude test --exclude Tests --exclude Behat",
+            "phploc project/spryker/vendor/spryker --exclude Tests --exclude tests"
         ],
         "cpd": [
             "phpcpd project/shopsys/src || true",
-            "phpcpd project/sylius/src || true",
-            "phpcpd project/spryker/vendor/spryker || true"
+            "phpcpd project/sylius/src --exclude spec --exclude test --exclude Tests --exclude Behat || true",
+            "phpcpd project/spryker/vendor/spryker  --exclude Tests --exclude tests || true"
         ],
         "dep": [
             "pdepend --overview-pyramid=output/shopsys/pdepend-pyramid.svg project/shopsys/src",
-            "pdepend --overview-pyramid=output/sylius/pdepend-pyramid.svg project/sylius/src",
-            "pdepend --overview-pyramid=output/spryker/pdepend-pyramid.svg project/spryker/vendor/spryker"
+            "pdepend --overview-pyramid=output/sylius/pdepend-pyramid.svg --ignore=spec,test,Tests,Behat project/sylius/src",
+            "pdepend --overview-pyramid=output/spryker/pdepend-pyramid.svg --ignore=Tests,tests project/spryker/vendor/spryker"
         ],
         "met": [
             "phpmetrics --report-html=output/shopsys/php-metrics/index.html project/shopsys/src",
-            "phpmetrics --report-html=output/sylius/php-metrics/index.html project/sylius/src",
-            "phpmetrics --report-html=output/spryker/php-metrics/index.html --excluded-dirs=Tests,tests project/spryker/vendor/spryker"
+            "phpmetrics --report-html=output/sylius/php-metrics/index.html project/sylius/src --excluded-dirs='spec|test|Tests|Behat'",
+            "phpmetrics --report-html=output/spryker/php-metrics/index.html project/spryker/vendor/spryker --excluded-dirs='Tests|tests'"
         ]
     }
 }
