@@ -30,12 +30,17 @@ As project have dependencies in conflict, they have to be cloned to own director
 
 ```bash
 git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys
+cd project/shopsys
+git checkout 829cfde7
+# August 7, 2017
 ```
 
 **Sylius**
 
 ```bash
-git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.0.0-beta.2 project/sylius
+git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.0.0-beta.3 project/sylius
+# July 25, 2017
+# https://github.com/Sylius/Sylius/releases/tag/v1.0.0-beta.3
 ```
 
 **Spryker**
@@ -46,4 +51,7 @@ Therefore `composer install` command is needed in addition to git clone.
 ```bash
 git clone https://github.com/spryker/demoshop --depth 1 --single-branch --branch 2.14 project/spryker
 composer install -d project/spryker
+# May 24, 2017
+# https://github.com/spryker/demoshop/tree/2.14
+# later version had issues with installation
 ```
