@@ -1,7 +1,7 @@
 # Code Complexity of Shopsys FW, Sylius and Spryker 
 
 ```bash
-"sebastian/phpcpd": "^3.0",
+"phploc/phploc": "^4.0",
 ```
 
 - **Lines of Code**
@@ -22,7 +22,7 @@
 
 
 ```bash
-"phpmetrics/phpmetrics": "^1.5"
+"phpmetrics/phpmetrics": "^1.10"
 ```
 
 - **Maintainability / Complexity** image from index
