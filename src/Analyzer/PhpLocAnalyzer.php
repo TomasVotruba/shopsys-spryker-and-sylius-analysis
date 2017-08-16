@@ -4,9 +4,10 @@ namespace TomasVotruba\ShopsysAnalysis\Analyzer;
 
 use SebastianBergmann\PHPLOC\Analyser;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use TomasVotruba\ShopsysAnalysis\Contract\Analyzer\AnalyzerInterface;
 use TomasVotruba\ShopsysAnalysis\Finder\PhpFilesFinder;
 
-final class PhpLocAnalyzer
+final class PhpLocAnalyzer implements AnalyzerInterface
 {
     /**
      * @var SymfonyStyle
@@ -24,11 +25,9 @@ final class PhpLocAnalyzer
         $this->phpFilesFinder = $phpFilesFinder;
     }
 
-    public function process(string $name, string $source): void
+    public function process(string $directory): void
     {
-        $count = $this->analyzeLocInDirectory($source);
-
-        $this->symfonyStyle->title($name);
+        $count = $this->analyzeLocInDirectory($directory);
 
         $this->symfonyStyle->writeln(sprintf(
             'Lines of code (LOC): %d',

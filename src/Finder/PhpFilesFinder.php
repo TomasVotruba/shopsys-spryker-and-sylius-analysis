@@ -8,10 +8,20 @@ use Symfony\Component\Finder\Finder;
 final class PhpFilesFinder
 {
     /**
+     * @var SplFileInfo[][]
+     */
+    private $cachedDirectoryResults = [];
+
+    /**
      * @return SplFileInfo[]
      */
     public function findInDirectory(string $directory): array
     {
+        if (isset($this->cachedDirectoryResults[$directory])) {
+            return $this->cachedDirectoryResults[$directory];
+        }
+
+        /** @var Finder $finder */
         $finder = Finder::create()->in($directory)
             ->ignoreUnreadableDirs()
             ->exclude('spec')
@@ -19,9 +29,15 @@ final class PhpFilesFinder
             ->exclude('Tests')
             ->exclude('tests')
             ->exclude('Behat')
-            ->name('*.php')
-            ->getIterator();
+            ->name('*.php');
 
-        return iterator_to_array($finder);
+        $files = [];
+        foreach ($finder as $file) {
+            $files[] = $file->getRealpath();
+        }
+
+        $this->cachedDirectoryResults[$directory] = $files;
+
+        return $files;
     }
 }
