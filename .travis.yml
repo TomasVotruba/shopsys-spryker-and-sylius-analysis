@@ -9,8 +9,8 @@ install:
   # prepare projects
 
   # ShopSys
-  - git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys
-  - git -C project/shopsys checkout 829cfde7
+#  - git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys
+#  - git -C project/shopsys checkout 829cfde7
 
   # Sylius
   - git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.0.0-beta.3 project/sylius
