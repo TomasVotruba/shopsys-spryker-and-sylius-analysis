@@ -2,37 +2,15 @@
 <?php declare(strict_types=1);
 
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use TomasVotruba\ShopsysAnalysis\Analyzer\PhpCpdAnalyzer;
-use TomasVotruba\ShopsysAnalysis\Analyzer\PhpLocAnalyzer;
-use TomasVotruba\ShopsysAnalysis\Command\AnalyzeCommand;
-use TomasVotruba\ShopsysAnalysis\Finder\PhpFilesFinder;
-use TomasVotruba\ShopsysAnalysis\ProjectProvider;
+use TomasVotruba\ShopsysAnalysis\DependencyInjection\ContainerFactory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 
-// dumb DI
-$input = new ArgvInput;
-$output = new ConsoleOutput;
-$symfonyStyle = new SymfonyStyle($input, $output);
+// Build DI container
+$container = (new ContainerFactory)->create();
 
-$projectProvider = new ProjectProvider;
-
-$phpFilesFinder = new PhpFilesFinder;
-
-$phpLocAnalyzer = new PhpLocAnalyzer($symfonyStyle, $phpFilesFinder);
-$phpCpdAnalyzer = new PhpCpdAnalyzer($symfonyStyle, $phpFilesFinder);
-
-$analyzeCommand = new AnalyzeCommand($symfonyStyle, $projectProvider, $phpLocAnalyzer, $phpCpdAnalyzer);
-
-// setup console
-$application = new Application;
-$application->add($analyzeCommand);
-$application->setDefaultCommand('analyze', true);
-
-// run
-$exitCode = $application->run($input, $output);
-exit($exitCode);
+// Run Console Application
+/** @var Application $application */
+$application = $container->get(Application::class);
+exit($application->run());
