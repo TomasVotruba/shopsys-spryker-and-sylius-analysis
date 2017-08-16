@@ -1,5 +1,6 @@
 {
     "name": "tomasvotruba/shopsys-analysis",
+    "license": "MIT",
     "require": {
         "php": "^7.1",
         "phploc/phploc": "^4.0",
@@ -7,6 +8,9 @@
         "phpmetrics/phpmetrics": "^1.10",
         "symfony/console": "^3.3",
         "symfony/finder": "^3.3"
+    },
+    "require-dev": {
+        "tracy/tracy": "^2.4"
     },
     "autoload": {
         "psr-4": {
@@ -24,8 +28,5 @@
             "phpmetrics --report-html=output/sylius/php-metrics/index.html project/sylius/src --excluded-dirs='spec|test|Tests|Behat'",
             "phpmetrics --report-html=output/spryker/php-metrics/index.html project/spryker/vendor/spryker --excluded-dirs='Tests|tests'"
         ]
-    },
-    "require-dev": {
-        "tracy/tracy": "^2.4"
     }
 }

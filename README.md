@@ -1,13 +1,6 @@
 # Code Complexity of Shopsys FW, Sylius and Spryker 
 
 ```bash
-"sebastian/phpcpd": "^3.0",
-```
-
-- **Method complexity**
-- **Duplicated code**
-
-```bash
 "phpmetrics/phpmetrics": "^1.10"
 ```
 
@@ -27,10 +20,7 @@ See [Setup page](/docs/setup.md)
 
 ## Run Analysis
 
-
-
 ```bash
-composer cpd # % of duplicated code
 composer met # php metrics output
 ```
 

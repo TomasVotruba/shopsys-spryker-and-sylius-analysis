@@ -45,6 +45,11 @@ final class AnalyzeCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         foreach ($this->projectProvider->provide() as $name => $source) {
+            // skip non-existing source, e.g. on Travis
+            if (! file_exists($source)) {
+                continue;
+            }
+
             $this->phpLocAnalyzer->process($name, $source);
 
             $this->symfonyStyle->newLine(2);
