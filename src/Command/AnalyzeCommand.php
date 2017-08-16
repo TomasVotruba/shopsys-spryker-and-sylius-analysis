@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
+use TomasVotruba\ShopsysAnalysis\Finder\PhpFilesFinder;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 
 final class AnalyzeCommand extends Command
@@ -23,10 +24,19 @@ final class AnalyzeCommand extends Command
      */
     private $projectProvider;
 
-    public function __construct(SymfonyStyle $symfonyStyle, ProjectProvider $projectProvider)
-    {
+    /**
+     * @var PhpFilesFinder
+     */
+    private $phpFilesFinder;
+
+    public function __construct(
+        SymfonyStyle $symfonyStyle,
+        ProjectProvider $projectProvider,
+        PhpFilesFinder $phpFilesFinder
+    ) {
         $this->symfonyStyle = $symfonyStyle;
         $this->projectProvider = $projectProvider;
+        $this->phpFilesFinder = $phpFilesFinder;
         parent::__construct();
     }
 
@@ -73,29 +83,14 @@ final class AnalyzeCommand extends Command
         return 1;
     }
 
+    /**
+     * @return mixed[]
+     */
     private function analyzeLocInDirectory(string $directory): array
     {
-        $files = $this->findFilesInDirectory($directory);
+        $files = $this->phpFilesFinder->findInDirectory($directory);
 
         // have to be created fresh for every project, uses cache
         return (new Analyser)->countFiles($files, false);
-    }
-
-    /**
-     * @return SplFileInfo[]
-     */
-    private function findFilesInDirectory(string $directory): array
-    {
-        $finder = Finder::create()->in($directory)
-            ->ignoreUnreadableDirs()
-            ->exclude('spec')
-            ->exclude('test')
-            ->exclude('Tests')
-            ->exclude('tests')
-            ->exclude('Behat')
-            ->name('*.php')
-            ->getIterator();
-
-        return iterator_to_array($finder);
     }
 }

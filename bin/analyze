@@ -3,24 +3,31 @@
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use TomasVotruba\ShopsysAnalysis\Command\AnalyzeCommand;
+use TomasVotruba\ShopsysAnalysis\Finder\PhpFilesFinder;
+use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 
-// dump DI
-$input = new Symfony\Component\Console\Input\ArgvInput;
+// dumb DI
+$input = new ArgvInput;
 $output = new ConsoleOutput;
 $symfonyStyle = new SymfonyStyle($input, $output);
 
-$projectProvider = new \TomasVotruba\ShopsysAnalysis\ProjectProvider;
+$projectProvider = new ProjectProvider;
 
-$analyzeCommand = new AnalyzeCommand($symfonyStyle, $projectProvider);
+$phpFilesFinder = new PhpFilesFinder;
 
+$analyzeCommand = new AnalyzeCommand($symfonyStyle, $projectProvider, $phpFilesFinder);
+
+// setup console
 $application = new Application;
 $application->add($analyzeCommand);
 $application->setDefaultCommand('analyze', true);
 
-$return = $application->run();
-exit($return);
+// run
+$exitCode = $application->run($input, $output);
+exit($exitCode);
