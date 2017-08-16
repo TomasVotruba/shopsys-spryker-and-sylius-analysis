@@ -30,8 +30,7 @@ As project have dependencies in conflict, they have to be cloned to own director
 
 ```bash
 git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys
-cd project/shopsys
-git checkout 829cfde7
+git -C project/shopsys checkout 829cfde7  
 # August 7, 2017
 ```
 
