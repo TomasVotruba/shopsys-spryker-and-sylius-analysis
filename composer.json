@@ -3,7 +3,6 @@
     "require": {
         "phploc/phploc": "^4.0",
         "sebastian/phpcpd": "^3.0",
-        "pdepend/pdepend": "^2.5",
         "phpmetrics/phpmetrics": "^1.10"
     },
     "scripts": {
@@ -16,11 +15,6 @@
             "phpcpd project/shopsys/src || true",
             "phpcpd project/sylius/src --exclude spec --exclude test --exclude Tests --exclude Behat || true",
             "phpcpd project/spryker/vendor/spryker  --exclude Tests --exclude tests || true"
-        ],
-        "dep": [
-            "pdepend --overview-pyramid=output/shopsys/pdepend-pyramid.svg project/shopsys/src",
-            "pdepend --overview-pyramid=output/sylius/pdepend-pyramid.svg --ignore=spec,test,Tests,Behat project/sylius/src",
-            "pdepend --overview-pyramid=output/spryker/pdepend-pyramid.svg --ignore=Tests,tests project/spryker/vendor/spryker"
         ],
         "met": [
             "phpmetrics --report-html=output/shopsys/php-metrics/index.html project/shopsys/src",

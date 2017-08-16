@@ -1,0 +1,65 @@
+phploc 4.0.0 by Sebastian Bergmann.
+
+Directories                                        293
+Files                                             1280
+
+Size
+  Lines of Code (LOC)                            94590
+  Comment Lines of Code (CLOC)                   24092 (25.47%)
+  Non-Comment Lines of Code (NCLOC)              70498 (74.53%)
+  Logical Lines of Code (LLOC)                   22938 (24.25%)
+    Classes                                      16710 (72.85%)
+      Average Class Length                          13
+        Minimum Class Length                         0
+        Maximum Class Length                       272
+      Average Method Length                          2
+        Minimum Method Length                        0
+        Maximum Method Length                      261
+    Functions                                        3 (0.01%)
+      Average Function Length                        0
+    Not in classes or functions                   6225 (27.14%)
+
+Cyclomatic Complexity
+  Average Complexity per LLOC                     0.10
+  Average Complexity per Class                    2.88
+    Minimum Class Complexity                      1.00
+    Maximum Class Complexity                     65.00
+  Average Complexity per Method                   1.52
+    Minimum Method Complexity                     1.00
+    Maximum Method Complexity                    12.00
+
+Dependencies
+  Global Accesses                                    0
+    Global Constants                                 0 (0.00%)
+    Global Variables                                 0 (0.00%)
+    Super-Global Variables                           0 (0.00%)
+  Attribute Accesses                              8028
+    Non-Static                                    8016 (99.85%)
+    Static                                          12 (0.15%)
+  Method Calls                                   11095
+    Non-Static                                   10809 (97.42%)
+    Static                                         286 (2.58%)
+
+Structure
+  Namespaces                                       293
+  Interfaces                                        91
+  Traits                                             1
+  Classes                                         1186
+    Abstract Classes                                 8 (0.67%)
+    Concrete Classes                              1178 (99.33%)
+  Methods                                         4583
+    Scope
+      Non-Static Methods                          4547 (99.21%)
+      Static Methods                                36 (0.79%)
+    Visibility
+      Public Methods                              3840 (83.79%)
+      Non-Public Methods                           743 (16.21%)
+  Functions                                         51
+    Named Functions                                  3 (5.88%)
+    Anonymous Functions                             48 (94.12%)
+  Constants                                        503
+    Global Constants                                 0 (0.00%)
+    Class Constants                                503 (100.00%)
+phploc 4.0.0 by Sebastian Bergmann.
+
+No files found to scan
