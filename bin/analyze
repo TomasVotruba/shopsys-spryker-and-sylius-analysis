@@ -5,6 +5,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use TomasVotruba\ShopsysAnalysis\Analyzer\PhpLocAnalyzer;
 use TomasVotruba\ShopsysAnalysis\Command\AnalyzeCommand;
 use TomasVotruba\ShopsysAnalysis\Finder\PhpFilesFinder;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
@@ -21,7 +22,9 @@ $projectProvider = new ProjectProvider;
 
 $phpFilesFinder = new PhpFilesFinder;
 
-$analyzeCommand = new AnalyzeCommand($symfonyStyle, $projectProvider, $phpFilesFinder);
+$phpLocAnalyzer = new PhpLocAnalyzer($symfonyStyle, $phpFilesFinder);
+
+$analyzeCommand = new AnalyzeCommand($symfonyStyle, $projectProvider, $phpLocAnalyzer);
 
 // setup console
 $application = new Application;
