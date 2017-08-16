@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Style\SymfonyStyle;
+use TomasVotruba\ShopsysAnalysis\Command\AnalyzeCommand;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+
+// dump DI
+$input = new Symfony\Component\Console\Input\ArgvInput;
+$output = new ConsoleOutput;
+$symfonyStyle = new SymfonyStyle($input, $output);
+
+$projectProvider = new \TomasVotruba\ShopsysAnalysis\ProjectProvider;
+
+$analyzeCommand = new AnalyzeCommand($symfonyStyle, $projectProvider);
+
+$application = new Application;
+$application->add($analyzeCommand);
+$application->setDefaultCommand('analyze', true);
+
+$return = $application->run();
+exit($return);

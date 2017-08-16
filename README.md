@@ -1,13 +1,6 @@
 # Code Complexity of Shopsys FW, Sylius and Spryker 
 
 ```bash
-"phploc/phploc": "^4.0",
-```
-
-- **Lines of Code**
-- **Class complexity**
-
-```bash
 "sebastian/phpcpd": "^3.0",
 ```
 
@@ -34,20 +27,18 @@ See [Setup page](/docs/setup.md)
 
 ## Run Analysis
 
+
+
+```bash
+composer cpd # % of duplicated code
+composer met # php metrics output
+```
+
 You can run 3 analysing tools:
 
 ```bash
-composer loc # 1. lines of code, avg. class and method complexity
-composer cpd # 2. % of duplicated code
-composer met # 3. php metrics output
+bin/analyze
 ```
-
-See `scripts` section in the end of [`composer.json`](composer.json) for more.
-
-
-> txt
-
-@todo: add parsing output of first 2 files to data...
 
 
 ## View Generated Results of Some Tools  

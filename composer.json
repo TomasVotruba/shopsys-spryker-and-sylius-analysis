@@ -1,16 +1,19 @@
 {
     "name": "tomasvotruba/shopsys-analysis",
     "require": {
+        "php": "^7.1",
         "phploc/phploc": "^4.0",
         "sebastian/phpcpd": "^3.0",
-        "phpmetrics/phpmetrics": "^1.10"
+        "phpmetrics/phpmetrics": "^1.10",
+        "symfony/console": "^3.3",
+        "symfony/finder": "^3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "TomasVotruba\\ShopsysAnalysis\\": "src"
+        }
     },
     "scripts": {
-        "loc": [
-            "phploc project/shopsys/src",
-            "phploc project/sylius/src --exclude spec --exclude test --exclude Tests --exclude Behat",
-            "phploc project/spryker/vendor/spryker --exclude Tests --exclude tests"
-        ],
         "cpd": [
             "phpcpd project/shopsys/src || true",
             "phpcpd project/sylius/src --exclude spec --exclude test --exclude Tests --exclude Behat || true",
@@ -21,5 +24,8 @@
             "phpmetrics --report-html=output/sylius/php-metrics/index.html project/sylius/src --excluded-dirs='spec|test|Tests|Behat'",
             "phpmetrics --report-html=output/spryker/php-metrics/index.html project/spryker/vendor/spryker --excluded-dirs='Tests|tests'"
         ]
+    },
+    "require-dev": {
+        "tracy/tracy": "^2.4"
     }
 }

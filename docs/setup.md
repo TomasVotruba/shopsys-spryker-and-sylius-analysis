@@ -50,7 +50,7 @@ Therefore `composer install` command is needed in addition to git clone.
 
 ```bash
 git clone https://github.com/spryker/demoshop --depth 1 --single-branch --branch 2.14 project/spryker
-composer install -d project/spryker
+composer install --working-dir project/spryker
 # May 24, 2017
 # https://github.com/spryker/demoshop/tree/2.14
 # later version had issues with installation
