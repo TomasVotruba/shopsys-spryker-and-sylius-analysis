@@ -22,3 +22,5 @@ install:
 scripts:
   - bin/analyze
 
+notifications:
+  emails: never
