@@ -9,6 +9,9 @@ before_install:
   # not preinstalled
 #  - pecl install bcmath
 #  - pecl install gmp
+
+  # Install bz2
+  - pecl channel-update pear.php.net
   - pecl install bz2
 #  - echo "extension = bcmath.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 #  - echo "extension = gmp.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
