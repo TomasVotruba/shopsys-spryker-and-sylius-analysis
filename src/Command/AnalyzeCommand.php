@@ -6,8 +6,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use TomasVotruba\ShopsysAnalysis\Analyzer\PhpCpdAnalyzer;
-use TomasVotruba\ShopsysAnalysis\Analyzer\PhpLocAnalyzer;
+use TomasVotruba\ShopsysAnalysis\Contract\Analyzer\AnalyzerInterface;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 
 final class AnalyzeCommand extends Command
@@ -28,25 +27,20 @@ final class AnalyzeCommand extends Command
     private $projectProvider;
 
     /**
-     * @var PhpLocAnalyzer
+     * @var AnalyzerInterface[]
      */
-    private $phpLocAnalyzer;
-    /**
-     * @var PhpCpdAnalyzer
-     */
-    private $phpCpdAnalyzer;
+    private $analyzers = [];
 
-    public function __construct(
-        SymfonyStyle $symfonyStyle,
-        ProjectProvider $projectProvider,
-        PhpLocAnalyzer $phpLocAnalyzer,
-        PhpCpdAnalyzer $phpCpdAnalyzer
-    ) {
+    public function __construct(SymfonyStyle $symfonyStyle, ProjectProvider $projectProvider)
+    {
         $this->symfonyStyle = $symfonyStyle;
         $this->projectProvider = $projectProvider;
-        $this->phpLocAnalyzer = $phpLocAnalyzer;
-        $this->phpCpdAnalyzer = $phpCpdAnalyzer;
         parent::__construct();
+    }
+
+    public function addAnalyzer(AnalyzerInterface $analyzer): void
+    {
+        $this->analyzers[] = $analyzer;
     }
 
     protected function configure(): void
@@ -64,8 +58,9 @@ final class AnalyzeCommand extends Command
 
             $this->symfonyStyle->title($name);
 
-            $this->phpLocAnalyzer->process($source);
-            $this->phpCpdAnalyzer->process($source);
+            foreach ($this->analyzers as $analyzer) {
+                $analyzer->process($source);
+            }
 
             $this->symfonyStyle->newLine(2);
         }

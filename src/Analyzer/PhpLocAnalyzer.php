@@ -53,6 +53,16 @@ final class PhpLocAnalyzer implements AnalyzerInterface
             'Number of Methods/Number of Classes: %0.2f',
             $count['methods'] / $count['classes'] ?: 1
         ));
+
+        $this->symfonyStyle->writeln(sprintf(
+            'Maximum Method Length: %0.2f',
+            $count['methodLlocMax']
+        ));
+
+        $this->symfonyStyle->writeln(sprintf(
+            'Maximum Method Cyclomatic Complexity: %0.2f',
+            $count['methodCcnMax']
+        ));
     }
 
     /**

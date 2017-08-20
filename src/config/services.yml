@@ -14,7 +14,6 @@ services:
     Symfony\Component\Console\Input\ArgvInput: ~
     Symfony\Component\Console\Style\SymfonyStyle: ~
 
-
     # alias required for SymfonyStyle
     Symfony\Component\Console\Output\OutputInterface:
         alias: Symfony\Component\Console\Output\ConsoleOutput

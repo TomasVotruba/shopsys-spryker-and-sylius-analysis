@@ -31,7 +31,7 @@ final class PhpCpdAnalyzer implements AnalyzerInterface
     {
         $codeCloneMap = $this->analyzeDirectory($directory);
 
-        $this->symfonyStyle->write(sprintf(
+        $this->symfonyStyle->writeln(sprintf(
             'Duplicate code: %0.2f %%',
             $codeCloneMap->getPercentage()
         ));
