@@ -1,27 +1,26 @@
 {
     "name": "tomasvotruba/shopsys-analysis",
+    "license": "MIT",
     "require": {
+        "php": "^7.1",
         "phploc/phploc": "^4.0",
         "sebastian/phpcpd": "^3.0",
-        "pdepend/pdepend": "^2.5",
-        "phpmetrics/phpmetrics": "^1.10"
+        "phpmetrics/phpmetrics": "^1.10",
+        "symfony/console": "^3.3",
+        "symfony/finder": "^3.3",
+        "symfony/dependency-injection": "^3.3",
+        "symfony/http-kernel": "^3.3",
+        "symplify/package-builder": "^2.2"
+    },
+    "require-dev": {
+        "tracy/tracy": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "TomasVotruba\\ShopsysAnalysis\\": "src"
+        }
     },
     "scripts": {
-        "loc": [
-            "phploc project/shopsys/src",
-            "phploc project/sylius/src --exclude spec --exclude test --exclude Tests --exclude Behat",
-            "phploc project/spryker/vendor/spryker --exclude Tests --exclude tests"
-        ],
-        "cpd": [
-            "phpcpd project/shopsys/src || true",
-            "phpcpd project/sylius/src --exclude spec --exclude test --exclude Tests --exclude Behat || true",
-            "phpcpd project/spryker/vendor/spryker  --exclude Tests --exclude tests || true"
-        ],
-        "dep": [
-            "pdepend --overview-pyramid=output/shopsys/pdepend-pyramid.svg project/shopsys/src",
-            "pdepend --overview-pyramid=output/sylius/pdepend-pyramid.svg --ignore=spec,test,Tests,Behat project/sylius/src",
-            "pdepend --overview-pyramid=output/spryker/pdepend-pyramid.svg --ignore=Tests,tests project/spryker/vendor/spryker"
-        ],
         "met": [
             "phpmetrics --report-html=output/shopsys/php-metrics/index.html project/shopsys/src",
             "phpmetrics --report-html=output/sylius/php-metrics/index.html project/sylius/src --excluded-dirs='spec|test|Tests|Behat'",

@@ -1,0 +1,47 @@
+language: php
+
+sudo: true
+
+php:
+  - 7.1
+
+before_install:
+  # Spryker required extensions
+  - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+  # Add sury repo
+  - sudo add-apt-repository ppa:ondrej/php -y # "-y" for skipping "Enter" reuqired message
+  - sudo apt-get update
+  - sudo apt-get install php7.1-gmp
+  - sudo apt-get install php7.1-bz2
+
+  # Debug: current config
+  - php-config --configure-options
+
+  # Install bz2
+#  - pecl channel-update pear.php.net
+#  - pecl install bz2
+#  - echo "extension = bcmath.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+#  - echo "extension = gmp.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+#  - echo "extension = bz2.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+install:
+  - composer install
+  # prepare projects
+
+  # ShopSys
+#  - git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys
+#  - git -C project/shopsys checkout 829cfde7
+
+  # Sylius
+  - git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.0.0-beta.3 project/sylius
+
+  # Spryker
+  - git clone https://github.com/spryker/demoshop --depth 1 --single-branch --branch 2.14 project/spryker
+  - composer install --working-dir project/spryker
+
+scripts:
+  - bin/analyze
+
+notifications:
+  emails: never

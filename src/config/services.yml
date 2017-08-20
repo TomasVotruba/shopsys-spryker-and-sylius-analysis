@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        autowire: true
+
+    TomasVotruba\ShopsysAnalysis\:
+        resource: '../../src'
+
+    # Symfony Console
+    TomasVotruba\ShopsysAnalysis\Console\ApplicationFactory: ~
+    Symfony\Component\Console\Application:
+        factory: ['@TomasVotruba\ShopsysAnalysis\Console\ApplicationFactory', 'create']
+
+    Symfony\Component\Console\Output\ConsoleOutput: ~
+    Symfony\Component\Console\Input\ArgvInput: ~
+    Symfony\Component\Console\Style\SymfonyStyle: ~
+
+    # alias required for SymfonyStyle
+    Symfony\Component\Console\Output\OutputInterface:
+        alias: Symfony\Component\Console\Output\ConsoleOutput
