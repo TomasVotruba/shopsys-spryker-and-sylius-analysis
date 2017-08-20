@@ -1,5 +1,7 @@
 language: php
 
+sudo: true
+
 php:
   - 7.1
 
@@ -9,6 +11,9 @@ before_install:
   # not preinstalled
 #  - pecl install bcmath
 #  - pecl install gmp
+  - sudo apt-get install php7.1-gmp
+  - sudo apt-get install php7.1-bz2
+
 
   # Install bz2
 #  - pecl channel-update pear.php.net
