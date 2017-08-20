@@ -6,10 +6,9 @@ services:
         resource: '../../src'
 
     # Symfony Console
+    TomasVotruba\ShopsysAnalysis\Console\ApplicationFactory: ~
     Symfony\Component\Console\Application:
-        calls:
-            - ['add', ['@TomasVotruba\ShopsysAnalysis\Command\AnalyzeCommand']]
-            - ['setDefaultCommand', ['analyze', true]]
+        factory: ['@TomasVotruba\ShopsysAnalysis\Console\ApplicationFactory', 'create']
 
     Symfony\Component\Console\Output\ConsoleOutput: ~
     Symfony\Component\Console\Input\ArgvInput: ~

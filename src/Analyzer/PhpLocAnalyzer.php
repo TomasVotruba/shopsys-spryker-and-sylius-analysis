@@ -30,7 +30,7 @@ final class PhpLocAnalyzer implements AnalyzerInterface
         $count = $this->analyzeLocInDirectory($directory);
 
         $this->symfonyStyle->writeln(sprintf(
-            'Lines of code (LOC): %d',
+            'Lines of code: %d',
             $count['loc']
         ));
 

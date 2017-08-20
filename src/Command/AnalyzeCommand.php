@@ -13,6 +13,11 @@ use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 final class AnalyzeCommand extends Command
 {
     /**
+     * @var string
+     */
+    public const NAME = 'analyze';
+
+    /**
      * @var SymfonyStyle
      */
     private $symfonyStyle;
@@ -46,7 +51,7 @@ final class AnalyzeCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName('analyze');
+        $this->setName(self::NAME);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
