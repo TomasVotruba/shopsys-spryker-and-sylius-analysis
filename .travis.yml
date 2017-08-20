@@ -7,7 +7,7 @@ before_install:
   # Spryker required extensions
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   # not preinstalled
-  - pecl install bcmath
+#  - pecl install bcmath
   - pecl install gmp
   - pecl install bz2
 #  - echo "extension = bcmath.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
