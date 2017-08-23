@@ -5,36 +5,31 @@ namespace TomasVotruba\ShopsysAnalysis\Analyzer;
 use SebastianBergmann\PHPCPD\CodeCloneMap;
 use SebastianBergmann\PHPCPD\Detector\Detector;
 use SebastianBergmann\PHPCPD\Detector\Strategy\DefaultStrategy;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use TomasVotruba\ShopsysAnalysis\Contract\Analyzer\AnalyzerInterface;
 use TomasVotruba\ShopsysAnalysis\Finder\PhpFilesFinder;
 
 final class PhpCpdAnalyzer implements AnalyzerInterface
 {
     /**
-     * @var SymfonyStyle
-     */
-    private $symfonyStyle;
-
-    /**
      * @var PhpFilesFinder
      */
     private $phpFilesFinder;
 
-    public function __construct(SymfonyStyle $symfonyStyle, PhpFilesFinder $phpFilesFinder)
+    public function __construct(PhpFilesFinder $phpFilesFinder)
     {
-        $this->symfonyStyle = $symfonyStyle;
         $this->phpFilesFinder = $phpFilesFinder;
     }
 
-    public function process(string $directory): void
+    /**
+     * @return mixed[]
+     */
+    public function process(string $directory): array
     {
         $codeCloneMap = $this->analyzeDirectory($directory);
 
-        $this->symfonyStyle->writeln(sprintf(
-            'Duplicate code: %0.2f %%',
-            $codeCloneMap->getPercentage()
-        ));
+        return [
+            'Duplicate code' => round($codeCloneMap->getPercentage(), 2)
+        ];
     }
 
     private function analyzeDirectory(string $directory): CodeCloneMap

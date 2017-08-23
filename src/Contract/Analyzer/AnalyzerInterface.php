@@ -4,5 +4,8 @@ namespace TomasVotruba\ShopsysAnalysis\Contract\Analyzer;
 
 interface AnalyzerInterface
 {
-    public function process(string $directory): void;
+    /**
+     * @return mixed { name => value }
+     */
+    public function process(string $directory): array;
 }

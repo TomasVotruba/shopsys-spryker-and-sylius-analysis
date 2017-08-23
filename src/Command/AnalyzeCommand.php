@@ -52,17 +52,24 @@ final class AnalyzeCommand extends Command
     {
         foreach ($this->projectProvider->provide() as $name => $source) {
             // skip non-existing source, e.g. on Travis
-            if (! file_exists($source)) {
+             if (! file_exists($source)) {
                 continue;
             }
 
             $this->symfonyStyle->title($name);
 
             foreach ($this->analyzers as $analyzer) {
-                $analyzer->process($source);
+                $data = $analyzer->process($source);
+                foreach ($data as $metricName => $metricValue) {
+                    $this->symfonyStyle->writeln(sprintf(
+                        '%s: <options=bold>%s</>',
+                        $metricName,
+                        $metricValue
+                    ));
+                }
             }
 
-            $this->symfonyStyle->newLine(2);
+            $this->symfonyStyle->newLine();
         }
 
         return 1;
