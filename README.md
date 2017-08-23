@@ -1,4 +1,7 @@
-# Code Complexity of Shopsys FW, Spryker & Sylius
+# Code Complexity of [Shopsys FW](https://www.shopsys-framework.com/), [Spryker](https://spryker.com/) & [Sylius](http://sylius.org/)
+
+[![Build Status](https://img.shields.io/travis/TomasVotruba/shopsys-analysis.svg?style=flat-square)](https://travis-ci.org/TomasVotruba/shopsys-analysis)
+
 
 You can find nice summary of these metrics [in a blogpost](@todo - complete when published).
 
@@ -8,6 +11,7 @@ But to be sure, you can **run them yourself on you local machine**:
 ## Install
 
 See [Setup page](/docs/setup.md)
+
 @todo move here?
 
 
