@@ -26,7 +26,10 @@ bin/analyze
 ```
 
 
-@todo: screenshot
+And it will print this nice summary for every project:
+
+
+![Preview](docs/preview.png)
 
 
 
@@ -45,9 +48,9 @@ It will take a while - around 8-10 minutes - thanks to big amount of code for Sp
 Then, you can go to particular directories to see results:
 
 ```php
-/output/shopsys/php-metrics/
-/output/spryker/php-metrics/
-/output/sylius/php-metrics/
+/output/shopsys/php-metrics
+/output/spryker/php-metrics
+/output/sylius/php-metrics
 ```
 
 
@@ -55,9 +58,7 @@ Then, you can go to particular directories to see results:
 
 If you want to read more about code complexity, you can read sources used for this analysis: 
 
-- [Code complexity: Symfony vs. Laravel](https://medium.com/@taylorotwell/measuring-code-complexity-64356da605f9)
-    - [critics of some metrics](https://news.ycombinator.com/item?id=13364649)
-- [Diploma Thesis by @mhujer on Continuous Integration, sections 3.4-3.8](https://blog.martinhujer.cz/bp/)
+- [Code complexity: Symfony vs. Laravel](https://medium.com/@taylorotwell/measuring-code-complexity-64356da605f9) + [its critics](https://news.ycombinator.com/item?id=13364649)
 - [Visualize Code Quality via PHPMetrics](https://www.sitepoint.com/visualize-codes-quality-phpmetrics/)
 
 
