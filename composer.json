@@ -23,8 +23,8 @@
     "scripts": {
         "met": [
             "phpmetrics --report-html=output/shopsys/php-metrics/index.html project/shopsys/src",
-            "phpmetrics --report-html=output/sylius/php-metrics/index.html project/sylius/src --excluded-dirs='spec|test|Tests|Behat'",
-            "phpmetrics --report-html=output/spryker/php-metrics/index.html project/spryker/vendor/spryker --excluded-dirs='Tests|tests'"
+            "phpmetrics --report-html=output/spryker/php-metrics/index.html project/spryker/vendor/spryker --excluded-dirs='Tests|tests'",
+            "phpmetrics --report-html=output/sylius/php-metrics/index.html project/sylius/src --excluded-dirs='spec|test|Tests|Behat'"
         ]
     }
 }
