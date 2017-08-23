@@ -44,4 +44,4 @@ scripts:
   - bin/analyze
 
 notifications:
-  emails: never
+  email: never
