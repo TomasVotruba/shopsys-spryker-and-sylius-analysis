@@ -1,6 +1,6 @@
 # Code Complexity of [Shopsys FW](https://www.shopsys-framework.com/), [Spryker](https://spryker.com/) & [Sylius](http://sylius.org/)
 
-[![Build Status](https://img.shields.io/travis/TomasVotruba/shopsys-analysis.svg?style=flat-square)](https://travis-ci.org/TomasVotruba/shopsys-analysis)
+[![Build Status](https://img.shields.io/travis/TomasVotruba/shopsys-spryker-and-sylius-analysis.svg?style=flat-square)](https://travis-ci.org/TomasVotruba/shopsys-spryker-and-sylius-analysis)
 
 
 You can find nice summary of these metrics [in a blogpost](@todo - complete when published).
