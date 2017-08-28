@@ -8,18 +8,68 @@ You can find nice summary of these metrics [in a blogpost](@todo - complete when
 But to be sure, you can **run them yourself on you local machine**:
 
 
-## Install
+## 1. Install
 
-See [Setup page](/docs/setup.md)
-
-@todo move here?
-
-
+[Spryker](https://spryker.com/) requires few extra PHP extensions. Here is how you add them:
+ 
+**On Linux**
+  
 ```bash
-composer update
+sudo add-apt-repository ppa:ondrej/php
+sudo apt update
+sudo apt-get install php7.1-bcmath
+sudo apt-get install php7.1-gmp
+sudo apt-get install php7.1-redis
+sudo apt-get install php7.1-bz2
 ```
 
-## Run Analysis
+### Install this Repository
+
+Then you can install this repository:
+
+```bash
+git clone https://github.com/TomasVotruba/shopsys-analysis.git shopsys-analysis
+cd shopsys-analysis
+# require dependencies
+composer install
+```
+
+### Clones projects To Analyze
+
+As project have dependencies in conflict, they have to be cloned to **own directories**.
+
+**Shopsys**
+
+You need to request access to Beta first - [do it here](https://www.shopsys-framework.com/) .
+
+```bash
+git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys
+git -C project/shopsys checkout 829cfde7  
+# August 7, 2017
+```
+
+**Sylius**
+
+```bash
+git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.0.0-beta.3 project/sylius
+# July 25, 2017
+# https://github.com/Sylius/Sylius/releases/tag/v1.0.0-beta.3
+```
+
+**Spryker**
+
+This will install sandbox, but the framework code is in localed in its `spryker/*` dependencies. 
+Therefore `composer install` command is needed in addition to git clone.
+
+```bash
+git clone https://github.com/spryker/demoshop --depth 1 --single-branch --branch 2.14 project/spryker
+composer install --working-dir project/spryker
+# May 24, 2017
+# https://github.com/spryker/demoshop/tree/2.14
+# later version had issues with installation
+```
+
+## 2. Run Analysis
 
 ```bash
 bin/analyze
@@ -33,7 +83,7 @@ And it will print this nice summary for every project:
 
 
 
-## Extra - PHPMetrics
+## 3. Extra - PHPMetrics
 
 A [PHPMetrics](https://github.com/phpmetrics/PhpMetrics) tool is not included in main analysis, because it provides various data and graphs and the most important numbers are already included in previous tools. Yet you could **be interested in specific metrics or their relations** (e.g. complexity/lines of code) and PHPMetrics is the best tool to find them in.
 
