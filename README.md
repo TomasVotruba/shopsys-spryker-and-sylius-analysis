@@ -23,18 +23,17 @@ sudo apt-get install php7.1-redis
 sudo apt-get install php7.1-bz2
 ```
 
-### Install this Repository
+### 1.1 Install this Repository
 
 Then you can install this repository:
 
 ```bash
 git clone https://github.com/TomasVotruba/shopsys-analysis.git shopsys-analysis
 cd shopsys-analysis
-# require dependencies
 composer install
 ```
 
-### Clones projects To Analyze
+### 1.2 Clones projects To Analyze
 
 As project have dependencies in conflict, they have to be cloned to **own directories**.
 
