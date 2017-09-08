@@ -3,9 +3,12 @@
 [![Build Status](https://img.shields.io/travis/TomasVotruba/shopsys-spryker-and-sylius-analysis.svg?style=flat-square)](https://travis-ci.org/TomasVotruba/shopsys-spryker-and-sylius-analysis)
 
 
-You can find nice summary of these metrics [in a blogpost](@todo - complete when published).
+You can find nice summary of these metrics 2 posts:
 
-But to be sure, you can **run them yourself on you local machine**:
+- [Shopsys, Spryker & Sylius under Static Analysis](https://www.tomasvotruba.cz/blog/2017/08/28/shopsys-spriker-and-sylius-under-static-analysis/)
+- [tba](tba)
+
+To be sure we're not making them up, you can **run them yourself on you local machine**:
 
 
 ## 1. Install
