@@ -20,5 +20,23 @@
         "psr-4": {
             "TomasVotruba\\ShopsysAnalysis\\": "src"
         }
+    },
+    "scripts": {
+        "download-projects": [
+            "@download-shopsys",
+            "@download-sylius",
+            "@download-spryker"
+        ],
+        "download-shopsys": [
+            "git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys",
+            "git -C 'project/shopsys' checkout bc0de371836afff333c364b517b7c8ef2050060e"
+        ],
+        "download-sylius": [
+            "git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.0.0-beta.3 project/sylius"
+        ],
+        "download-spryker": [
+            "git clone https://github.com/spryker/demoshop --depth 1 --single-branch --branch 2.14 project/spryker",
+            "composer install --working-dir project/spryker"
+        ]
     }
 }

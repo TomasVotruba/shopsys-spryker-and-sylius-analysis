@@ -40,14 +40,24 @@ composer install
 
 As project have dependencies in conflict, they have to be cloned to **own directories**.
 
+If you have all access you need, you can run prepared composer command:
+
+```bash
+composer download-projects
+```
+
+**It downloads all 3 projects to `/project` directory** for you with locked commits and installed dependencies.
+
+
+
 **Shopsys**
 
 You need to request access to Beta first - [do it here](https://www.shopsys-framework.com/) .
 
 ```bash
 git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys
-git -C project/shopsys checkout 829cfde7  
-# August 7, 2017
+git -C project/shopsys checkout bc0de371836afff333c364b517b7c8ef2050060e
+# September 5, 2017
 ```
 
 **Sylius**
