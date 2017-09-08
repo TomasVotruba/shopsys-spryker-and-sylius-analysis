@@ -2,7 +2,6 @@
 
 [![Build Status](https://img.shields.io/travis/TomasVotruba/shopsys-spryker-and-sylius-analysis.svg?style=flat-square)](https://travis-ci.org/TomasVotruba/shopsys-spryker-and-sylius-analysis)
 
-
 You can find nice summary of these metrics 2 posts:
 
 - [Shopsys, Spryker & Sylius under Static Analysis](https://www.tomasvotruba.cz/blog/2017/08/28/shopsys-spriker-and-sylius-under-static-analysis/)
@@ -94,7 +93,22 @@ And it will print this nice summary for every project:
 ![Preview](docs/preview.png)
 
 
+### Easy Coding Standard
 
+Run one by one these commands. Config [`easy-coding-standard.neon`](/easy-coding-standard.neon) is used.
+
+```bash
+vendor/bin/ecs check project/shopsys/src 
+vendor/bin/ecs check project/sylius/src
+vendor/bin/ecs check project/spryker/vendor/spryker
+```
+
+
+### PHPStan
+
+```bash
+vendor/bin/phpstan analyse project/shopsys/src --configuration phpstan.neon
+```
 
 
 ### Resources

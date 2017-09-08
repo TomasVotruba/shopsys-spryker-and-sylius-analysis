@@ -22,6 +22,11 @@
         }
     },
     "scripts": {
+        "run-ecs-psr2": [
+            "vendor/bin/ecs check project/shopsys/src",
+            "vendor/bin/ecs check project/spryker/vendor/spryker",
+            "vendor/bin/ecs check project/sylius/src"
+        ],
         "download-projects": [
             "@download-shopsys",
             "@download-sylius",

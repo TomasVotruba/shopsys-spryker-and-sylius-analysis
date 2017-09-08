@@ -1,0 +1,6 @@
+parameters:
+    autoload_directories:
+#        - %rootDir%/../../../project/shopsys/src
+        # @todo: requires to exclude tests, duplicated classes there
+#        - %rootDir%/../../../project/spryker/vendor/spryker
+#        - %rootDir%/../../../project/sylius/src
