@@ -72,6 +72,6 @@ final class AnalyzeCommand extends Command
             $this->symfonyStyle->newLine();
         }
 
-        return 1;
+        return 0;
     }
 }
