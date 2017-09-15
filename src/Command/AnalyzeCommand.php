@@ -50,16 +50,16 @@ final class AnalyzeCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        foreach ($this->projectProvider->provide() as $name => $source) {
-            // skip non-existing source, e.g. on Travis
-             if (! file_exists($source)) {
+        foreach ($this->projectProvider->provide() as $name => $sources) {
+            // skip non-existing sources, e.g. Shopsys on Travis (@todo fix after open-sourcing)
+            if (! $this->isProjectAvailable($sources)) {
                 continue;
             }
 
             $this->symfonyStyle->title($name);
 
             foreach ($this->analyzers as $analyzer) {
-                $data = $analyzer->process($source);
+                $data = $analyzer->process($sources);
                 foreach ($data as $metricName => $metricValue) {
                     $this->symfonyStyle->writeln(sprintf(
                         '%s: <options=bold>%s</>',
@@ -73,5 +73,19 @@ final class AnalyzeCommand extends Command
         }
 
         return 0;
+    }
+
+    /**
+     * @param string[] $sources
+     */
+    private function isProjectAvailable(array $sources): bool
+    {
+        foreach ($sources as $source) {
+            if (! file_exists($source)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

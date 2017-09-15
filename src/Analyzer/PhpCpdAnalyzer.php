@@ -23,18 +23,21 @@ final class PhpCpdAnalyzer implements AnalyzerInterface
     /**
      * @return mixed[]
      */
-    public function process(string $directory): array
+    public function process(array $directories): array
     {
-        $codeCloneMap = $this->analyzeDirectory($directory);
+        $codeCloneMap = $this->analyzeDirectories($directories);
 
         return [
             'Duplicate code' => round($codeCloneMap->getPercentage(), 2)
         ];
     }
 
-    private function analyzeDirectory(string $directory): CodeCloneMap
+    /**
+     * @param string[] $directories
+     */
+    private function analyzeDirectories(array $directories): CodeCloneMap
     {
-        $files = $this->phpFilesFinder->findInDirectory($directory);
+        $files = $this->phpFilesFinder->findInDirectories($directories);
 
         $copyPasteDetector = new Detector(new DefaultStrategy);
 

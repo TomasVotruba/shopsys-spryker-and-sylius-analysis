@@ -44,7 +44,7 @@ script:
   - composer ecs-basic
   - composer psr2-basic
   # PHPStan
-  - composer
+  - composer phpstan-max
 
 notifications:
   email: never

@@ -13,16 +13,18 @@ final class PhpFilesFinder
     private $cachedDirectoryResults = [];
 
     /**
+     * @param string[] $directories
      * @return SplFileInfo[]
      */
-    public function findInDirectory(string $directory): array
+    public function findInDirectories(array $directories): array
     {
-        if (isset($this->cachedDirectoryResults[$directory])) {
-            return $this->cachedDirectoryResults[$directory];
+        $cacheKey = md5(serialize($directories));
+        if (isset($this->cachedDirectoryResults[$cacheKey])) {
+            return $this->cachedDirectoryResults[$cacheKey];
         }
 
         /** @var Finder $finder */
-        $finder = Finder::create()->in($directory)
+        $finder = Finder::create()->in($directories)
             ->ignoreUnreadableDirs()
             ->exclude('spec')
             ->exclude('test')
@@ -36,7 +38,7 @@ final class PhpFilesFinder
             $files[] = $file->getRealpath();
         }
 
-        $this->cachedDirectoryResults[$directory] = $files;
+        $this->cachedDirectoryResults[$cacheKey] = $files;
 
         return $files;
     }
