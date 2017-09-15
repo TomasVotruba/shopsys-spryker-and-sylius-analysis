@@ -40,6 +40,11 @@ install:
 
 script:
   - bin/analyze
+  # EasyCodingStandard checks
+  - composer ecs-basic
+  - composer psr2-basic
+  # PHPStan
+  - composer
 
 notifications:
   email: never

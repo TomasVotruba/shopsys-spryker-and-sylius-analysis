@@ -86,7 +86,6 @@ composer install --working-dir project/spryker
 bin/analyze
 ```
 
-
 And it will print this nice summary for every project:
 
 
@@ -95,21 +94,20 @@ And it will print this nice summary for every project:
 
 ### Easy Coding Standard
 
-Run one by one these commands. Config [`easy-coding-standard.neon`](/easy-coding-standard.neon) is used.
+Run by these commands. See `scripts` section in `composer.json` for more details:
 
 ```bash
-vendor/bin/ecs check project/shopsys/src 
-vendor/bin/ecs check project/sylius/src
-vendor/bin/ecs check project/spryker/vendor/spryker
+composer ecs-basic
+composer ecs-psr2
 ```
-
 
 ### PHPStan
 
-```bash
-vendor/bin/phpstan analyse project/shopsys/src --configuration phpstan.neon
-```
+Run this command. See `scripts` section in `composer.json` for more details:
 
+```bash
+phpstan-max
+```
 
 ### Resources
 

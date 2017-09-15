@@ -1,0 +1,9 @@
+services:
+    TomasVotruba\ShopsysAnalysis\EasyCodingStandard\Finder\SourceProvider: ~
+
+checkers:
+    PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer:
+        syntax: short
+    - SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff
+    - PhpCsFixer\Fixer\Import\NoUnusedImportsFixer
+    - PhpCsFixer\Fixer\Import\OrderedImportsFixer
