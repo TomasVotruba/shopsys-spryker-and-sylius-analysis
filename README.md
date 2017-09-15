@@ -106,12 +106,6 @@ composer ecs-psr2
 Run this command. See `scripts` section in `composer.json` for more details:
 
 ```bash
-phpstan-max
+composer phpstan-0
+composer phpstan-max
 ```
-
-### Resources
-
-If you want to read more about code complexity, you can read sources used for this analysis: 
-
-- [Code complexity: Symfony vs. Laravel](https://medium.com/@taylorotwell/measuring-code-complexity-64356da605f9) + [its critics](https://news.ycombinator.com/item?id=13364649)
-- [Visualize Code Quality via PHPMetrics](https://www.sitepoint.com/visualize-codes-quality-phpmetrics/)

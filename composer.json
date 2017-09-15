@@ -24,19 +24,16 @@
     },
     "scripts": {
         "ecs-basic": [
-            "vendor/bin/ecs check project/shopsys/src project/shopsys/vendor/shopsys --config ecs-basic.neon",
-            "vendor/bin/ecs check project/spryker/vendor/spryker --config ecs-basic.neon",
-            "vendor/bin/ecs check project/sylius/src --config ecs-basic.neon"
+            "vendor/bin/ecs check project/shopsys/src project/shopsys/vendor/shopsys --config ecs-basic.neon || vendor/bin/ecs check project/spryker/vendor/spryker --config ecs-basic.neon || vendor/bin/ecs check project/sylius/src --config ecs-basic.neon"
         ],
         "ecs-psr2": [
-            "vendor/bin/ecs check project/shopsys/src project/shopsys/vendor/shopsys --config ecs-psr2.neon",
-            "vendor/bin/ecs check project/spryker/vendor/spryker --config ecs-psr2.neon",
-            "vendor/bin/ecs check project/sylius/src --config ecs-psr2.neon"
+            "vendor/bin/ecs check project/shopsys/src project/shopsys/vendor/shopsys --config ecs-psr2.neon || vendor/bin/ecs check project/spryker/vendor/spryker --config ecs-psr2.neon || vendor/bin/ecs check project/sylius/src --config ecs-psr2.neon"
+        ],
+        "phpstan-0": [
+            "vendor/bin/phpstan analyse project/shopsys/src project/shopsys/vendor/shopsys --configuration phpstan-shopsys.neon --level 0 || vendor/bin/phpstan analyse project/spryker/vendor/spryker --configuration phpstan-spryker.neon --level 0 || vendor/bin/phpstan analyse project/sylius/src --configuration phpstan-sylius.neon --level 0"
         ],
         "phpstan-max": [
-            "vendor/bin/phpstan analyse project/shopsys/src project/shopsys/vendor/shopsys --configuration phpstan-shopsys.neon --level max",
-            "vendor/bin/phpstan analyse project/spryker/vendor/spryker --configuration phpstan-spryker.neon --level max",
-            "vendor/bin/phpstan analyse project/sylius/src --configuration phpstan-sylius.neon --level max"
+            "vendor/bin/phpstan analyse project/shopsys/src project/shopsys/vendor/shopsys --configuration phpstan-shopsys.neon --level max || vendor/bin/phpstan analyse project/spryker/vendor/spryker --configuration phpstan-spryker.neon --level max || vendor/bin/phpstan analyse project/sylius/src --configuration phpstan-sylius.neon --level max"
         ],
         "download-projects": [
             "@download-shopsys",
