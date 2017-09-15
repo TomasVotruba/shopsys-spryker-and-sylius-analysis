@@ -1,4 +1,11 @@
 parameters:
     autoload_directories:
         - project/spryker/src
+        - stub/Spryker
     bootstrap: "phpstan-spryker-bootstrap.php"
+    excludes_analyse:
+        # invalid reflections
+        - project/spryker/vendor/spryker/tax-product-connector/src/Spryker/Zed/TaxProductConnector/Dependency/Facade/TaxProductConnectorToProductBridge.php
+        - project/spryker/vendor/spryker/zed-request/src/Spryker/Zed/ZedRequest/Dependency/Facade/NullMessenger.php
+    ignoreErrors:
+        - "#Class [A-Za-z\\\\]+ not found and could not be autoloaded#"

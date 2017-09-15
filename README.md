@@ -125,7 +125,6 @@ vendor/bin/phpstan analyse project/sylius/src --configuration phpstan-sylius.neo
 ```
 
 
-
 ### Resources
 
 If you want to read more about code complexity, you can read sources used for this analysis: 
