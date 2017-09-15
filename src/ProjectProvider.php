@@ -10,7 +10,7 @@ final class ProjectProvider
     public function provide(): array
     {
         return [
-            'Shopsys' => __DIR__ . '/../project/shopsys/src',
+            'Shopsys' => __DIR__ . '/../project/shopsys/src', // @todo: add /vendor as well
             'Sylius' => __DIR__ . '/../project/sylius/src',
             'Spryker' => __DIR__ . '/../project/spryker/vendor/spryker',
         ];

@@ -1,0 +1,4 @@
+parameters:
+    autoload_directories:
+        - project/spryker/src
+    bootstrap: "phpstan-spryker-bootstrap.php"

@@ -112,11 +112,17 @@ vendor/bin/ecs check project/spryker/vendor/spryker
 vendor/bin/phpstan analyse project/shopsys/src project/shopsys/vendor/shopsys --configuration phpstan-shopsys.neon --level max 
 ```
 
-
 **Spryker**
+
+```bash
+vendor/bin/phpstan analyse project/spryker/vendor/spryker --configuration phpstan-spryker.neon --level max 
+```
 
 **Sylius**
 
+```bash
+vendor/bin/phpstan analyse project/sylius/src --configuration phpstan-sylius.neon --level max
+```
 
 
 

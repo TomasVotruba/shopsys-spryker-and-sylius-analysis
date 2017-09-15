@@ -6,7 +6,7 @@ use Nette\Loaders\RobotLoader;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-final class SyliusRobotLoader
+final class TestsExcludingRobotLoader
 {
     public function loadDirectoryWithoutTests(string $directory): void
     {
@@ -30,6 +30,7 @@ final class SyliusRobotLoader
         $finder = Finder::create()->directories()
             ->in($directory)
             ->name('Tests')
+            ->name('tests')
             ->name('test');
 
         return iterator_to_array($finder->getIterator());
