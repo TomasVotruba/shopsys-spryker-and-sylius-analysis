@@ -106,9 +106,18 @@ vendor/bin/ecs check project/spryker/vendor/spryker
 
 ### PHPStan
 
+**Shopsys**
+
 ```bash
-vendor/bin/phpstan analyse project/shopsys/src --configuration phpstan.neon
+vendor/bin/phpstan analyse project/shopsys/src project/shopsys/vendor/shopsys --configuration phpstan-shopsys.neon --level max 
 ```
+
+
+**Spryker**
+
+**Sylius**
+
+
 
 
 ### Resources

@@ -1,0 +1,5 @@
+parameters:
+    autoload_directories:
+        - project/shopsys/app
+        - project/shopsys/src
+        - project/shopsys/vendor/shopsys

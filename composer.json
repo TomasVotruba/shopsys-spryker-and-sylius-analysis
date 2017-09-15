@@ -5,13 +5,14 @@
         "php": "^7.1",
         "phploc/phploc": "^4.0",
         "sebastian/phpcpd": "^3.0",
-        "symfony/console": "^3.3",
+        "symfony/console": "3.2 as 3.3",
         "symfony/finder": "^3.3",
         "symfony/dependency-injection": "^3.3",
         "symfony/http-kernel": "^3.3",
         "symplify/package-builder": "^2.2",
+        "symplify/easy-coding-standard": "^2.3",
         "phpstan/phpstan": "^0.8.5",
-        "symplify/easy-coding-standard": "^2.3"
+        "nette/robot-loader": "^3.0"
     },
     "require-dev": {
         "tracy/tracy": "^2.4"
@@ -22,8 +23,8 @@
         }
     },
     "scripts": {
-        "run-ecs-psr2": [
-            "vendor/bin/ecs check project/shopsys/src",
+        "ecs-psr2": [
+            "vendor/bin/ecs check project/shopsys/src project/shopsys/vendor/shopsys",
             "vendor/bin/ecs check project/spryker/vendor/spryker",
             "vendor/bin/ecs check project/sylius/src"
         ],
@@ -34,7 +35,8 @@
         ],
         "download-shopsys": [
             "git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys",
-            "git -C 'project/shopsys' checkout bc0de371836afff333c364b517b7c8ef2050060e"
+            "git -C 'project/shopsys' checkout bc0de371836afff333c364b517b7c8ef2050060e",
+            "composer install --working-dir project/shopsys"
         ],
         "download-sylius": [
             "git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.0.0-beta.3 project/sylius"

@@ -1,0 +1,6 @@
+parameters:
+    bootstrap: "phpstan-sylius-bootstrap.php"
+#    autoload_directories:
+#        - project/sylius/src
+    excludes_analyse:
+        - **project/sylius/src/Sylius/**/test/**
