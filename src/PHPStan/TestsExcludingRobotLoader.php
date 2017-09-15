@@ -14,26 +14,9 @@ final class TestsExcludingRobotLoader
 
         $robotLoader->addDirectory($directory);
 
-        $directoriesWithTests = $this->getDirectoriesWithTests($directory);
-        foreach ($directoriesWithTests as $directoryWithTests) {
-            $robotLoader->excludeDirectory($directoryWithTests->getRealPath());
-        }
+        $this->excludeTestsDirectory($directory, $robotLoader);
 
         $robotLoader->register();
-    }
-
-    /**
-     * @return SplFileInfo[]
-     */
-    private function getDirectoriesWithTests(string $directory): array
-    {
-        $finder = Finder::create()->directories()
-            ->in($directory)
-            ->name('Tests')
-            ->name('tests')
-            ->name('test');
-
-        return iterator_to_array($finder->getIterator());
     }
 
     private function createRobotLoader(): RobotLoader
@@ -43,5 +26,28 @@ final class TestsExcludingRobotLoader
         $robotLoader->setTempDirectory(sys_get_temp_dir() . '/_static-anal-robot-loader');
 
         return $robotLoader;
+    }
+
+    private function excludeTestsDirectory(string $directory, RobotLoader $robotLoader): void
+    {
+        $directoriesWithTests = $this->findTestDirectoriesInDirectory($directory);
+
+        foreach ($directoriesWithTests as $directoryWithTests) {
+            $robotLoader->excludeDirectory($directoryWithTests->getRealPath());
+        }
+    }
+
+    /**
+     * @return SplFileInfo[]
+     */
+    private function findTestDirectoriesInDirectory(string $directory): array
+    {
+        $finder = Finder::create()->directories()
+            ->in($directory)
+            ->name('Tests')
+            ->name('tests')
+            ->name('test');
+
+        return iterator_to_array($finder->getIterator());
     }
 }
