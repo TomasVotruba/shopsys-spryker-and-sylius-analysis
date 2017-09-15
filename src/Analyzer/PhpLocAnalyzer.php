@@ -19,11 +19,13 @@ final class PhpLocAnalyzer implements AnalyzerInterface
     }
 
     /**
+     * @param string[] $directories
      * @return mixed[]
      */
-    public function process(string $directory): array
+    public function process(array $directories): array
     {
-        $count = $this->analyzeLocInDirectory($directory);
+
+        $count = $this->analyzeLocInDirectories($directories);
 
         return [
             'Lines of code' => number_format($count['loc'], 0, '.', ' '),
@@ -37,11 +39,12 @@ final class PhpLocAnalyzer implements AnalyzerInterface
     }
 
     /**
+     * @param string[] $directories
      * @return mixed[]
      */
-    private function analyzeLocInDirectory(string $directory): array
+    private function analyzeLocInDirectories(array $directories): array
     {
-        $files = $this->phpFilesFinder->findInDirectory($directory);
+        $files = $this->phpFilesFinder->findInDirectories($directories);
 
         // have to be created fresh for every project, uses cache
         return (new Analyser)->countFiles($files, false);
