@@ -65,15 +65,13 @@ final class PHPStanCommand extends Command
                 $finalCli = sprintf($cli, $level);
                 $tempFile = $this->createTempFileName($name, $level);
 
-                $process = new Process($finalCli . ' > ' . $tempFile);
+                $process = new Process($finalCli . ' > ' . $tempFile, null, null, null, null);
                 $process->run();
-
-                $errorCount = $this->getErrorCountFromTempFile($tempFile);
 
                 $this->symfonyStyle->writeln(sprintf(
                     'Level %d: %d errors',
                     $level,
-                    $errorCount
+                    $this->getErrorCountFromTempFile($tempFile)
                 ));
             }
 

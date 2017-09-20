@@ -11,7 +11,7 @@
         "symfony/http-kernel": "^3.3",
         "symplify/package-builder": "^2.2",
         "symplify/easy-coding-standard": "^2.3",
-        "phpstan/phpstan": "^0.8.5",
+        "phpstan/phpstan": "0.8.5",
         "nette/robot-loader": "^3.0",
         "nette/utils": "^2.4|^3.0"
     },
