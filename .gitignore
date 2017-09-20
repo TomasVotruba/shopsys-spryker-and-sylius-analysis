@@ -9,3 +9,7 @@ composer.lock
 !/project/shopsys/app/.gitkeep
 !/project/shopsys/src/.gitkeep
 !/project/shopsys/vendor/shopsys/.gitkeep
+
+# temp data
+/temp
+!/temp/.gitkeep
