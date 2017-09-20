@@ -7,10 +7,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Process\Process;
-use TomasVotruba\ShopsysAnalysis\Contract\Analyzer\AnalyzerInterface;
 use TomasVotruba\ShopsysAnalysis\PHPStanProjectProvider;
-use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 
 final class PHPStanCommand extends Command
 {
@@ -61,29 +61,15 @@ final class PHPStanCommand extends Command
         foreach ($this->phpStanProjectProvider->provide() as $name => $cli) {
             $this->symfonyStyle->title($name);
 
-            for ($level = self::FIRST_LEVEL; $level <= self::LEVEL_COUNT; $level++) {
-                $finalCli = sprintf($cli, $level);
-                $tempFile = $this->createTempFileName($name, $level);
-
-                $process = new Process($finalCli . ' > ' . $tempFile, null, null, null, null);
-                $process->run();
-
-                $this->symfonyStyle->writeln(sprintf(
-                    'Level %d: %d errors',
-                    $level,
-                    $this->getErrorCountFromTempFile($tempFile)
-                ));
-            }
+            $this->processLevels($cli, $name);
 
             $this->symfonyStyle->newLine();
         }
 
-        return 0;
-    }
+        $this->deleteTempFiles();
 
-    private function createTempFileName(string $name, int $level): string
-    {
-        return 'temp/phpstan-' . strtolower($name) . '-level-' . $level;
+
+        return 0;
     }
 
     private function getErrorCountFromTempFile(string $tempFile): int
@@ -92,5 +78,51 @@ final class PHPStanCommand extends Command
         $matches = Strings::match($tempFileContent, self::ERROR_COUNT_PATTERN);
 
         return (int) ($matches['errorCount'] ?? 0);
+    }
+
+    private function deleteTempFiles(): void
+    {
+        $finder = Finder::create()
+            ->files()
+            ->ignoreDotFiles(true)
+            ->in(getcwd() . '/temp');
+
+        /** @var SplFileInfo[] $files */
+        $files = iterator_to_array($finder->getIterator());
+
+        foreach ($files as $file) {
+            unlink($file->getRealPath());
+        }
+    }
+
+    /**
+     * @param $cli
+     * @param $name
+     */
+    private function processLevels(string $cli, string $name): void
+    {
+        for ($level = self::FIRST_LEVEL; $level <= self::LEVEL_COUNT; $level++) {
+            $this->processLevel($cli, $name, $level);
+        }
+    }
+
+    private function processLevel(string $cli, string $name, int $level): void
+    {
+        $finalCli = sprintf($cli, $level);
+        $tempFile = $this->createTempFileName($name, $level);
+
+        $process = new Process($finalCli . ' > ' . $tempFile, null, null, null, null);
+        $process->run();
+
+        $this->symfonyStyle->writeln(sprintf(
+            'Level %d: %d errors',
+            $level,
+            $this->getErrorCountFromTempFile($tempFile)
+        ));
+    }
+
+    private function createTempFileName(string $name, int $level): string
+    {
+        return 'temp/phpstan-' . strtolower($name) . '-level-' . $level;
     }
 }
