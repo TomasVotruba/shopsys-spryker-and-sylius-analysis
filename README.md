@@ -83,7 +83,7 @@ composer install --working-dir project/spryker
 ## 2. Run Analysis
 
 ```bash
-bin/analyze
+bin/run analyze
 ```
 
 And it will print this nice summary for every project:
@@ -103,9 +103,8 @@ composer ecs-psr2
 
 ### PHPStan
 
-Run this command. See `scripts` section in `composer.json` for more details:
+Run this command to see per level errors in every project:
 
 ```bash
-composer phpstan-0
-composer phpstan-max
+bin/run phpstan
 ```
