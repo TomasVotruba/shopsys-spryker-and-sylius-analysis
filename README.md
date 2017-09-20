@@ -89,7 +89,7 @@ bin/run analyze
 And it will print this nice summary for every project:
 
 
-![Preview](docs/preview.png)
+![Preview](docs/preview-analyze.png)
 
 
 ### Easy Coding Standard
@@ -108,3 +108,7 @@ Run this command to see per level errors in every project:
 ```bash
 bin/run phpstan
 ```
+
+And it will print summary for every project:
+
+![Preview](docs/preview-phpstan.png)
