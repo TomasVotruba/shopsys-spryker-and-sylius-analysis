@@ -10,16 +10,17 @@ final class ProjectProvider
     public function provide(): array
     {
         return [
+            // keep alphabetical order!
             'Shopsys' => [
                 __DIR__ . '/../project/shopsys/src',
                 __DIR__ . '/../project/shopsys/vendor/shopsys',
             ],
-            'Sylius' => [
-                __DIR__ . '/../project/sylius/src',
-            ],
             'Spryker' => [
                 __DIR__ . '/../project/spryker/vendor/spryker',
-            ]
+            ],
+            'Sylius' => [
+        __DIR__ . '/../project/sylius/src',
+            ],
         ];
     }
 }
