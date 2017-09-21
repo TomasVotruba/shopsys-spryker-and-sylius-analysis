@@ -95,10 +95,6 @@ final class PHPStanCommand extends Command
         }
     }
 
-    /**
-     * @param $cli
-     * @param $name
-     */
     private function processLevels(string $cli, string $name): void
     {
         for ($level = self::FIRST_LEVEL; $level <= self::LEVEL_COUNT; $level++) {
