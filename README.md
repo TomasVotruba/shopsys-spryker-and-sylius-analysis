@@ -94,12 +94,25 @@ And it will print this nice summary for every project:
 
 ### Easy Coding Standard
 
-Run by these commands. See `scripts` section in `composer.json` for more details:
+This will check all 3 projects with **[`ecs-psr2.neon`](/ecs-psr2.neon) checker set**
 
 ```bash
-composer ecs-basic
-composer ecs-psr2
+composer ecs-psr2-shopsys
+composer ecs-psr2-spryker
+composer ecs-psr2-sylius
 ```
+
+This will check all 3 projects with **[`ecs-clean-code.neon`](/ecs-clean-code.neon) checker set**:
+
+```bash
+composer ecs-basic-shopsys
+composer ecs-basic-spryker
+composer ecs-basic-sylius
+```
+
+
+
+See `scripts` section in [`composer.json`](/composer.json) for more details.
 
 ### PHPStan
 
