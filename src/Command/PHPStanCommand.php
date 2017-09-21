@@ -15,6 +15,11 @@ use TomasVotruba\ShopsysAnalysis\PHPStanProjectProvider;
 final class PHPStanCommand extends Command
 {
     /**
+     * @var string
+     */
+    public const NAME = 'phpstan';
+
+    /**
      * @var int
      */
     private const FIRST_LEVEL = 0;
@@ -28,11 +33,6 @@ final class PHPStanCommand extends Command
      * @var string
      */
     private const ERROR_COUNT_PATTERN = '#Found (?<errorCount>[0-9]+) errors#';
-
-    /**
-     * @var string
-     */
-    public const NAME = 'phpstan';
 
     /**
      * @var SymfonyStyle
@@ -68,7 +68,6 @@ final class PHPStanCommand extends Command
 
         $this->deleteTempFiles();
 
-
         return 0;
     }
 
@@ -95,13 +94,9 @@ final class PHPStanCommand extends Command
         }
     }
 
-    /**
-     * @param $cli
-     * @param $name
-     */
     private function processLevels(string $cli, string $name): void
     {
-        for ($level = self::FIRST_LEVEL; $level <= self::LEVEL_COUNT; $level++) {
+        for ($level = self::FIRST_LEVEL; $level <= self::LEVEL_COUNT; ++$level) {
             $this->processLevel($cli, $name, $level);
         }
     }

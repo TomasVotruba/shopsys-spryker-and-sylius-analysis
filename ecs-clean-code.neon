@@ -1,0 +1,5 @@
+includes:
+    - vendor/symplify/easy-coding-standard/config/clean-code.neon
+
+services:
+    TomasVotruba\ShopsysAnalysis\EasyCodingStandard\Finder\SourceProvider: ~

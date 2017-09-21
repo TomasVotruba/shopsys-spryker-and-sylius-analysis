@@ -10,7 +10,7 @@
         "symfony/dependency-injection": "^3.3",
         "symfony/http-kernel": "^3.3",
         "symplify/package-builder": "^2.2",
-        "symplify/easy-coding-standard": "^2.3",
+        "symplify/easy-coding-standard": "^2.4",
         "phpstan/phpstan": "0.8.5",
         "nette/robot-loader": "^3.0",
         "nette/utils": "^2.4|^3.0"
@@ -24,12 +24,12 @@
         }
     },
     "scripts": {
-        "ecs-basic": [
-            "vendor/bin/ecs check project/shopsys/src project/shopsys/vendor/shopsys --config ecs-basic.neon || vendor/bin/ecs check project/spryker/vendor/spryker --config ecs-basic.neon || vendor/bin/ecs check project/sylius/src --config ecs-basic.neon"
-        ],
-        "ecs-psr2": [
-            "vendor/bin/ecs check project/shopsys/src project/shopsys/vendor/shopsys --config ecs-psr2.neon || vendor/bin/ecs check project/spryker/vendor/spryker --config ecs-psr2.neon || vendor/bin/ecs check project/sylius/src --config ecs-psr2.neon"
-        ],
+        "ecs-basic-shopsys": "vendor/bin/ecs check project/shopsys/src project/shopsys/vendor/shopsys --config ecs-clean-code.neon",
+        "ecs-basic-spryker": "vendor/bin/ecs check project/spryker/vendor/spryker --config ecs-clean-code.neon",
+        "ecs-basic-sylius": "vendor/bin/ecs check project/sylius/src --config ecs-clean-code.neon",
+        "ecs-psr2-shopsys": "vendor/bin/ecs check project/shopsys/src project/shopsys/vendor/shopsys --config ecs-psr2.neon",
+        "ecs-psr2-spryker": "vendor/bin/ecs check project/spryker/vendor/spryker --config ecs-psr2.neon",
+        "ecs-psr2-sylius": "vendor/bin/ecs check project/sylius/src --config ecs-psr2.neon",
         "download-projects": [
             "@download-shopsys",
             "@download-sylius",
@@ -37,15 +37,17 @@
         ],
         "download-shopsys": [
             "git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys",
-            "git -C 'project/shopsys' checkout bc0de371836afff333c364b517b7c8ef2050060e",
+            "git -C 'project/shopsys' checkout 069aff5d6ed198d10e71131c3cf4cc0fb58448da",
             "composer install --working-dir project/shopsys"
         ],
         "download-sylius": [
-            "git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.0.0-beta.3 project/sylius"
+            "git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.0.0 project/sylius"
         ],
         "download-spryker": [
             "git clone https://github.com/spryker/demoshop --depth 1 --single-branch --branch 2.14 project/spryker",
             "composer install --working-dir project/spryker"
-        ]
+        ],
+        "check-cs": "vendor/bin/ecs check bin src",
+        "fix-cs": "vendor/bin/ecs check bin src --fix"
     }
 }

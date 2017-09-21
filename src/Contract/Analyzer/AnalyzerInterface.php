@@ -6,7 +6,7 @@ interface AnalyzerInterface
 {
     /**
      * @param string[] $directories
-     * @return mixed { name => value }
+     * @return mixed[] { name => value }
      */
     public function process(array $directories): array;
 }
