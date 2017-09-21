@@ -16,19 +16,19 @@ final class ApplicationFactory
     /**
      * @var PHPStanCommand
      */
-    private $phpStanCommand;
+    private $pHPStanCommand;
 
-    public function __construct(AnalyzeCommand $analyzeCommand, PHPStanCommand $phpStanCommand)
+    public function __construct(AnalyzeCommand $analyzeCommand, PHPStanCommand $pHPStanCommand)
     {
         $this->analyzeCommand = $analyzeCommand;
-        $this->phpStanCommand = $phpStanCommand;
+        $this->pHPStanCommand = $pHPStanCommand;
     }
 
     public function create(): Application
     {
         $application = new Application;
         $application->add($this->analyzeCommand);
-        $application->add($this->phpStanCommand);
+        $application->add($this->pHPStanCommand);
 
         return $application;
     }

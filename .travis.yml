@@ -39,12 +39,16 @@ install:
   - composer install --working-dir project/spryker
 
 script:
-  - bin/analyze
-  # EasyCodingStandard checks
-  - composer ecs-basic
-  - composer psr2-basic
-  # PHPStan
-  - composer phpstan-max
+  # check coding standard of this project
+  - composer check-cs
+
+  # EasyCodingStandard checks - just to test it out, it takes long time
+  - composer ecs-psr2-sylius
+  - composer ecs-basic-sylius
+
+  # statistics
+  - bin/run analyze
+  - bin/run phpstan
 
 notifications:
   email: never

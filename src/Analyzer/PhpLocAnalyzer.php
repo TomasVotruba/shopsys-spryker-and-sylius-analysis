@@ -24,7 +24,6 @@ final class PhpLocAnalyzer implements AnalyzerInterface
      */
     public function process(array $directories): array
     {
-
         $count = $this->analyzeLocInDirectories($directories);
 
         return [

@@ -21,6 +21,7 @@ final class PhpCpdAnalyzer implements AnalyzerInterface
     }
 
     /**
+     * @param string[] $directories
      * @return mixed[]
      */
     public function process(array $directories): array
@@ -28,7 +29,7 @@ final class PhpCpdAnalyzer implements AnalyzerInterface
         $codeCloneMap = $this->analyzeDirectories($directories);
 
         return [
-            'Duplicate code' => round($codeCloneMap->getPercentage(), 2)
+            'Duplicate code' => round($codeCloneMap->getPercentage(), 2),
         ];
     }
 

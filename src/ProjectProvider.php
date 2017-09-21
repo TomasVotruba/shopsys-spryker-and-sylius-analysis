@@ -19,7 +19,7 @@ final class ProjectProvider
                 __DIR__ . '/../project/spryker/vendor/spryker',
             ],
             'Sylius' => [
-        __DIR__ . '/../project/sylius/src',
+                __DIR__ . '/../project/sylius/src',
             ],
         ];
     }
