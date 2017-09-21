@@ -37,7 +37,7 @@
         ],
         "download-shopsys": [
             "git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys",
-            "git -C 'project/shopsys' checkout bc0de371836afff333c364b517b7c8ef2050060e",
+            "git -C 'project/shopsys' checkout 069aff5d6ed198d10e71131c3cf4cc0fb58448da",
             "composer install --working-dir project/shopsys"
         ],
         "download-sylius": [
