@@ -1,5 +1,5 @@
-includes:
-    - vendor/symplify/easy-coding-standard/config/psr2-checkers.neon
+imports:
+    - { resource: 'vendor/symplify/easy-coding-standard/config/psr2.yml' }
 
 services:
     TomasVotruba\ShopsysAnalysis\EasyCodingStandard\Finder\SourceProvider: ~
@@ -8,4 +8,4 @@ parameters:
     exclude_checkers:
         # opinoinated checkers
         # blank line before return
-        - PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff
+        - 'PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff'

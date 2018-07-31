@@ -1,14 +1,13 @@
-includes:
-    - vendor/symplify/easy-coding-standard/config/symfony-checkers.neon
-    - vendor/symplify/easy-coding-standard/config/php54-checkers.neon
-    - vendor/symplify/easy-coding-standard/config/php70-checkers.neon
-    - vendor/symplify/easy-coding-standard/config/php71-checkers.neon
+imports:
+    - { resource: 'vendor/symplify/easy-coding-standard/config/symfony.yml' }
+    - { resource: 'vendor/symplify/easy-coding-standard/config/php54.yml' }
+    - { resource: 'vendor/symplify/easy-coding-standard/config/php70.yml' }
+    - { resource: 'vendor/symplify/easy-coding-standard/config/php71.yml' }
     # custom
-    - vendor/symplify/easy-coding-standard/config/symplify-checkers.neon
-    - vendor/symplify/easy-coding-standard/config/common.neon
-    - vendor/symplify/easy-coding-standard/config/spaces.neon
+    - { resource: 'vendor/symplify/easy-coding-standard/config/symplify.yml' }
+    - { resource: 'vendor/symplify/easy-coding-standard/config/common.yml' }
 
-checkers:
+services:
     # Slevomat
     SlevomatCodingStandard\Sniffs\Namespaces\ReferenceUsedNamesOnlySniff:
         allowPartialUses: false
@@ -38,13 +37,13 @@ checkers:
 parameters:
     exclude_checkers:
         # from PHP-CS-Fixer Symfony set
-        - PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer
-        - PhpCsFixer\Fixer\Operator\NewWithBracesFixer
-        - PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer
-        - PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer
-        - PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer
+        - 'PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer'
+        - 'PhpCsFixer\Fixer\Operator\NewWithBracesFixer'
+        - 'PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer'
+        - 'PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer'
+        - 'PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer'
 
     skip:
         Symplify\CodingStandard\Fixer\Naming\PropertyNameMatchingTypeFixer:
             # weird - maybe fix later
-            - src/Command/PHPStanCommand.php
+            - 'src/Command/PHPStanCommand.php'
