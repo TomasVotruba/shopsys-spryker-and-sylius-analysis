@@ -61,11 +61,7 @@ final class AnalyzeCommand extends Command
             foreach ($this->analyzers as $analyzer) {
                 $data = $analyzer->process($sources);
                 foreach ($data as $metricName => $metricValue) {
-                    $this->symfonyStyle->writeln(sprintf(
-                        '%s: <options=bold>%s</>',
-                        $metricName,
-                        $metricValue
-                    ));
+                    $this->symfonyStyle->writeln(sprintf('%s: <options=bold>%s</>', $metricName, $metricValue));
                 }
             }
 
