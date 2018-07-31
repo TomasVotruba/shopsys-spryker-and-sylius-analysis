@@ -1,6 +1,5 @@
 imports:
     - { resource: 'vendor/symplify/easy-coding-standard/config/symfony.yml' }
-    - { resource: 'vendor/symplify/easy-coding-standard/config/php54.yml' }
     - { resource: 'vendor/symplify/easy-coding-standard/config/php70.yml' }
     - { resource: 'vendor/symplify/easy-coding-standard/config/php71.yml' }
     # custom
@@ -11,10 +10,10 @@ services:
     # Slevomat
     SlevomatCodingStandard\Sniffs\Namespaces\ReferenceUsedNamesOnlySniff:
         allowPartialUses: false
-    - SlevomatCodingStandard\Sniffs\ControlStructures\AssignmentInConditionSniff
+    SlevomatCodingStandard\Sniffs\ControlStructures\AssignmentInConditionSniff: ~
     SlevomatCodingStandard\Sniffs\TypeHints\TypeHintDeclarationSniff:
         enableEachParameterAndReturnInspection: true
-    - SlevomatCodingStandard\Sniffs\Exceptions\ReferenceThrowableOnlySniff
+    SlevomatCodingStandard\Sniffs\Exceptions\ReferenceThrowableOnlySniff: ~
 
     # Complexity limits
     PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff:
@@ -42,6 +41,7 @@ parameters:
         - 'PhpCsFixer\Fixer\Phpdoc\PhpdocAlignFixer'
         - 'PhpCsFixer\Fixer\Operator\UnaryOperatorSpacesFixer'
         - 'PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer'
+        - 'PhpCsFixer\Fixer\Phpdoc\PhpdocSeparationFixer'
 
     skip:
         Symplify\CodingStandard\Fixer\Naming\PropertyNameMatchingTypeFixer:
