@@ -2,20 +2,25 @@
 
 namespace TomasVotruba\ShopsysAnalysis;
 
+use Iterator;
+
 final class PHPStanProjectProvider
 {
     /**
      * @return string[]
      */
-    public function provide(): array
+    public function provide(): Iterator
     {
-        return [
-            'Shopsys' => 'vendor/bin/phpstan analyse project/shopsys/packages project/shopsys/project-base '
-                . '--configuration phpstan-shopsys.neon --level %d',
-            'Spryker' => 'vendor/bin/phpstan analyse project/spryker/vendor/spryker '
-                . '--configuration phpstan-spryker.neon --level %d',
-            'Sylius' => 'vendor/bin/phpstan analyse project/sylius/src '
-                . '--configuration phpstan-sylius.neon --level %d',
+        yield [
+            'Shopsys' => 'vendor/bin/phpstan analyse project/shopsys/packages project/shopsys/project-base/src --configuration phpstan-shopsys.neon --level %d'
+        ];
+
+        yield [
+            'Spryker' => 'vendor/bin/phpstan analyse project/spryker/vendor/spryker --configuration phpstan-spryker.neon --level %d'
+        ];
+
+        yield [
+            'Sylius' => 'vendor/bin/phpstan analyse project/sylius/src/Sylius/Bundle project/sylius/src/Sylius/Component --configuration phpstan-sylius.neon --level %d'
         ];
     }
 }
