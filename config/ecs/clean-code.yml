@@ -1,5 +1,5 @@
 imports:
-    - { resource: 'vendor/symplify/easy-coding-standard/config/clean-code.yml' }
+    - { resource: '%vendor%/symplify/easy-coding-standard/config/clean-code.yml' }
 
 services:
     TomasVotruba\ShopsysAnalysis\EasyCodingStandard\Finder\SourceProvider: ~

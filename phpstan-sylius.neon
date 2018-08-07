@@ -1,4 +1,0 @@
-parameters:
-    bootstrap: "phpstan-sylius-bootstrap.php"
-    ignoreErrors:
-        - "#Class [A-Za-z\\\\]+ not found and could not be autoloaded#"
