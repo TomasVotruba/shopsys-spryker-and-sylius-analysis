@@ -3,14 +3,16 @@
     "license": "MIT",
     "require": {
         "php": "^7.1",
+        "ext-gmp": "*",
         "phploc/phploc": "^4.0",
         "sebastian/phpcpd": "^3.0",
-        "symfony/console": "^3.4",
-        "symfony/finder": "^3.4",
-        "symfony/dependency-injection": "^3.4",
-        "symfony/http-kernel": "^3.4",
-        "symplify/package-builder": "^4.5",
-        "symplify/easy-coding-standard": "^4.5",
+        "symfony/console": "^4.1",
+        "symfony/finder": "^4.1",
+        "symfony/dependency-injection": "^4.1",
+        "symfony/http-kernel": "^4.1",
+        "symplify/package-builder": "^4.7",
+        "symplify/easy-coding-standard": "^4.7",
+        "symplify/coding-standard": "^4.7",
         "phpstan/phpstan": "^0.10.2",
         "nette/robot-loader": "^3.0",
         "nette/utils": "^2.4"
@@ -36,8 +38,7 @@
             "@download-spryker"
         ],
         "download-shopsys": [
-            "git clone https://github.com/shopsys/shopsys.git --depth 1 --single-branch --branch v7.0.0-alpha4 project/shopsys",
-            "composer install --working-dir project/shopsys"
+            "git clone https://github.com/shopsys/shopsys.git --depth 1 --single-branch --branch v7.0.0-alpha4 project/shopsys"
         ],
         "download-sylius": [
             "git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.2.4 project/sylius"
@@ -48,5 +49,7 @@
         ],
         "check-cs": "vendor/bin/ecs check bin src",
         "fix-cs": "vendor/bin/ecs check bin src --fix"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
