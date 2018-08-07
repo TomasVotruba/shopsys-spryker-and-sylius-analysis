@@ -16,10 +16,7 @@ final class ShopsysProject implements ProjectInterface
      */
     public function getSources(): array
     {
-        return [
-            __DIR__ . '/../../project/shopsys/packages',
-            __DIR__ . '/../../project/shopsys/project-base/src',
-        ];
+        return [__DIR__ . '/../../project/shopsys/packages', __DIR__ . '/../../project/shopsys/project-base/src'];
     }
 
     public function getPhpstanConfig(): string
@@ -32,9 +29,6 @@ final class ShopsysProject implements ProjectInterface
      */
     public function getEasyCodingStandardConfigs(): array
     {
-        return [
-            __DIR__ . '/../../config/ecs/clean-code.yml',
-            __DIR__ . '/../../config/ecs/psr2.yml',
-        ];
+        return [__DIR__ . '/../../config/ecs/clean-code.yml', __DIR__ . '/../../config/ecs/psr2.yml'];
     }
 }

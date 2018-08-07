@@ -16,9 +16,7 @@ final class SprykerProject implements ProjectInterface
      */
     public function getSources(): array
     {
-        return [
-            __DIR__ . '/../../project/spryker/vendor/spryker'
-        ];
+        return [__DIR__ . '/../../project/spryker/vendor/spryker'];
     }
 
     public function getPhpstanConfig(): string
@@ -31,9 +29,6 @@ final class SprykerProject implements ProjectInterface
      */
     public function getEasyCodingStandardConfigs(): array
     {
-        return [
-            __DIR__ . '/../../config/ecs/clean-code.yml',
-            __DIR__ . '/../../config/ecs/psr2.yml',
-        ];
+        return [__DIR__ . '/../../config/ecs/clean-code.yml', __DIR__ . '/../../config/ecs/psr2.yml'];
     }
 }

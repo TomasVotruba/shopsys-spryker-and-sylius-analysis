@@ -113,7 +113,7 @@ final class PhpstanCommand extends Command
 
     private function createTempFileName(string $name, int $level): string
     {
-        return getcwd() . '/temp/phpstan-' . strtolower($name) . '-level-' . $level;
+        return sprintf('%s/temp/phpstan-%s-level-%d', strtolower($name), $level);
     }
 
     private function createCommandLine(ProjectInterface $project, int $level): string
