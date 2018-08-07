@@ -27,12 +27,6 @@
         }
     },
     "scripts": {
-        "ecs-basic-shopsys": "vendor/bin/ecs check project/shopsys/packages project/shopsys/project-base/src --config ecs-clean-code.yml",
-        "ecs-psr2-shopsys": "vendor/bin/ecs check project/shopsys/packages project/shopsys/project-base/src --config ecs-psr2.yml",
-        "ecs-basic-spryker": "vendor/bin/ecs check project/spryker/vendor/spryker --config ecs-clean-code.yml",
-        "ecs-psr2-spryker": "vendor/bin/ecs check project/spryker/vendor/spryker --config ecs-psr2.yml",
-        "ecs-basic-sylius": "vendor/bin/ecs check project/sylius/src --config ecs-clean-code.yml",
-        "ecs-psr2-sylius": "vendor/bin/ecs check project/sylius/src --config ecs-psr2.yml",
         "download-projects": [
             "@download-shopsys",
             "@download-sylius",

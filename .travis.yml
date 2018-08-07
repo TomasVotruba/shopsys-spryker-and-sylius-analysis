@@ -5,14 +5,14 @@ sudo: true
 php:
   - 7.1
 
-# Spryker required extensions
 before_install:
+    # Spryker required extensions
   # Redis is pre-installed on Travis, just enable it
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
   # Add sury repo
-  - sudo add-apt-repository ppa:ondrej/php -y # "-y" for skipping "Enter" reuqired message
-  - sudo apt-get update
+#  - sudo add-apt-repository ppa:ondrej/php -y # "-y" for skipping "Enter" reuqired message
+#  - sudo apt-get update
 
   # Install other required etensions
   - sudo apt-get install php-gmp
@@ -34,12 +34,9 @@ script:
   - composer check-cs
   - composer phpstan
 
-  # EasyCodingStandard checks - just to test it out, it takes long time
-  - composer ecs-psr2-sylius
-  - composer ecs-basic-sylius
-
   # statistics
   - bin/run analyze
+  - bin/run ecs
   - bin/run phpstan
 
 notifications:
