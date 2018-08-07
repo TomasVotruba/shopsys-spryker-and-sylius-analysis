@@ -2,15 +2,13 @@
 
 namespace TomasVotruba\ShopsysAnalysis\Command;
 
+use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Process\Process;
-use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 
@@ -50,7 +48,7 @@ final class PhpstanCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName(CommandNaming::classToName(self::class));
+        $this->setName('phpstan');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -83,37 +81,25 @@ final class PhpstanCommand extends Command
 
         $process = new Process($commandLine . ' > ' . $tempFile, null, null, null, null);
 
-        if ($this->symfonyStyle->getVerbosity() === OutputInterface::VERBOSITY_VERBOSE) {
+        if ($this->symfonyStyle->isVerbose()) {
             $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
         }
 
         $process->run();
 
-        $this->symfonyStyle->writeln(sprintf(
-            'Level %d: %d errors',
-            $level,
-            $this->getErrorCountFromTempFile($tempFile)
-        ));
+        $this->symfonyStyle->writeln(
+            sprintf('Level %d: %d errors', $level, $this->getErrorCountFromTempFile($tempFile))
+        );
     }
 
     private function deleteTempFiles(): void
     {
-        $finder = Finder::create()
-            ->files()
-            ->ignoreDotFiles(true)
-            ->in(getcwd() . '/temp');
-
-        /** @var SplFileInfo[] $files */
-        $files = iterator_to_array($finder->getIterator());
-
-        foreach ($files as $file) {
-            unlink($file->getRealPath());
-        }
+        FileSystem::delete(getcwd() . '/temp');
     }
 
     private function createTempFileName(string $name, int $level): string
     {
-        return sprintf('%s/temp/phpstan-%s-level-%d', strtolower($name), $level);
+        return sprintf('%s/temp/phpstan-%s-level-%d', getcwd(), strtolower($name), $level);
     }
 
     private function createCommandLine(ProjectInterface $project, int $level): string
