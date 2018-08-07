@@ -10,15 +10,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Process\Process;
+use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use TomasVotruba\ShopsysAnalysis\PHPStanProjectProvider;
 
 final class PHPStanCommand extends Command
 {
-    /**
-     * @var string
-     */
-    public const NAME = 'phpstan';
-
     /**
      * @var int
      */
@@ -27,7 +23,7 @@ final class PHPStanCommand extends Command
     /**
      * @var int
      */
-    private const LEVEL_COUNT = 7;
+    private const LEVEL_COUNT = 8;
 
     /**
      * @var string
@@ -53,7 +49,7 @@ final class PHPStanCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName(self::NAME);
+        $this->setName(CommandNaming::classToName(self::class));
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

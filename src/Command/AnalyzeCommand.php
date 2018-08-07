@@ -6,16 +6,12 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use TomasVotruba\ShopsysAnalysis\Contract\Analyzer\AnalyzerInterface;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 
 final class AnalyzeCommand extends Command
 {
-    /**
-     * @var string
-     */
-    public const NAME = 'analyze';
-
     /**
      * @var SymfonyStyle
      */
@@ -45,7 +41,7 @@ final class AnalyzeCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName(self::NAME);
+        $this->setName(CommandNaming::classToName(self::class));
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
