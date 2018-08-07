@@ -11,8 +11,8 @@ before_install:
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
   # Add sury repo
-#  - sudo add-apt-repository ppa:ondrej/php -y # "-y" for skipping "Enter" reuqired message
-#  - sudo apt-get update
+  - sudo add-apt-repository ppa:ondrej/php -y # "-y" for skipping "Enter" reuqired message
+  - sudo apt-get update
 
   # Install other required etensions
   - sudo apt-get install php-gmp
