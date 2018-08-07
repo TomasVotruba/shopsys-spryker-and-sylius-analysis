@@ -10,6 +10,8 @@ use Symplify\PackageBuilder\DependencyInjection\DefinitionCollector;
 use Symplify\PackageBuilder\DependencyInjection\DefinitionFinder;
 use TomasVotruba\ShopsysAnalysis\Command\AnalyzeCommand;
 use TomasVotruba\ShopsysAnalysis\Contract\Analyzer\AnalyzerInterface;
+use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
+use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 
 final class CollectorCompilerPass implements CompilerPassInterface
 {
@@ -27,6 +29,7 @@ final class CollectorCompilerPass implements CompilerPassInterface
     {
         $this->collectAnalyzersToAnalyzeCommand($containerBuilder);
         $this->collectCommandsToApplication($containerBuilder);
+        $this->collectProjectsToProjectProvider($containerBuilder);
     }
 
     private function collectAnalyzersToAnalyzeCommand(ContainerBuilder $containerBuilder): void
@@ -46,6 +49,16 @@ final class CollectorCompilerPass implements CompilerPassInterface
             Application::class,
             Command::class,
             'add'
+        );
+    }
+
+    private function collectProjectsToProjectProvider(ContainerBuilder $containerBuilder): void
+    {
+        $this->definitionCollector->loadCollectorWithType(
+            $containerBuilder,
+            ProjectProvider::class,
+            ProjectInterface::class,
+            'addProject'
         );
     }
 }

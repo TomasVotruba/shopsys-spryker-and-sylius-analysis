@@ -11,7 +11,8 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Process\Process;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
-use TomasVotruba\ShopsysAnalysis\PHPStanProjectProvider;
+use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
+use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 
 final class PhpstanCommand extends Command
 {
@@ -36,14 +37,14 @@ final class PhpstanCommand extends Command
     private $symfonyStyle;
 
     /**
-     * @var PHPStanProjectProvider
+     * @var ProjectProvider
      */
-    private $phpStanProjectProvider;
+    private $projectProvider;
 
-    public function __construct(SymfonyStyle $symfonyStyle, PHPStanProjectProvider $phpStanProjectProvider)
+    public function __construct(SymfonyStyle $symfonyStyle, ProjectProvider $projectProvider)
     {
         $this->symfonyStyle = $symfonyStyle;
-        $this->phpStanProjectProvider = $phpStanProjectProvider;
+        $this->projectProvider = $projectProvider;
         parent::__construct();
     }
 
@@ -54,15 +55,13 @@ final class PhpstanCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        foreach ($this->phpStanProjectProvider->provide() as $name => $cli) {
-            $this->symfonyStyle->title($name);
+        foreach ($this->projectProvider->provide() as $project) {
+            $this->symfonyStyle->title($project->getName());
 
-            dump($name, $cli);
-            die;
-
-            $this->processLevels($cli, $name);
-
-            $this->symfonyStyle->newLine();
+            for ($level = self::FIRST_LEVEL; $level <= self::MAX_LEVEL; ++$level) {
+                $commandLine = $this->createCommandLine($project, $level);
+                $this->processLevel($commandLine, $project->getName(), $level);
+            }
         }
 
         $this->deleteTempFiles();
@@ -76,6 +75,25 @@ final class PhpstanCommand extends Command
         $matches = Strings::match($tempFileContent, self::ERROR_COUNT_PATTERN);
 
         return (int) ($matches['errorCount'] ?? 0);
+    }
+
+    private function processLevel(string $commandLine, string $name, int $level): void
+    {
+        $tempFile = $this->createTempFileName($name, $level);
+
+        $process = new Process($commandLine . ' > ' . $tempFile, null, null, null, null);
+
+        if ($this->symfonyStyle->getVerbosity() === OutputInterface::VERBOSITY_VERBOSE) {
+            $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
+        }
+
+        $process->run();
+
+        $this->symfonyStyle->writeln(sprintf(
+            'Level %d: %d errors',
+            $level,
+            $this->getErrorCountFromTempFile($tempFile)
+        ));
     }
 
     private function deleteTempFiles(): void
@@ -93,31 +111,18 @@ final class PhpstanCommand extends Command
         }
     }
 
-    private function processLevels(string $cli, string $name): void
-    {
-        for ($level = self::FIRST_LEVEL; $level <= self::MAX_LEVEL; ++$level) {
-            $this->processLevel($cli, $name, $level);
-        }
-    }
-
-    private function processLevel(string $cli, string $name, int $level): void
-    {
-        $finalCli = sprintf($cli, $level);
-        $tempFile = $this->createTempFileName($name, $level);
-
-        $process = new Process($finalCli . ' > ' . $tempFile, null, null, null, null);
-        $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
-        $process->run();
-
-        $this->symfonyStyle->writeln(sprintf(
-            'Level %d: %d errors',
-            $level,
-            $this->getErrorCountFromTempFile($tempFile)
-        ));
-    }
-
     private function createTempFileName(string $name, int $level): string
     {
-        return 'temp/phpstan-' . strtolower($name) . '-level-' . $level;
+        return getcwd() . '/temp/phpstan-' . strtolower($name) . '-level-' . $level;
+    }
+
+    private function createCommandLine(ProjectInterface $project, int $level): string
+    {
+        return sprintf(
+            'vendor/bin/phpstan analyse %s --configuration %s --level %d',
+            implode(' ', $project->getSources()),
+            $project->getPhpstanConfig(),
+            $level
+        );
     }
 }
