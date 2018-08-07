@@ -27,11 +27,11 @@
         }
     },
     "scripts": {
-        "ecs-basic-shopsys": "vendor/bin/ecs check project/shopsys/packages project/shopsys/project-base --config ecs-clean-code.yml",
+        "ecs-basic-shopsys": "vendor/bin/ecs check project/shopsys/packages project/shopsys/project-base/src --config ecs-clean-code.yml",
+        "ecs-psr2-shopsys": "vendor/bin/ecs check project/shopsys/packages project/shopsys/project-base/src --config ecs-psr2.yml",
         "ecs-basic-spryker": "vendor/bin/ecs check project/spryker/vendor/spryker --config ecs-clean-code.yml",
-        "ecs-basic-sylius": "vendor/bin/ecs check project/sylius/src --config ecs-clean-code.yml",
-        "ecs-psr2-shopsys": "vendor/bin/ecs check project/shopsys/packages project/shopsys/project-base --config ecs-psr2.yml",
         "ecs-psr2-spryker": "vendor/bin/ecs check project/spryker/vendor/spryker --config ecs-psr2.yml",
+        "ecs-basic-sylius": "vendor/bin/ecs check project/sylius/src --config ecs-clean-code.yml",
         "ecs-psr2-sylius": "vendor/bin/ecs check project/sylius/src --config ecs-psr2.yml",
         "download-projects": [
             "@download-shopsys",
@@ -52,6 +52,7 @@
             "git clone https://github.com/spryker/demoshop --depth 1 --single-branch --branch 2.32 project/spryker",
             "composer install --working-dir project/spryker --no-dev --no-interaction"
         ],
+
         "check-cs": "vendor/bin/ecs check bin src",
         "fix-cs": "vendor/bin/ecs check bin src --fix",
         "phpstan": "vendor/bin/phpstan analyse bin src --level max"

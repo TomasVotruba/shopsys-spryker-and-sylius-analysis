@@ -1,21 +1,21 @@
 parameters:
     autoload_files:
-        - 'project/shopsys/vendor/autoload.php'
-        - 'project/shopsys/vendor/squizlabs/php_codesniffer/autoload.php'
+        - '%currentWorkingDirectory%/project/shopsys/vendor/autoload.php'
+        - '%currentWorkingDirectory%/project/shopsys/vendor/squizlabs/php_codesniffer/autoload.php'
 
     autoload_directories:
-        - 'project/shopsys/packages/coding-standards/src'
-        - 'project/shopsys/packages/form-types-bundle/src'
-        - 'project/shopsys/packages/framework/src'
-        - 'project/shopsys/packages/http-smoke-testing/src'
-        - 'project/shopsys/packages/framework/src'
-        - 'project/shopsys/packages/migrations/src'
-        - 'project/shopsys/packages/plugin-interface/src'
-        - 'project/shopsys/packages/product-feed-google/src'
-        - 'project/shopsys/packages/product-feed-heureka/src'
-        - 'project/shopsys/packages/product-feed-heureka-delivery/src'
-        - 'project/shopsys/packages/product-feed-zbozi/src'
-        - 'project/shopsys/project-base/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/coding-standards/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/form-types-bundle/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/framework/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/http-smoke-testing/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/framework/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/migrations/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/plugin-interface/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/product-feed-google/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/product-feed-heureka/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/product-feed-heureka-delivery/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/product-feed-zbozi/src'
+        - '%currentWorkingDirectory%/project/shopsys/project-base/src'
 
     excludes_analyse:
         # this line actually doesn't work and throws 1 false positive :(
