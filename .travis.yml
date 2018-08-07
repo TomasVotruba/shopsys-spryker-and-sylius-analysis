@@ -17,7 +17,6 @@ before_install:
   # Install other required etensions
   - sudo apt-get install php-gmp
   - sudo apt-get install php-bz2
-  # - sudo apt-get install php7.1-bcmath
 
   # Debug: current config
   - php-config --configure-options

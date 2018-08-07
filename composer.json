@@ -46,7 +46,7 @@
         ],
         "download-spryker": [
             "git clone https://github.com/spryker/demoshop --depth 1 --single-branch --branch 2.32 project/spryker",
-            "composer install --working-dir project/spryker"
+            "composer install --working-dir project/spryker --no-dev"
         ],
         "check-cs": "vendor/bin/ecs check bin src",
         "fix-cs": "vendor/bin/ecs check bin src --fix",
