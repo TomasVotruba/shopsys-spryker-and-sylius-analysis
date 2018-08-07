@@ -36,7 +36,7 @@
             "@download-spryker"
         ],
         "download-shopsys": [
-            "git clone https://github.com/shopsys/shopsys.git --depth 1 --single-branch --branch v7.0.0-alpha3 project/shopsys",
+            "git clone https://github.com/shopsys/shopsys.git --depth 1 --single-branch --branch v7.0.0-alpha4 project/shopsys",
             "composer install --working-dir project/shopsys"
         ],
         "download-sylius": [
