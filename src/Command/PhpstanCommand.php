@@ -57,6 +57,9 @@ final class PhpstanCommand extends Command
         foreach ($this->phpStanProjectProvider->provide() as $name => $cli) {
             $this->symfonyStyle->title($name);
 
+            dump($name, $cli);
+            die;
+
             $this->processLevels($cli, $name);
 
             $this->symfonyStyle->newLine();
@@ -103,10 +106,7 @@ final class PhpstanCommand extends Command
         $tempFile = $this->createTempFileName($name, $level);
 
         $process = new Process($finalCli . ' > ' . $tempFile, null, null, null, null);
-
-        var_dump($process->getCommandLine());
-        die;
-
+        $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
         $process->run();
 
         $this->symfonyStyle->writeln(sprintf(

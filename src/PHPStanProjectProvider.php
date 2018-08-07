@@ -11,16 +11,34 @@ final class PHPStanProjectProvider
      */
     public function provide(): Iterator
     {
-        yield [
-            'Shopsys' => 'vendor/bin/phpstan analyse project/shopsys/packages project/shopsys/project-base/src --configuration phpstan-shopsys.neon --level %d'
-        ];
+        yield 'Shopsys' => $this->createCommandLine([
+            __DIR__ . '/../project/shopsys/packages',
+            __DIR__ . '/../project/shopsys/project-base/src',
+        ],
+            __DIR__ . '/../config/phpstan/shopsys.neon'
+        );
 
-        yield [
-            'Spryker' => 'vendor/bin/phpstan analyse project/spryker/vendor/spryker --configuration phpstan-spryker.neon --level %d'
-        ];
+        yield 'Spryker' => $this->createCommandLine([__DIR__ . '/../project/spryker/vendor/spryker'],
+            __DIR__ . '/../config/phpstan/spryker.neon'
+        );
 
-        yield [
-            'Sylius' => 'vendor/bin/phpstan analyse project/sylius/src/Sylius/Bundle project/sylius/src/Sylius/Component --configuration phpstan-sylius.neon --level %d'
-        ];
+        yield 'Sylius' => $this->createCommandLine([
+            __DIR__ . '/../project/sylius/src/Sylius/Bundle',
+            __DIR__ . '/../project/sylius/src/Sylius/Component',
+        ],
+            __DIR__ . '/../config/phpstan/sylius.neon'
+        );
+    }
+
+    /**
+     * @param string[] $source
+     */
+    private function createCommandLine(array $source, string $config): string
+    {
+        return sprintf(
+            'vendor/bin/phpstan analyse %s --configuration %s --level %%d',
+            implode(' ', $source),
+            $config
+        );
     }
 }
