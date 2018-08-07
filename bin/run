@@ -6,7 +6,6 @@ use TomasVotruba\ShopsysAnalysis\DependencyInjection\ContainerFactory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-
 // Build DI container
 $container = (new ContainerFactory)->create();
 
