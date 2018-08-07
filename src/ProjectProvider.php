@@ -11,7 +11,7 @@ final class ProjectProvider
     {
         return [
             // keep alphabetical order!
-            'Shopsys' => [__DIR__ . '/../project/shopsys/src', __DIR__ . '/../project/shopsys/vendor/shopsys'],
+            'Shopsys' => [__DIR__ . '/../project/shopsys/packages', __DIR__ . '/../project/shopsys/project-base'],
             'Spryker' => [__DIR__ . '/../project/spryker/vendor/spryker'],
             'Sylius' => [__DIR__ . '/../project/sylius/src'],
         ];
