@@ -1,0 +1,11 @@
+imports:
+    - { resource: '%vendor%/symplify/easy-coding-standard/config/psr2.yml' }
+
+services:
+    TomasVotruba\ShopsysAnalysis\EasyCodingStandard\Finder\SourceProvider: ~
+
+parameters:
+    exclude_checkers:
+        # opinionated checkers
+        # blank line before return
+        - 'PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\ControlStructureSpacingSniff'

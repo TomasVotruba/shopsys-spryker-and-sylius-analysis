@@ -29,7 +29,7 @@ final class PhpCpdAnalyzer implements AnalyzerInterface
         $codeCloneMap = $this->analyzeDirectories($directories);
 
         return [
-            'Duplicate code' => round($codeCloneMap->getPercentage(), 2),
+            'Duplicate code' => round((float) $codeCloneMap->getPercentage(), 2),
         ];
     }
 

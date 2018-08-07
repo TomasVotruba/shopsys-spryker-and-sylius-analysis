@@ -1,0 +1,25 @@
+parameters:
+    autoload_files:
+        - '%currentWorkingDirectory%/project/shopsys/vendor/autoload.php'
+        - '%currentWorkingDirectory%/project/shopsys/vendor/squizlabs/php_codesniffer/autoload.php'
+
+    autoload_directories:
+        - '%currentWorkingDirectory%/project/shopsys/packages/coding-standards/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/form-types-bundle/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/framework/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/http-smoke-testing/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/framework/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/migrations/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/plugin-interface/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/product-feed-google/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/product-feed-heureka/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/product-feed-heureka-delivery/src'
+        - '%currentWorkingDirectory%/project/shopsys/packages/product-feed-zbozi/src'
+        - '%currentWorkingDirectory%/project/shopsys/project-base/src'
+
+    excludes_analyse:
+        # this line actually doesn't work and throws 1 false positive :(
+        - '%currentWorkingDirectory%/packages/coding-standards/examples/ValidClass.php'
+        - '%currentWorkingDirectory%/project/shopsys/packages/*/tests/*'
+        - '%currentWorkingDirectory%/project/shopsys/vendor/joschi127/doctrine-entity-override-bundle/Tests/Functional/app/AppKernel.php'
+        - '%currentWorkingDirectory%/project/shopsys/project-base/src/Shopsys/ShopBundle/Controller/Test/ErrorHandlerController.php'

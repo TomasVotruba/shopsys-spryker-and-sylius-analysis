@@ -1,0 +1,10 @@
+imports:
+    - { resource: '%vendor%/symplify/easy-coding-standard/config/clean-code.yml' }
+
+services:
+    TomasVotruba\ShopsysAnalysis\EasyCodingStandard\Finder\SourceProvider: ~
+
+parameters:
+    exclude_checkers:
+        # newly added short return assignments
+        - 'PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer'

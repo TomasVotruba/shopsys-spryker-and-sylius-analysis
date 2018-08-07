@@ -2,25 +2,25 @@
 
 namespace TomasVotruba\ShopsysAnalysis;
 
+use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
+
 final class ProjectProvider
 {
     /**
-     * @return string[][]
+     * @var ProjectInterface[]
+     */
+    private $projects = [];
+
+    public function addProject(ProjectInterface $project): void
+    {
+        $this->projects[] = $project;
+    }
+
+    /**
+     * @return ProjectInterface[]
      */
     public function provide(): array
     {
-        return [
-            // keep alphabetical order!
-            'Shopsys' => [
-                __DIR__ . '/../project/shopsys/src',
-                __DIR__ . '/../project/shopsys/vendor/shopsys',
-            ],
-            'Spryker' => [
-                __DIR__ . '/../project/spryker/vendor/spryker',
-            ],
-            'Sylius' => [
-                __DIR__ . '/../project/sylius/src',
-            ],
-        ];
+        return $this->projects;
     }
 }

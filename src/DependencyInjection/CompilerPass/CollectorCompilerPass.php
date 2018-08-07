@@ -2,26 +2,63 @@
 
 namespace TomasVotruba\ShopsysAnalysis\DependencyInjection\CompilerPass;
 
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symplify\PackageBuilder\Adapter\Symfony\DependencyInjection\DefinitionCollector;
+use Symplify\PackageBuilder\DependencyInjection\DefinitionCollector;
+use Symplify\PackageBuilder\DependencyInjection\DefinitionFinder;
 use TomasVotruba\ShopsysAnalysis\Command\AnalyzeCommand;
 use TomasVotruba\ShopsysAnalysis\Contract\Analyzer\AnalyzerInterface;
+use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
+use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 
 final class CollectorCompilerPass implements CompilerPassInterface
 {
+    /**
+     * @var DefinitionCollector
+     */
+    private $definitionCollector;
+
+    public function __construct()
+    {
+        $this->definitionCollector = (new DefinitionCollector(new DefinitionFinder()));
+    }
+
     public function process(ContainerBuilder $containerBuilder): void
     {
         $this->collectAnalyzersToAnalyzeCommand($containerBuilder);
+        $this->collectCommandsToApplication($containerBuilder);
+        $this->collectProjectsToProjectProvider($containerBuilder);
     }
 
     private function collectAnalyzersToAnalyzeCommand(ContainerBuilder $containerBuilder): void
     {
-        DefinitionCollector::loadCollectorWithType(
+        $this->definitionCollector->loadCollectorWithType(
             $containerBuilder,
             AnalyzeCommand::class,
             AnalyzerInterface::class,
             'addAnalyzer'
+        );
+    }
+
+    private function collectCommandsToApplication(ContainerBuilder $containerBuilder): void
+    {
+        $this->definitionCollector->loadCollectorWithType(
+            $containerBuilder,
+            Application::class,
+            Command::class,
+            'add'
+        );
+    }
+
+    private function collectProjectsToProjectProvider(ContainerBuilder $containerBuilder): void
+    {
+        $this->definitionCollector->loadCollectorWithType(
+            $containerBuilder,
+            ProjectProvider::class,
+            ProjectInterface::class,
+            'addProject'
         );
     }
 }

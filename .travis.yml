@@ -5,8 +5,8 @@ sudo: true
 php:
   - 7.1
 
-# Spryker required extensions
 before_install:
+    # Spryker required extensions
   # Redis is pre-installed on Travis, just enable it
   - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
@@ -15,9 +15,8 @@ before_install:
   - sudo apt-get update
 
   # Install other required etensions
-  - sudo apt-get install php7.1-gmp
-  - sudo apt-get install php7.1-bz2
-  # - sudo apt-get install php7.1-bcmath
+  - sudo apt-get install php-gmp
+  - sudo apt-get install php-bz2
 
   # Debug: current config
   - php-config --configure-options
@@ -26,28 +25,18 @@ install:
   - composer install
 
   # prepare projects
-
-  # ShopSys - require Beta Access, request here: https://www.shopsys-framework.com/
-  # - git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys
-  # - git -C project/shopsys checkout 829cfde7
-
-  # Sylius
-  - git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.0.0-beta.3 project/sylius
-
-  # Spryker
-  - git clone https://github.com/spryker/demoshop --depth 1 --single-branch --branch 2.14 project/spryker
-  - composer install --working-dir project/spryker
+  - composer download-shopsys
+  - composer download-sylius
+  - composer download-spryker
 
 script:
   # check coding standard of this project
   - composer check-cs
-
-  # EasyCodingStandard checks - just to test it out, it takes long time
-  - composer ecs-psr2-sylius
-  - composer ecs-basic-sylius
+  - composer phpstan
 
   # statistics
   - bin/run analyze
+  - bin/run ecs
   - bin/run phpstan
 
 notifications:

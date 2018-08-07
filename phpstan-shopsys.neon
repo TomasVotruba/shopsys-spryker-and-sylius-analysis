@@ -1,7 +1,0 @@
-parameters:
-    autoload_directories:
-        - project/shopsys/app
-        - project/shopsys/src
-        - project/shopsys/vendor/shopsys
-    ignoreErrors:
-        - "#Class [A-Za-z\\\\]+ not found and could not be autoloaded#"
