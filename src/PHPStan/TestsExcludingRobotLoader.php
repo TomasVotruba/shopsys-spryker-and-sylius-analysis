@@ -22,7 +22,7 @@ final class TestsExcludingRobotLoader
     private function createRobotLoader(): RobotLoader
     {
         $robotLoader = new RobotLoader;
-        $robotLoader->acceptFiles = '*.php';
+        $robotLoader->acceptFiles = ['*.php'];
         $robotLoader->setTempDirectory(sys_get_temp_dir() . '/_static-anal-robot-loader');
 
         return $robotLoader;

@@ -30,7 +30,6 @@ final class PhpLocAnalyzer implements AnalyzerInterface
             'Lines of code' => number_format($count['loc'], 0, '.', ' '),
             'Cyclomatic Complexity per Class' => round($count['classCcnAvg'], 2),
             'Cyclomatic Complexity per Method' => round($count['methodCcnAvg'], 2),
-            'Cyclomatic Complexity per Method' => round($count['methodCcnAvg'], 2),
             'Number of Methods/Number of Classes' => round($count['methods'] / $count['classes'] ?: 1, 2),
             'Maximum Method Length' => round($count['methodLlocMax'], 2),
             'Maximum Method Cyclomatic Complexity' => round($count['methodCcnMax'], 2),

@@ -33,6 +33,7 @@ install:
 script:
   # check coding standard of this project
   - composer check-cs
+  - composer phpstan
 
   # EasyCodingStandard checks - just to test it out, it takes long time
   - composer ecs-psr2-sylius

@@ -4,6 +4,7 @@
     "require": {
         "php": "^7.1",
         "ext-gmp": "*",
+        "ext-bz2": "*",
         "phploc/phploc": "^4.0",
         "sebastian/phpcpd": "^3.0",
         "symfony/console": "^4.1",
@@ -48,7 +49,8 @@
             "composer install --working-dir project/spryker"
         ],
         "check-cs": "vendor/bin/ecs check bin src",
-        "fix-cs": "vendor/bin/ecs check bin src --fix"
+        "fix-cs": "vendor/bin/ecs check bin src --fix",
+        "phpstan": "vendor/bin/phpstan analyse bin src --level max"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
