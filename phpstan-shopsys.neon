@@ -1,7 +1,29 @@
 parameters:
+    autoload_files:
+        - 'project/shopsys/vendor/autoload.php'
+        - 'project/shopsys/vendor/squizlabs/php_codesniffer/autoload.php'
+
     autoload_directories:
-        - project/shopsys/app
-        - project/shopsys/src
-        - project/shopsys/vendor/shopsys
-    ignoreErrors:
-        - "#Class [A-Za-z\\\\]+ not found and could not be autoloaded#"
+        - 'project/shopsys/packages/coding-standards/src'
+        - 'project/shopsys/packages/form-types-bundle/src'
+        - 'project/shopsys/packages/framework/src'
+        - 'project/shopsys/packages/http-smoke-testing/src'
+        - 'project/shopsys/packages/framework/src'
+        - 'project/shopsys/packages/migrations/src'
+        - 'project/shopsys/packages/plugin-interface/src'
+        - 'project/shopsys/packages/product-feed-google/src'
+        - 'project/shopsys/packages/product-feed-heureka/src'
+        - 'project/shopsys/packages/product-feed-heureka-delivery/src'
+        - 'project/shopsys/packages/product-feed-zbozi/src'
+        - 'project/shopsys/project-base'
+
+    excludes_analyse:
+        # this line actually doesn't work and throws 1 false positive :(
+        - '%currentWorkingDirectory%/packages/coding-standards/examples/ValidClass.php'
+        - '%currentWorkingDirectory%/project/shopsys/project-base/app/autoload.php'
+        - '%currentWorkingDirectory%/project/shopsys/project-base/app/Bootstrap.php'
+        - '%currentWorkingDirectory%/project/shopsys/project-base/web/*'
+        - '%currentWorkingDirectory%/project/shopsys/project-base/tests/*'
+        - '%currentWorkingDirectory%/project/shopsys/packages/*/tests/*'
+        - '%currentWorkingDirectory%/project/shopsys/vendor/joschi127/doctrine-entity-override-bundle/Tests/Functional/app/AppKernel.php'
+        - '%currentWorkingDirectory%/project/shopsys/project-base/src/Shopsys/ShopBundle/Controller/Test/ErrorHandlerController.php'

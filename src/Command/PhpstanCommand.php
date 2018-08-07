@@ -13,7 +13,7 @@ use Symfony\Component\Process\Process;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use TomasVotruba\ShopsysAnalysis\PHPStanProjectProvider;
 
-final class PHPStanCommand extends Command
+final class PhpstanCommand extends Command
 {
     /**
      * @var int
@@ -23,7 +23,7 @@ final class PHPStanCommand extends Command
     /**
      * @var int
      */
-    private const LEVEL_COUNT = 8;
+    private const MAX_LEVEL = 8;
 
     /**
      * @var string
@@ -92,7 +92,7 @@ final class PHPStanCommand extends Command
 
     private function processLevels(string $cli, string $name): void
     {
-        for ($level = self::FIRST_LEVEL; $level <= self::LEVEL_COUNT; ++$level) {
+        for ($level = self::FIRST_LEVEL; $level <= self::MAX_LEVEL; ++$level) {
             $this->processLevel($cli, $name, $level);
         }
     }
@@ -103,6 +103,10 @@ final class PHPStanCommand extends Command
         $tempFile = $this->createTempFileName($name, $level);
 
         $process = new Process($finalCli . ' > ' . $tempFile, null, null, null, null);
+
+        var_dump($process->getCommandLine());
+        die;
+
         $process->run();
 
         $this->symfonyStyle->writeln(sprintf(

@@ -39,7 +39,10 @@
             "@download-spryker"
         ],
         "download-shopsys": [
-            "git clone https://github.com/shopsys/shopsys.git --depth 1 --single-branch --branch v7.0.0-alpha4 project/shopsys"
+            "git clone https://github.com/shopsys/shopsys.git --depth 1 --single-branch --branch v7.0.0-alpha4 project/shopsys",
+            "composer install --working-dir project/shopsys --no-dev",
+            "rm -rf project/shopsys/vendor/nikic",
+            "rm -rf project/shopsys/vendor/phpstan"
         ],
         "download-sylius": [
             "git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.2.4 project/sylius"
