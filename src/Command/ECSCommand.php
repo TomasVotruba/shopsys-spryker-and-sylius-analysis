@@ -2,7 +2,6 @@
 
 namespace TomasVotruba\ShopsysAnalysis\Command;
 
-use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use SplFileInfo;
 use Symfony\Component\Console\Command\Command;
@@ -56,7 +55,7 @@ final class ECSCommand extends Command
                 $process = new Process($commandLine . ' > ' . $tempFile, null, null, null, null);
 
                 if ($this->symfonyStyle->isVerbose()) {
-                    $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
+                    $this->symfonyStyle->note('Running: ' . $commandLine);
                 }
 
                 $process->run();
@@ -69,8 +68,6 @@ final class ECSCommand extends Command
             }
         }
 
-        $this->deleteTempFiles();
-
         return 0;
     }
 
@@ -81,7 +78,7 @@ final class ECSCommand extends Command
 
     private function createTempFileName(string $name, string $configName): string
     {
-        return sprintf('%s/temp/ecs-%s-config-%d', getcwd(), strtolower($name), $configName);
+        return sprintf('%s/_analyze_ecs-%s-config-%s', sys_get_temp_dir(), strtolower($name), $configName);
     }
 
     private function getErrorCountFromTempFile(string $tempFile): int
@@ -90,11 +87,6 @@ final class ECSCommand extends Command
         $matches = Strings::match($tempFileContent, self::ERROR_COUNT_PATTERN);
 
         return (int) ($matches['errorCount'] ?? 0);
-    }
-
-    private function deleteTempFiles(): void
-    {
-        FileSystem::delete(getcwd() . '/temp');
     }
 
     private function getConfigBaseName(string $config): string

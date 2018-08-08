@@ -2,6 +2,8 @@
 <?php declare(strict_types=1);
 
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use TomasVotruba\ShopsysAnalysis\DependencyInjection\ContainerFactory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -12,4 +14,9 @@ $container = (new ContainerFactory)->create();
 // Run Console Application
 /** @var Application $application */
 $application = $container->get(Application::class);
-exit($application->run());
+
+// to enable "-v" options for Input/Output services
+$input = $container->get(InputInterface::class);
+$output = $container->get(OutputInterface::class);
+
+exit($application->run($input, $output));
