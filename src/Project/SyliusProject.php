@@ -32,9 +32,6 @@ final class SyliusProject implements ProjectInterface
      */
     public function getEasyCodingStandardConfigs(): array
     {
-        return [
-            __DIR__ . '/../../config/ecs/clean-code.yml',
-            __DIR__ . '/../../config/ecs/psr2.yml',
-        ];
+        return [__DIR__ . '/../../config/ecs/clean-code.yml', __DIR__ . '/../../config/ecs/psr2.yml'];
     }
 }
