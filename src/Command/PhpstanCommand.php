@@ -2,7 +2,6 @@
 
 namespace TomasVotruba\ShopsysAnalysis\Command;
 
-use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -62,8 +61,6 @@ final class PhpstanCommand extends Command
             }
         }
 
-        $this->deleteTempFiles();
-
         return 0;
     }
 
@@ -92,14 +89,9 @@ final class PhpstanCommand extends Command
         );
     }
 
-    private function deleteTempFiles(): void
-    {
-        FileSystem::delete(getcwd() . '/temp');
-    }
-
     private function createTempFileName(string $name, int $level): string
     {
-        return sprintf('%s/temp/phpstan-%s-level-%d', getcwd(), strtolower($name), $level);
+        return sprintf('%s/_analyze_phpstan-%s-level-%d', sys_get_temp_dir(), strtolower($name), $level);
     }
 
     private function createCommandLine(ProjectInterface $project, int $level): string
