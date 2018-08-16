@@ -27,25 +27,6 @@
         }
     },
     "scripts": {
-        "download-projects": [
-            "@download-shopsys",
-            "@download-sylius",
-            "@download-spryker"
-        ],
-        "download-shopsys": [
-            "git clone https://github.com/shopsys/shopsys.git --depth 1 --single-branch --branch v7.0.0-alpha4 project/shopsys",
-            "composer install --working-dir project/shopsys --no-dev --no-interaction",
-            "rm -rf project/shopsys/vendor/nikic",
-            "rm -rf project/shopsys/vendor/phpstan"
-        ],
-        "download-sylius": [
-            "git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.2.4 project/sylius",
-            "composer install --working-dir project/sylius --no-dev --no-interaction"
-        ],
-        "download-spryker": [
-            "git clone https://github.com/spryker/demoshop --depth 1 --single-branch --branch 2.32 project/spryker",
-            "composer install --working-dir project/spryker --no-dev --no-interaction"
-        ],
         "check-cs": "vendor/bin/ecs check bin src",
         "fix-cs": "vendor/bin/ecs check bin src --fix",
         "phpstan": "vendor/bin/phpstan analyse bin src --level max"

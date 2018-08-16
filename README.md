@@ -36,7 +36,7 @@ As project have dependencies in conflict, they have to be cloned to **own direct
 This command downloads all projects to `/project` directory and runs `composer install` on them.
 
 ```bash
-composer download-projects
+bin/run prepare
 ```
 
 ## 2. Run Analysis

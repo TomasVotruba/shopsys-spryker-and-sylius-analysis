@@ -14,15 +14,15 @@ use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 final class PhpStanCommand extends Command
 {
     /**
+     * @var string
+     */
+    private const ERROR_COUNT_PATTERN = '#Found (?<errorCount>[0-9]+) errors#';
+
+    /**
      * @var string[]
      * @see https://github.com/phpstan/phpstan/tree/master/conf
      */
     private $phpStanLevels = [0, 1, 2, 3, 4, 5, 6, 7, 'max'];
-
-    /**
-     * @var string
-     */
-    private const ERROR_COUNT_PATTERN = '#Found (?<errorCount>[0-9]+) errors#';
 
     /**
      * @var SymfonyStyle
