@@ -1,6 +1,6 @@
 parameters:
     autoload_files:
-        - 'project/sylius/vendor/autoload.php'
+        - '%currentWorkingDirectory%/project/sylius/vendor/autoload.php'
 
     exclude_analyse:
         - 'project/sylius/src/Sylius/Bundle/*/test/*'
