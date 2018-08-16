@@ -1,7 +1,12 @@
+parameters:
+    projects_directory: '%kernel.project_dir%/project'
+
 services:
     _defaults:
         autowire: true
         public: true
+        bind:
+            $projectsDirectory: '%projects_directory%'
 
     TomasVotruba\ShopsysAnalysis\:
         resource: '../../src'
