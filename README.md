@@ -30,7 +30,7 @@ cd ecommerce-analysis
 composer install
 ```
 
-### Download Projects To Analyze
+### Download Projects
 
 As project have dependencies in conflict, they have to be cloned to **own directories**.
 This command downloads all projects to `/project` directory and runs `composer install` on them.
