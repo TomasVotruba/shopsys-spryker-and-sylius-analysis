@@ -12,7 +12,7 @@ use Symfony\Component\Process\Process;
 use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 
-final class ECSCommand extends Command
+final class EcsCommand extends Command
 {
     /**
      * @var string

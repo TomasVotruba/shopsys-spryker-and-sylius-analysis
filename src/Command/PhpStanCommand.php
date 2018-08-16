@@ -11,17 +11,13 @@ use Symfony\Component\Process\Process;
 use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 
-final class PhpstanCommand extends Command
+final class PhpStanCommand extends Command
 {
     /**
-     * @var int
+     * @var string[]
+     * @see https://github.com/phpstan/phpstan/tree/master/conf
      */
-    private const FIRST_LEVEL = 0;
-
-    /**
-     * @var int
-     */
-    private const MAX_LEVEL = 8;
+    private $phpStanLevels = [0, 1, 2, 3, 4, 5, 6, 7, 'max'];
 
     /**
      * @var string
@@ -55,9 +51,9 @@ final class PhpstanCommand extends Command
         foreach ($this->projectProvider->provide() as $project) {
             $this->symfonyStyle->title($project->getName());
 
-            for ($level = self::FIRST_LEVEL; $level <= self::MAX_LEVEL; ++$level) {
-                $commandLine = $this->createCommandLine($project, $level);
-                $this->processLevel($commandLine, $project->getName(), $level);
+            foreach ($this->phpStanLevels as $phpStanLevel) {
+                $commandLine = $this->createCommandLine($project, (string) $phpStanLevel);
+                $this->processLevel($commandLine, $project->getName(), (string) $phpStanLevel);
             }
         }
 
@@ -72,7 +68,7 @@ final class PhpstanCommand extends Command
         return (int) ($matches['errorCount'] ?? 0);
     }
 
-    private function processLevel(string $commandLine, string $name, int $level): void
+    private function processLevel(string $commandLine, string $name, string $level): void
     {
         $tempFile = $this->createTempFileName($name, $level);
 
@@ -88,12 +84,12 @@ final class PhpstanCommand extends Command
         );
     }
 
-    private function createTempFileName(string $name, int $level): string
+    private function createTempFileName(string $name, string $level): string
     {
         return sprintf('%s/_analyze_phpstan-%s-level-%d', sys_get_temp_dir(), strtolower($name), $level);
     }
 
-    private function createCommandLine(ProjectInterface $project, int $level): string
+    private function createCommandLine(ProjectInterface $project, string $level): string
     {
         return sprintf(
             'vendor/bin/phpstan analyse %s --configuration %s --level %d',
