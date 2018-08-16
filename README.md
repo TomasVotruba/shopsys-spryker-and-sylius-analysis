@@ -20,7 +20,7 @@ To be sure we're not making them up, you can **run them yourself on you local ma
 sudo apt-get install php-bcmath php-gmp php-redis php-bz2
 ```
 
-### 1.1 Install this Repository
+### Install this Repository
 
 Then you can install this repository:
 
@@ -30,17 +30,14 @@ cd shopsys-analysis
 composer install
 ```
 
-### 1.2 Clones projects To Analyze
+### Download Projects To Analyze
 
 As project have dependencies in conflict, they have to be cloned to **own directories**.
-
-If you have all access you need, you can run prepared composer command:
+This command downloads all projects to `/project` directory and runs `composer install` on them.
 
 ```bash
 composer download-projects
 ```
-
-**It downloads all 3 projects to `/project` directory** for you with locked commits and installed dependencies.
 
 ## 2. Run Analysis
 
@@ -55,27 +52,15 @@ And it will print this nice summary for every project:
 
 ### Easy Coding Standard
 
-This will check all 3 projects with **[`ecs-psr2.neon`](/ecs-psr2.neon) checker set**
+This will check coding standards of project with [`psr2.yml`](/config/ecs/psr2.yml) and [`clean-code.yml`](/config/ecs/clean-code.yml) sets:
 
 ```bash
-composer ecs-psr2-shopsys
-composer ecs-psr2-spryker
-composer ecs-psr2-sylius
+bin/run ecs
 ```
-
-This will check all 3 projects with **[`ecs-clean-code.neon`](/ecs-clean-code.neon) checker set**:
-
-```bash
-composer ecs-basic-shopsys
-composer ecs-basic-spryker
-composer ecs-basic-sylius
-```
-
-See `scripts` section in [`composer.json`](/composer.json) for more details.
 
 ### PHPStan
 
-Run this command to see per level errors in every project:
+This will run and show number of errors per level:
 
 ```bash
 bin/run phpstan
