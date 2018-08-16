@@ -17,12 +17,7 @@ To be sure we're not making them up, you can **run them yourself on you local ma
 **On Linux**
   
 ```bash
-sudo add-apt-repository ppa:ondrej/php
-sudo apt update
-sudo apt-get install php7.1-bcmath
-sudo apt-get install php7.1-gmp
-sudo apt-get install php7.1-redis
-sudo apt-get install php7.1-bz2
+sudo apt-get install php-bcmath php-gmp php-redis php-bz2
 ```
 
 ### 1.1 Install this Repository
@@ -47,39 +42,6 @@ composer download-projects
 
 **It downloads all 3 projects to `/project` directory** for you with locked commits and installed dependencies.
 
-
-
-**Shopsys**
-
-You need to request access to Beta first - [do it here](https://www.shopsys-framework.com/) .
-
-```bash
-git clone git@git.shopsys-framework.com:shopsys/shopsys-framework.git --depth 1 project/shopsys
-git -C project/shopsys checkout bc0de371836afff333c364b517b7c8ef2050060e
-# September 5, 2017
-```
-
-**Sylius**
-
-```bash
-git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.0.0-beta.3 project/sylius
-# July 25, 2017
-# https://github.com/Sylius/Sylius/releases/tag/v1.0.0-beta.3
-```
-
-**Spryker**
-
-This will install sandbox, but the framework code is in localed in its `spryker/*` dependencies. 
-Therefore `composer install` command is needed in addition to git clone.
-
-```bash
-git clone https://github.com/spryker/demoshop --depth 1 --single-branch --branch 2.14 project/spryker
-composer install --working-dir project/spryker
-# May 24, 2017
-# https://github.com/spryker/demoshop/tree/2.14
-# later version had issues with installation
-```
-
 ## 2. Run Analysis
 
 ```bash
@@ -87,7 +49,6 @@ bin/run analyze
 ```
 
 And it will print this nice summary for every project:
-
 
 ![Preview](docs/preview-analyze.png)
 
@@ -109,8 +70,6 @@ composer ecs-basic-shopsys
 composer ecs-basic-spryker
 composer ecs-basic-sylius
 ```
-
-
 
 See `scripts` section in [`composer.json`](/composer.json) for more details.
 
