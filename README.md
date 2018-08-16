@@ -1,11 +1,11 @@
-# Code Complexity of [Shopsys FW](https://www.shopsys-framework.com/), [Spryker](https://spryker.com/) & [Sylius](http://sylius.org/)
+# Code Complexity of [Shopsys](https://www.shopsys-framework.com/), [Spryker](https://spryker.com/) & [Sylius](http://sylius.org/)
 
 [![Build Status](https://img.shields.io/travis/TomasVotruba/shopsys-spryker-and-sylius-analysis.svg?style=flat-square)](https://travis-ci.org/TomasVotruba/shopsys-spryker-and-sylius-analysis)
 
 You can find nice summary of these metrics 2 posts:
 
-- [Shopsys, Spryker & Sylius under Static Analysis](https://www.tomasvotruba.cz/blog/2017/08/28/shopsys-spriker-and-sylius-under-static-analysis/)
-- [tba](tba)
+- [Shopsys, Spryker & Sylius under Static Analysis](https://www.tomasvotruba.cz/blog/2017/08/28/shopsys-spriker-and-sylius-under-static-analysis/) (2017-08)
+- [EasyCodingStandard and PHPStan meet 3 Symfony E-Commerce Projects](https://www.tomasvotruba.cz/blog/2017/10/02/easy-coding-standard-and-phpstan-meet-3-symfony-ecommerce-projects/) (2017-10)
 
 To be sure we're not making them up, you can **run them yourself on you local machine**:
 
@@ -25,8 +25,8 @@ sudo apt-get install php-bcmath php-gmp php-redis php-bz2
 Then you can install this repository:
 
 ```bash
-git clone https://github.com/TomasVotruba/shopsys-analysis.git shopsys-analysis
-cd shopsys-analysis
+git clone https://github.com/TomasVotruba/shopsys-spryker-and-sylius-analysis.git ecommerce-analysis
+cd ecommerce-analysis
 composer install
 ```
 
