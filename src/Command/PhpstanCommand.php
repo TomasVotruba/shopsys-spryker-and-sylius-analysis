@@ -77,7 +77,6 @@ final class PhpstanCommand extends Command
         $tempFile = $this->createTempFileName($name, $level);
 
         $process = new Process($commandLine . ' > ' . $tempFile, null, null, null, null);
-
         if ($this->symfonyStyle->isVerbose()) {
             $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
         }
