@@ -80,19 +80,19 @@ final class PhpStanCommand extends Command
         $process->run();
 
         $this->symfonyStyle->writeln(
-            sprintf('Level %d: %d errors', $level, $this->getErrorCountFromTempFile($tempFile))
+            sprintf('Level %s: %d errors', $level, $this->getErrorCountFromTempFile($tempFile))
         );
     }
 
     private function createTempFileName(string $name, string $level): string
     {
-        return sprintf('%s/_analyze_phpstan-%s-level-%d', sys_get_temp_dir(), strtolower($name), $level);
+        return sprintf('%s/_analyze_phpstan-%s-level-%s', sys_get_temp_dir(), strtolower($name), $level);
     }
 
     private function createCommandLine(ProjectInterface $project, string $level): string
     {
         return sprintf(
-            'vendor/bin/phpstan analyse %s --configuration %s --level %d',
+            'vendor/bin/phpstan analyse %s --configuration %s --level %s',
             implode(' ', $project->getSources()),
             $project->getPhpstanConfig(),
             $level
