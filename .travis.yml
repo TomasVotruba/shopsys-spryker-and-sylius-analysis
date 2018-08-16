@@ -17,7 +17,7 @@ install:
     - composer install
 
     # prepare projects
-    - composer download-projects
+    - bin/run prepare
 
 script:
     - bin/run analyze
