@@ -41,14 +41,14 @@ final class SyliusProject implements ProjectInterface
     public function getSources(): array
     {
         return [
-            $this->getProjectDirectory() . '/src/Sylius/Bundle',
-            $this->getProjectDirectory() . '/src/Sylius/Component',
+            realpath($this->getProjectDirectory() . '/src/Sylius/Bundle'),
+            realpath($this->getProjectDirectory() . '/src/Sylius/Component'),
         ];
     }
 
     public function getPhpstanConfig(): string
     {
-        return __DIR__ . '/../../config/phpstan/sylius.neon';
+        return realpath(__DIR__ . '/../../config/phpstan/sylius.neon');
     }
 
     /**
@@ -56,7 +56,10 @@ final class SyliusProject implements ProjectInterface
      */
     public function getEasyCodingStandardConfigs(): array
     {
-        return [__DIR__ . '/../../config/ecs/clean-code.yml', __DIR__ . '/../../config/ecs/psr2.yml'];
+        return [
+            realpath(__DIR__ . '/../../config/ecs/clean-code.yml'),
+            realpath(__DIR__ . '/../../config/ecs/psr2.yml'),
+        ];
     }
 
     /**
@@ -79,6 +82,6 @@ final class SyliusProject implements ProjectInterface
      */
     public function getProjectDirectory(): string
     {
-        return __DIR__ . '/../../project/sylius';
+        return realpath(__DIR__ . '/../../project/sylius');
     }
 }

@@ -49,7 +49,7 @@ final class SprykerProject implements ProjectInterface
 
     public function getPhpstanConfig(): string
     {
-        return __DIR__ . '/../../config/phpstan/spryker.neon';
+        return realpath(__DIR__ . '/../../config/phpstan/spryker.neon');
     }
 
     /**
@@ -57,7 +57,10 @@ final class SprykerProject implements ProjectInterface
      */
     public function getEasyCodingStandardConfigs(): array
     {
-        return [__DIR__ . '/../../config/ecs/clean-code.yml', __DIR__ . '/../../config/ecs/psr2.yml'];
+        return [
+            realpath(__DIR__ . '/../../config/ecs/clean-code.yml'),
+            realpath(__DIR__ . '/../../config/ecs/psr2.yml'),
+        ];
     }
 
     /**
@@ -80,6 +83,6 @@ final class SprykerProject implements ProjectInterface
      */
     public function getProjectDirectory(): string
     {
-        return __DIR__ . '/../../project/spryker';
+        return realpath(__DIR__ . '/../../project/spryker');
     }
 }

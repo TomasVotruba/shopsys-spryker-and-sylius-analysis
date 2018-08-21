@@ -50,7 +50,7 @@ final class ShopsysProject implements ProjectInterface
 
     public function getPhpstanConfig(): string
     {
-        return __DIR__ . '/../../config/phpstan/shopsys.neon';
+        return realpath(__DIR__ . '/../../config/phpstan/shopsys.neon');
     }
 
     /**
@@ -58,7 +58,10 @@ final class ShopsysProject implements ProjectInterface
      */
     public function getEasyCodingStandardConfigs(): array
     {
-        return [__DIR__ . '/../../config/ecs/clean-code.yml', __DIR__ . '/../../config/ecs/psr2.yml'];
+        return [
+            realpath(__DIR__ . '/../../config/ecs/clean-code.yml'),
+            realpath(__DIR__ . '/../../config/ecs/psr2.yml'),
+        ];
     }
 
     /**
@@ -85,7 +88,7 @@ final class ShopsysProject implements ProjectInterface
      */
     public function getProjectDirectory(): string
     {
-        return __DIR__ . '/../../project/shopsys';
+        return realpath(__DIR__ . '/../../project/shopsys');
     }
 
     private function prepareShopsysComposerJson(): void
@@ -99,6 +102,7 @@ final class ShopsysProject implements ProjectInterface
 
         // @todo fix install on travis
         // - https://api.github.com/repos/molaux/PostgreSearchBundle unable to install
+        // see https://github.com/TomasVotruba/shopsys-spryker-and-sylius-analysis/pull/16#issue-209768449
 
         // save
         $shopsysComposerJson = Json::encode($shopsysComposerData, Json::PRETTY);
