@@ -55,7 +55,7 @@ final class ProjectProvider
         }, $this->projects);
 
         throw new ProjectNotFoundException(sprintf(
-            'Project "%s" was not found. Available project are "%s".',
+            'Project "%s" was not found. Available projects are "%s".',
             $projectOption,
             implode('", "', $projectNames)
         ));
