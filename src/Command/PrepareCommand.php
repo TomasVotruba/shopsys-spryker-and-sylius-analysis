@@ -41,7 +41,7 @@ final class PrepareCommand extends Command
             $this->symfonyStyle->success(sprintf(
                 'Project "%s" is prepared in "%s" directory',
                 $project->getName(),
-                $project->getProjectDirectory()
+                realpath($project->getProjectDirectory())
             ));
         }
 
