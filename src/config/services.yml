@@ -5,6 +5,7 @@ services:
 
     TomasVotruba\ShopsysAnalysis\:
         resource: '../../src'
+        exclude: '../../src/Exception'
 
     # Symfony Console
     TomasVotruba\ShopsysAnalysis\Console\Application: ~

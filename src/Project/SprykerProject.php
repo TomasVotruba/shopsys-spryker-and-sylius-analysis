@@ -17,6 +17,22 @@ final class SprykerProject implements ProjectInterface
         $this->processRunner = $processRunner;
     }
 
+    /**
+     * Version of project to be checked.
+     */
+    public function getVersion(): string
+    {
+        return '2.32';
+    }
+
+    /**
+     * Url of .git repository to be cloned.
+     */
+    public function getGitRepository(): string
+    {
+        return 'https://github.com/spryker/demoshop';
+    }
+
     public function getName(): string
     {
         return 'Spryker';
@@ -50,7 +66,11 @@ final class SprykerProject implements ProjectInterface
     public function prepare(): void
     {
         $this->processRunner->runAndReport(
-            'git clone https://github.com/spryker/demoshop --depth 1 --single-branch --branch 2.32 project/spryker'
+            sprintf(
+                'git clone %s --depth 1 --single-branch --branch %s project/spryker',
+                $this->getGitRepository(),
+                $this->getVersion()
+            )
         );
         $this->processRunner->runAndReport('composer install --working-dir project/spryker --no-dev --no-interaction');
     }

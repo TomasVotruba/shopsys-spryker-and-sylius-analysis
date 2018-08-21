@@ -22,6 +22,19 @@ final class SyliusProject implements ProjectInterface
         return 'Sylius';
     }
 
+    public function getVersion(): string
+    {
+        return 'v1.2.4';
+    }
+
+    /**
+     * Url of .git repository to be cloned.
+     */
+    public function getGitRepository(): string
+    {
+        return 'https://github.com/Sylius/Sylius.git';
+    }
+
     /**
      * @return string[]
      */
@@ -52,7 +65,11 @@ final class SyliusProject implements ProjectInterface
     public function prepare(): void
     {
         $this->processRunner->runAndReport(
-            'git clone https://github.com/Sylius/Sylius.git --depth 1 --single-branch --branch v1.2.4 project/sylius'
+            sprintf(
+                'git clone %s --depth 1 --single-branch --branch %s project/sylius',
+                $this->getGitRepository(),
+                $this->getVersion()
+            )
         );
         $this->processRunner->runAndReport('composer install --working-dir project/sylius --no-dev --no-interaction');
     }

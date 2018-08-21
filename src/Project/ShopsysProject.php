@@ -19,6 +19,22 @@ final class ShopsysProject implements ProjectInterface
         $this->processRunner = $processRunner;
     }
 
+    /**
+     * Version of project to be checked.
+     */
+    public function getVersion(): string
+    {
+        return 'v7.0.0-alpha4';
+    }
+
+    /**
+     * Url of .git repository to be cloned.
+     */
+    public function getGitRepository(): string
+    {
+        return 'https://github.com/shopsys/shopsys.git';
+    }
+
     public function getName(): string
     {
         return 'Shopsys';
@@ -51,7 +67,11 @@ final class ShopsysProject implements ProjectInterface
     public function prepare(): void
     {
         $this->processRunner->runAndReport(
-            'git clone https://github.com/shopsys/shopsys.git --depth 1 --single-branch --branch v7.0.0-alpha4 project/shopsys'
+            sprintf(
+                'git clone %s --depth 1 --single-branch --branch %s project/shopsys',
+                $this->getGitRepository(),
+                $this->getVersion()
+            )
         );
 
         $this->prepareShopsysComposerJson();

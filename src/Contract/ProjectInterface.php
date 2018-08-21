@@ -7,6 +7,16 @@ interface ProjectInterface
     public function getName(): string;
 
     /**
+     * Version of project to be checked.
+     */
+    public function getVersion(): string;
+
+    /**
+     * Url of .git repository to be cloned.
+     */
+    public function getGitRepository(): string;
+
+    /**
      * What to run to download project, install dependencies and clean them up before install.
      */
     public function prepare(): void;
