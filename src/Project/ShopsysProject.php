@@ -29,7 +29,7 @@ final class ShopsysProject implements ProjectInterface
      */
     public function getSources(): array
     {
-        return [__DIR__ . '/../../project/shopsys/packages', __DIR__ . '/../../project/shopsys/project-base/src'];
+        return [$this->getProjectDirectory() . '/packages', $this->getProjectDirectory() . '/project-base/src'];
     }
 
     public function getPhpstanConfig(): string
@@ -71,7 +71,7 @@ final class ShopsysProject implements ProjectInterface
     private function prepareShopsysComposerJson(): void
     {
         // load
-        $shopsysComposerJson = FileSystem::read($this->getShopsysComposerJsonFilePath());
+        $shopsysComposerJson = FileSystem::read($this->getProjectDirectory() . '/composer.json');
         $shopsysComposerData = Json::decode($shopsysComposerJson, Json::FORCE_ARRAY);
 
         // fix long install run on Doctrine custom branch
@@ -82,11 +82,6 @@ final class ShopsysProject implements ProjectInterface
 
         // save
         $shopsysComposerJson = Json::encode($shopsysComposerData, Json::PRETTY);
-        FileSystem::write($this->getShopsysComposerJsonFilePath(), $shopsysComposerJson);
-    }
-
-    private function getShopsysComposerJsonFilePath(): string
-    {
-        return __DIR__ . '/../../project/shopsys/composer.json';
+        FileSystem::write($this->getProjectDirectory() . '/composer.json', $shopsysComposerJson);
     }
 }

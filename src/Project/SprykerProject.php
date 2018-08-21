@@ -28,7 +28,7 @@ final class SprykerProject implements ProjectInterface
     public function getSources(): array
     {
         // can be a glob for Symfony\Finder
-        return [__DIR__ . '/../../project/spryker/vendor/spryker/*/src'];
+        return [$this->getProjectDirectory() . '/vendor/spryker/*/src'];
     }
 
     public function getPhpstanConfig(): string

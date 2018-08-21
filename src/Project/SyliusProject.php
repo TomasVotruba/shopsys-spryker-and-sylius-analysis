@@ -28,8 +28,8 @@ final class SyliusProject implements ProjectInterface
     public function getSources(): array
     {
         return [
-            __DIR__ . '/../../project/sylius/src/Sylius/Bundle',
-            __DIR__ . '/../../project/sylius/src/Sylius/Component',
+            $this->getProjectDirectory() . '/src/Sylius/Bundle',
+            $this->getProjectDirectory() . '/src/Sylius/Component',
         ];
     }
 
