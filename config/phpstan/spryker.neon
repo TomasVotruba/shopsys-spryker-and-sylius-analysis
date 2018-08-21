@@ -6,6 +6,11 @@ parameters:
         # invalid reflections
         - 'project/spryker/vendor/spryker/tax-product-connector/src/Spryker/Zed/TaxProductConnector/Dependency/Facade/TaxProductConnectorToProductBridge.php'
         - 'project/spryker/vendor/spryker/zed-request/src/Spryker/Zed/ZedRequest/Dependency/Facade/NullMessenger.php'
+        - 'project/spryker/vendor/spryker/data-import/src/Spryker/Zed/DataImport/Business/Model/DataImportStep/TouchAwareStep.php'
+        - 'project/spryker/vendor/spryker/product-search/src/Spryker/Zed/ProductSearch/Communication/Table/FilterPreferencesTable.php'
+        # private package
+        - '*/project/spryker/vendor/spryker/*/src/Spryker/Zed/*'
 
-#    ignoreErrors:
-#        - "#Class [A-Za-z\\\\]+ not found and could not be autoloaded#"
+    ignoreErrors:
+        # Generated content
+        - '#(.*?)() Generated\\(.*?)#'

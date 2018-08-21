@@ -80,7 +80,7 @@ final class PhpStanCommand extends Command
         $process->run();
 
         $this->symfonyStyle->writeln(
-            sprintf('Level %s: %d errors', $level, $this->getErrorCountFromTempFile($tempFile))
+            sprintf('PHPStan Level %s: %d errors', $level, $this->getErrorCountFromTempFile($tempFile))
         );
     }
 

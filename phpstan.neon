@@ -3,3 +3,6 @@ parameters:
         # SplFileInfo phpstan bug
         - '#Array \(array<array<SplFileInfo>>\) does not accept array<int, string\|false>#'
         - '#Method TomasVotruba\\ShopsysAnalysis\\Finder\\PhpFilesFinder::findInDirectories\(\) should return array<SplFileInfo> but returns array<int, string\|false>#'
+
+        # realpaths()
+        - '#Method (.*?)() should return (.*?) but returns string|false#'

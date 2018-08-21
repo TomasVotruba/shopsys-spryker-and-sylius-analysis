@@ -11,9 +11,9 @@
         "symfony/finder": "^4.1",
         "symfony/dependency-injection": "^4.1",
         "symfony/http-kernel": "^4.1",
-        "symplify/package-builder": "^4.7",
-        "symplify/easy-coding-standard": "^4.7",
-        "symplify/coding-standard": "^4.7",
+        "symplify/package-builder": "^4.6",
+        "symplify/easy-coding-standard": "^4.6",
+        "symplify/coding-standard": "^4.6",
         "phpstan/phpstan": "^0.10.3",
         "nette/robot-loader": "^3.0",
         "nette/utils": "^2.5"
@@ -30,7 +30,5 @@
         "check-cs": "vendor/bin/ecs check bin src",
         "fix-cs": "vendor/bin/ecs check bin src --fix",
         "phpstan": "vendor/bin/phpstan analyse bin src --level max"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
