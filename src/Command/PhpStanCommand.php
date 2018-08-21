@@ -19,7 +19,7 @@ final class PhpStanCommand extends Command
     private const ERROR_COUNT_PATTERN = '#Found (?<errorCount>[0-9]+) errors#';
 
     /**
-     * @var string[]
+     * @var string[]|int[]
      * @see https://github.com/phpstan/phpstan/tree/master/conf
      */
     private $phpStanLevels = [0, 1, 2, 3, 4, 5, 6, 7, 'max'];

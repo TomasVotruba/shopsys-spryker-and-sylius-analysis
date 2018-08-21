@@ -12,7 +12,9 @@ services:
         resource: '../../src'
 
     # Symfony Console
+    TomasVotruba\ShopsysAnalysis\Console\Application: ~
     Symfony\Component\Console\Application:
+        alias: TomasVotruba\ShopsysAnalysis\Console\Application
 
     # SymfonyStyle
     Symfony\Component\Console\Style\SymfonyStyle: ~

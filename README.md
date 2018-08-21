@@ -45,6 +45,12 @@ bin/run prepare
 bin/run analyze
 ```
 
+Or limit it to single project:
+
+```bash
+bin/run analyze --project shopsys 
+```
+
 And it will print this nice summary for every project:
 
 ![Preview](docs/preview-analyze.png)
