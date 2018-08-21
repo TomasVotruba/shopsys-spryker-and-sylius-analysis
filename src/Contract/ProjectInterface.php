@@ -12,6 +12,7 @@ interface ProjectInterface
     public function prepare(): void;
 
     /**
+     * What directories should be analysed. The source code of framework/platform.
      * @return string[]
      */
     public function getSources(): array;
@@ -21,9 +22,14 @@ interface ProjectInterface
      */
     public function getProjectDirectory(): string;
 
+    /**
+     * Config that will be used for PHPStan - including autoloading and ignores.
+     */
     public function getPhpstanConfig(): string;
 
     /**
+     * Configs that will be used for EasyCodingStandard - including autoloading and ignores.
+     *
      * @return string[]
      */
     public function getEasyCodingStandardConfigs(): array;
