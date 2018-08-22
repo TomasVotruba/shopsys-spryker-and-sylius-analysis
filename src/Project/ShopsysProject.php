@@ -24,7 +24,7 @@ final class ShopsysProject implements ProjectInterface
      */
     public function getVersion(): string
     {
-        return 'v7.0.0-alpha4';
+        return 'v7.0.0-alpha5';
     }
 
     /**
