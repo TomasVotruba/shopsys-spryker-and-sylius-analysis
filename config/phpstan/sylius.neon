@@ -6,6 +6,3 @@ parameters:
         - 'project/sylius/src/Sylius/Bundle/*/test/*'
         - 'project/sylius/src/Sylius/Bundle/*/Tests/*'
         - 'project/sylius/src/Sylius/Bundle/*/spec/*'
-
-#    ignoreErrors:
-#        - "#Class [A-Za-z\\\\]+ not found and could not be autoloaded#"
