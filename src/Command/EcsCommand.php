@@ -75,10 +75,7 @@ final class EcsCommand extends Command
 
         if (! file_exists($tempFile) || ! file_get_contents($tempFile) || file_get_contents($tempFile) === '') {
             $process = $this->processFactory->createECSProcess($project, $config, $tempFile);
-
-            if ($this->symfonyStyle->isVerbose()) {
-                $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
-            }
+            $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
 
             $process->run();
         } else {

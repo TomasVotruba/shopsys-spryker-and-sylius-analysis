@@ -114,9 +114,7 @@ final class PhpStanCommand extends Command
         // @note invalidate cache form time to time
         if (! file_exists($tempFile) || ! file_get_contents($tempFile) || file_get_contents($tempFile) === '') {
             $process = $this->processFactory->createPHPStanProcess($project, $level, $tempFile);
-            if ($this->symfonyStyle->isVerbose()) {
-                $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
-            }
+            $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
 
             $process->run();
         } else {
