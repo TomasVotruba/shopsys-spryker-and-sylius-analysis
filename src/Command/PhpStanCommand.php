@@ -5,6 +5,7 @@ namespace TomasVotruba\ShopsysAnalysis\Command;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Process\Process;
@@ -17,6 +18,11 @@ final class PhpStanCommand extends Command
      * @var string
      */
     private const ERROR_COUNT_PATTERN = '#Found (?<errorCount>[0-9]+) errors#';
+
+    /**
+     * @var string
+     */
+    private const OPTION_LEVEL = 'level';
 
     /**
      * @var string[]|int[]
@@ -44,10 +50,16 @@ final class PhpStanCommand extends Command
     protected function configure(): void
     {
         $this->setName('phpstan');
+        $this->addOption(self::OPTION_LEVEL, null, InputOption::VALUE_REQUIRED, 'Run at specific of level');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        // use custom files
+        if ($input->getOption(self::OPTION_LEVEL) !== null)  {
+            $this->phpStanLevels = [$input->getOption(self::OPTION_LEVEL)];
+        }
+
         foreach ($this->projectProvider->provide() as $project) {
             $this->symfonyStyle->title($project->getName());
 

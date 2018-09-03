@@ -22,7 +22,7 @@ final class EcsCommand extends Command
     /**
      * @var string
      */
-    private const FIXABLE_ERROR_COUNT_PATTERN = '#Good news is that (?<count>[0-9]+) file#';
+    private const FIXABLE_ERROR_COUNT_PATTERN = '#(?<count>[0-9]+) files are fixable#';
 
     /**
      * @var SymfonyStyle

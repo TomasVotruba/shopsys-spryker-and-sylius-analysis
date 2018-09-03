@@ -70,6 +70,9 @@ This will run and show number of errors per level:
 
 ```bash
 bin/run phpstan
+
+# with specific level only
+bin/run phpstan --level 7
 ```
 
 And it will print summary for every project:
