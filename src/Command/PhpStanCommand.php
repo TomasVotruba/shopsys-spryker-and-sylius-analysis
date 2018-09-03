@@ -3,14 +3,13 @@
 namespace TomasVotruba\ShopsysAnalysis\Command;
 
 use Nette\Utils\Json;
-use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Process\Process;
 use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
+use TomasVotruba\ShopsysAnalysis\Process\ProcessFactory;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 use TomasVotruba\ShopsysAnalysis\Report\PhpStanReportSummary;
 
@@ -36,17 +35,28 @@ final class PhpStanCommand extends Command
      * @var ProjectProvider
      */
     private $projectProvider;
+
     /**
      * @var PhpStanReportSummary
      */
     private $phpStanReportSummary;
 
-    public function __construct(SymfonyStyle $symfonyStyle, ProjectProvider $projectProvider, PhpStanReportSummary $phpStanReportSummary)
-    {
+    /**
+     * @var ProcessFactory
+     */
+    private $processFactory;
+
+    public function __construct(
+        SymfonyStyle $symfonyStyle,
+        ProjectProvider $projectProvider,
+        PhpStanReportSummary $phpStanReportSummary,
+        ProcessFactory $processFactory
+    ) {
         parent::__construct();
         $this->symfonyStyle = $symfonyStyle;
         $this->projectProvider = $projectProvider;
         $this->phpStanReportSummary = $phpStanReportSummary;
+        $this->processFactory = $processFactory;
     }
 
     protected function configure(): void
@@ -58,7 +68,7 @@ final class PhpStanCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         // use custom files
-        if ($input->getOption(self::OPTION_LEVEL) !== null)  {
+        if ($input->getOption(self::OPTION_LEVEL) !== null) {
             $this->phpStanLevels = [$input->getOption(self::OPTION_LEVEL)];
         }
 
@@ -66,8 +76,7 @@ final class PhpStanCommand extends Command
             $this->symfonyStyle->title($project->getName());
 
             foreach ($this->phpStanLevels as $phpStanLevel) {
-                $commandLine = $this->createCommandLine($project, (string) $phpStanLevel);
-                $this->processLevel($commandLine, $project->getName(), (string) $phpStanLevel);
+                $this->processLevel($project, (string) $phpStanLevel);
             }
         }
 
@@ -81,14 +90,14 @@ final class PhpStanCommand extends Command
         return (int) $resultJson['totals']['file_errors'];
     }
 
-    private function processLevel(string $commandLine, string $name, string $level): void
+    private function processLevel(ProjectInterface $project, string $level): void
     {
-        $tempFile = $this->createTempFileName($name, $level);
+        $tempFile = $this->createTempFileName($project->getName(), $level);
 
         // the file doesn't exist or is empty → run analysis
         // @note invalidate cache form time to time
         if (! file_exists($tempFile) || ! file_get_contents($tempFile) || file_get_contents($tempFile) === '') {
-            $process = new Process($commandLine . ' > ' . $tempFile, null, null, null, null);
+            $process = $this->processFactory->createPHPStanProcess($project, $level, $tempFile);
             if ($this->symfonyStyle->isVerbose()) {
                 $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
             }
@@ -109,15 +118,5 @@ final class PhpStanCommand extends Command
     private function createTempFileName(string $name, string $level): string
     {
         return sprintf('%s/_analyze_phpstan-%s-level-%s', sys_get_temp_dir(), strtolower($name), $level);
-    }
-
-    private function createCommandLine(ProjectInterface $project, string $level): string
-    {
-        return sprintf(
-            'vendor/bin/phpstan analyse %s --configuration %s --level %s --errorFormat json',
-            implode(' ', $project->getSources()),
-            $project->getPhpstanConfig(),
-            $level
-        );
     }
 }

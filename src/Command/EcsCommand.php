@@ -8,8 +8,8 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Process\Process;
 use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
+use TomasVotruba\ShopsysAnalysis\Process\ProcessFactory;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
 
 final class EcsCommand extends Command
@@ -34,11 +34,20 @@ final class EcsCommand extends Command
      */
     private $projectProvider;
 
-    public function __construct(SymfonyStyle $symfonyStyle, ProjectProvider $projectProvider)
-    {
+    /**
+     * @var ProcessFactory
+     */
+    private $processFactory;
+
+    public function __construct(
+        SymfonyStyle $symfonyStyle,
+        ProjectProvider $projectProvider,
+        ProcessFactory $processFactory
+    ) {
+        parent::__construct();
         $this->symfonyStyle = $symfonyStyle;
         $this->projectProvider = $projectProvider;
-        parent::__construct();
+        $this->processFactory = $processFactory;
     }
 
     protected function configure(): void
@@ -52,37 +61,35 @@ final class EcsCommand extends Command
             $this->symfonyStyle->title('ECS Analysis of ' . $project->getName());
 
             foreach ($project->getEasyCodingStandardConfigs() as $config) {
-                $commandLine = $this->createCommandLine($project, $config);
-
-                $name = $this->getConfigBaseName($config);
-                $tempFile = $this->createTempFileName($project->getName(), $name);
-
-                if (! file_exists($tempFile) || ! file_get_contents($tempFile) || file_get_contents($tempFile) === '') {
-                    $process = new Process($commandLine . ' > ' . $tempFile, null, null, null, null);
-
-                    if ($this->symfonyStyle->isVerbose()) {
-                        $this->symfonyStyle->note('Running: ' . $commandLine);
-                    }
-
-                    $process->run();
-                } else {
-                    $this->symfonyStyle->note(sprintf('Using cached result file "%s". Remove it to re-run.', $tempFile));
-                }
-
-                $this->symfonyStyle->writeln(sprintf(
-                    'Config %s: %d errors',
-                    $name,
-                    $this->getErrorCountFromTempFile($tempFile)
-                ));
+                $this->processEcsConfig($project, $config);
             }
         }
 
         return 0;
     }
 
-    private function createCommandLine(ProjectInterface $project, string $config): string
+    protected function processEcsConfig(ProjectInterface $project, string $config): void
     {
-        return sprintf('vendor/bin/ecs check %s --config %s', implode(' ', $project->getSources()), $config);
+        $name = $this->getConfigBaseName($config);
+        $tempFile = $this->createTempFileName($project->getName(), $name);
+
+        if (! file_exists($tempFile) || ! file_get_contents($tempFile) || file_get_contents($tempFile) === '') {
+            $process = $this->processFactory->createECSProcess($project, $config, $tempFile);
+
+            if ($this->symfonyStyle->isVerbose()) {
+                $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
+            }
+
+            $process->run();
+        } else {
+            $this->symfonyStyle->note(sprintf('Using cached result file "%s". Remove it to re-run.', $tempFile));
+        }
+
+        $this->symfonyStyle->writeln(sprintf(
+            'Config %s: %d errors',
+            $name,
+            $this->getErrorCountFromTempFile($tempFile)
+        ));
     }
 
     private function createTempFileName(string $name, string $configName): string
