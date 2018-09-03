@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
 use TomasVotruba\ShopsysAnalysis\Process\ProcessFactory;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
@@ -21,6 +22,11 @@ final class PhpStanCommand extends Command
      * @var string
      */
     private const OPTION_LEVEL = 'level';
+
+    /**
+     * @var string
+     */
+    private const OPTION_REPORT = 'report';
 
     /**
      * @var string[]|int[]
@@ -72,6 +78,7 @@ final class PhpStanCommand extends Command
     {
         $this->setName('phpstan');
         $this->addOption(self::OPTION_LEVEL, null, InputOption::VALUE_REQUIRED, 'Run at specific of level');
+        $this->addOption(self::OPTION_REPORT, null, InputOption::VALUE_NONE, 'Show top 20 most common errors.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -85,7 +92,7 @@ final class PhpStanCommand extends Command
             $this->symfonyStyle->title($project->getName());
 
             foreach ($this->phpStanLevels as $phpStanLevel) {
-                $this->processLevel($project, (string) $phpStanLevel);
+                $this->processLevel($project, (string) $phpStanLevel, (bool) $input->getOption(self::OPTION_REPORT));
             }
         }
 
@@ -106,7 +113,7 @@ final class PhpStanCommand extends Command
         return (int) $resultJson['totals']['file_errors'];
     }
 
-    private function processLevel(ProjectInterface $project, string $level): void
+    private function processLevel(ProjectInterface $project, string $level, bool $shouldReport): void
     {
         $tempFile = $this->createTempFileName($project->getName(), $level);
 
@@ -117,6 +124,10 @@ final class PhpStanCommand extends Command
             $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
 
             $process->run();
+
+            if (! $process->isSuccessful()) {
+                throw new ProcessFailedException($process);
+            }
         } else {
             $this->symfonyStyle->note(sprintf('Using cached result file "%s". Remove it to re-run.', $tempFile));
         }
@@ -125,8 +136,17 @@ final class PhpStanCommand extends Command
             sprintf('PHPStan Level %s: %d errors', $level, $this->getErrorCountFromTempFile($tempFile))
         );
 
-        $this->phpStanReportSummary->processOutput(file_get_contents($tempFile));
-        // @todo summary report
+        if ($shouldReport) {
+            $errorsList = $this->phpStanReportSummary->processPHPStanJsonFileToErrorList($tempFile);
+
+            $errorTable = [];
+            foreach ($errorsList as $errorMessage => $errorCount) {
+                $errorTable[] = [$errorCount, $errorMessage];
+            }
+
+            $this->symfonyStyle->newLine();
+            $this->symfonyStyle->table(['Count', 'Message'], $errorTable);
+        }
     }
 
     private function createTempFileName(string $name, string $level): string
