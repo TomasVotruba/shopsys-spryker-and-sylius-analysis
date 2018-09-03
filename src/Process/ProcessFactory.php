@@ -2,6 +2,7 @@
 
 namespace TomasVotruba\ShopsysAnalysis\Process;
 
+use Nette\Utils\Strings;
 use Symfony\Component\Process\Process;
 use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
 
@@ -9,8 +10,6 @@ final class ProcessFactory
 {
     public function createPHPStanProcess(ProjectInterface $project, string $level, string $tempFile): Process
     {
-        // @todo relativize paths to CWD, to make output nicer and smaller
-
         $commandLine = sprintf(
             'vendor/bin/phpstan analyse %s --configuration %s --level %s --errorFormat json',
             implode(' ', $project->getSources()),
@@ -18,18 +17,20 @@ final class ProcessFactory
             $level
         );
 
+        $commandLine = $this->relativizePaths($commandLine);
+
         return $this->createProcessWithOutputToFile($commandLine, $tempFile);
     }
 
     public function createECSProcess(ProjectInterface $project, string $config, string $tempFile): Process
     {
-        // @todo relativize paths to CWD, to make output nicer and smaller
-
         $commandLine = sprintf(
             'vendor/bin/ecs check %s --config %s',
             implode(' ', $project->getSources()),
             $config
         );
+
+        $commandLine = $this->relativizePaths($commandLine);
 
         return $this->createProcessWithOutputToFile($commandLine, $tempFile);
     }
@@ -37,5 +38,10 @@ final class ProcessFactory
     private function createProcessWithOutputToFile(string $commandLine, string $tempFile): Process
     {
         return new Process($commandLine . ' > ' . $tempFile, null, null, null, null);
+    }
+
+    private function relativizePaths(string $commandLine): string
+    {
+        return Strings::replace($commandLine, '#' . preg_quote(getcwd()) . '\/#');
     }
 }
