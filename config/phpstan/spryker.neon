@@ -8,6 +8,7 @@ parameters:
         - 'project/spryker/vendor/spryker/zed-request/src/Spryker/Zed/ZedRequest/Dependency/Facade/NullMessenger.php'
         - 'project/spryker/vendor/spryker/data-import/src/Spryker/Zed/DataImport/Business/Model/DataImportStep/TouchAwareStep.php'
         - 'project/spryker/vendor/spryker/product-search/src/Spryker/Zed/ProductSearch/Communication/Table/FilterPreferencesTable.php'
+        - 'project/spryker/vendor/spryker/checkout/src/Spryker/Yves/Checkout/Form/Steps/PaymentForm.php'
         # private package
         - '*/project/spryker/vendor/spryker/*/src/Spryker/Zed/*'
 

@@ -57,13 +57,17 @@ final class EcsCommand extends Command
                 $name = $this->getConfigBaseName($config);
                 $tempFile = $this->createTempFileName($project->getName(), $name);
 
-                $process = new Process($commandLine . ' > ' . $tempFile, null, null, null, null);
+                if (! file_exists($tempFile) || ! file_get_contents($tempFile) || file_get_contents($tempFile) === '') {
+                    $process = new Process($commandLine . ' > ' . $tempFile, null, null, null, null);
 
-                if ($this->symfonyStyle->isVerbose()) {
-                    $this->symfonyStyle->note('Running: ' . $commandLine);
+                    if ($this->symfonyStyle->isVerbose()) {
+                        $this->symfonyStyle->note('Running: ' . $commandLine);
+                    }
+
+                    $process->run();
+                } else {
+                    $this->symfonyStyle->note(sprintf('Using cached result file "%s". Remove it to re-run.', $tempFile));
                 }
-
-                $process->run();
 
                 $this->symfonyStyle->writeln(sprintf(
                     'Config %s: %d errors',

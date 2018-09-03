@@ -2,6 +2,7 @@
 
 namespace TomasVotruba\ShopsysAnalysis\Command;
 
+use Nette\Utils\Json;
 use Nette\Utils\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,14 +12,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Process\Process;
 use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
+use TomasVotruba\ShopsysAnalysis\Report\PhpStanReportSummary;
 
 final class PhpStanCommand extends Command
 {
-    /**
-     * @var string
-     */
-    private const ERROR_COUNT_PATTERN = '#Found (?<errorCount>[0-9]+) errors#';
-
     /**
      * @var string
      */
@@ -39,12 +36,17 @@ final class PhpStanCommand extends Command
      * @var ProjectProvider
      */
     private $projectProvider;
+    /**
+     * @var PhpStanReportSummary
+     */
+    private $phpStanReportSummary;
 
-    public function __construct(SymfonyStyle $symfonyStyle, ProjectProvider $projectProvider)
+    public function __construct(SymfonyStyle $symfonyStyle, ProjectProvider $projectProvider, PhpStanReportSummary $phpStanReportSummary)
     {
+        parent::__construct();
         $this->symfonyStyle = $symfonyStyle;
         $this->projectProvider = $projectProvider;
-        parent::__construct();
+        $this->phpStanReportSummary = $phpStanReportSummary;
     }
 
     protected function configure(): void
@@ -74,26 +76,34 @@ final class PhpStanCommand extends Command
 
     private function getErrorCountFromTempFile(string $tempFile): int
     {
-        $tempFileContent = file_get_contents($tempFile);
-        $matches = Strings::match($tempFileContent, self::ERROR_COUNT_PATTERN);
+        $resultJson = Json::decode(file_get_contents($tempFile), Json::FORCE_ARRAY);
 
-        return (int) ($matches['errorCount'] ?? 0);
+        return (int) $resultJson['totals']['file_errors'];
     }
 
     private function processLevel(string $commandLine, string $name, string $level): void
     {
         $tempFile = $this->createTempFileName($name, $level);
 
-        $process = new Process($commandLine . ' > ' . $tempFile, null, null, null, null);
-        if ($this->symfonyStyle->isVerbose()) {
-            $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
-        }
+        // the file doesn't exist or is empty → run analysis
+        // @note invalidate cache form time to time
+        if (! file_exists($tempFile) || ! file_get_contents($tempFile) || file_get_contents($tempFile) === '') {
+            $process = new Process($commandLine . ' > ' . $tempFile, null, null, null, null);
+            if ($this->symfonyStyle->isVerbose()) {
+                $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
+            }
 
-        $process->run();
+            $process->run();
+        } else {
+            $this->symfonyStyle->note(sprintf('Using cached result file "%s". Remove it to re-run.', $tempFile));
+        }
 
         $this->symfonyStyle->writeln(
             sprintf('PHPStan Level %s: %d errors', $level, $this->getErrorCountFromTempFile($tempFile))
         );
+
+        $this->phpStanReportSummary->processOutput(file_get_contents($tempFile));
+        // @todo summary report
     }
 
     private function createTempFileName(string $name, string $level): string
@@ -104,7 +114,7 @@ final class PhpStanCommand extends Command
     private function createCommandLine(ProjectInterface $project, string $level): string
     {
         return sprintf(
-            'vendor/bin/phpstan analyse %s --configuration %s --level %s',
+            'vendor/bin/phpstan analyse %s --configuration %s --level %s --errorFormat json',
             implode(' ', $project->getSources()),
             $project->getPhpstanConfig(),
             $level
