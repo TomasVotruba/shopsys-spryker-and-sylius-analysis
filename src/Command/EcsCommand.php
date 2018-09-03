@@ -17,7 +17,12 @@ final class EcsCommand extends Command
     /**
      * @var string
      */
-    private const ERROR_COUNT_PATTERN = '#Found (?<errorCount>[0-9]+) errors#';
+    private const ERROR_COUNT_PATTERN = '#Found (?<count>[0-9]+) errors#';
+
+    /**
+     * @var string
+     */
+    private const FIXABLE_ERROR_COUNT_PATTERN = '#Good news is that (?<count>[0-9]+) file#';
 
     /**
      * @var SymfonyStyle
@@ -84,9 +89,11 @@ final class EcsCommand extends Command
     private function getErrorCountFromTempFile(string $tempFile): int
     {
         $tempFileContent = file_get_contents($tempFile);
-        $matches = Strings::match($tempFileContent, self::ERROR_COUNT_PATTERN);
 
-        return (int) ($matches['errorCount'] ?? 0);
+        $errorMatch = Strings::match($tempFileContent, self::ERROR_COUNT_PATTERN);
+        $fixlableErrorMatch = Strings::match($tempFileContent, self::FIXABLE_ERROR_COUNT_PATTERN);
+
+        return (int) ($errorMatch['count'] ?? 0) + (int) ($fixlableErrorMatch['count'] ?? 0);
     }
 
     private function getConfigBaseName(string $config): string
