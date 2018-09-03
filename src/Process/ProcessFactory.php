@@ -11,7 +11,7 @@ final class ProcessFactory
     public function createPHPStanProcess(ProjectInterface $project, string $level, string $tempFile): Process
     {
         $commandLine = sprintf(
-            'vendor/bin/phpstan analyse %s --configuration %s --level %s --errorFormat json',
+            'vendor/bin/phpstan analyse %s --configuration %s --level %s --error-format json',
             implode(' ', $project->getSources()),
             $project->getPhpstanConfig(),
             $level
