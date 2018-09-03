@@ -40,6 +40,10 @@ final class ProcessFactory
         return new Process($commandLine . ' > ' . $tempFile, null, null, null, null);
     }
 
+    /**
+     * This cool trick basically removed current working directory from all paths:
+     *  - /var/www/something/this-repo/bin/command   →   repo/bin/command
+     */
     private function relativizePaths(string $commandLine): string
     {
         return Strings::replace($commandLine, '#' . preg_quote(getcwd()) . '\/#');
