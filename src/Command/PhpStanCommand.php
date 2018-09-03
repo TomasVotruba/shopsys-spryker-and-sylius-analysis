@@ -3,11 +3,13 @@
 namespace TomasVotruba\ShopsysAnalysis\Command;
 
 use Nette\Utils\Json;
+use Nette\Utils\JsonException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Filesystem\Filesystem;
 use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
 use TomasVotruba\ShopsysAnalysis\Process\ProcessFactory;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
@@ -46,17 +48,24 @@ final class PhpStanCommand extends Command
      */
     private $processFactory;
 
+    /**
+     * @var Filesystem
+     */
+    private $filesystem;
+
     public function __construct(
         SymfonyStyle $symfonyStyle,
         ProjectProvider $projectProvider,
         PhpStanReportSummary $phpStanReportSummary,
-        ProcessFactory $processFactory
+        ProcessFactory $processFactory,
+        Filesystem $filesystem
     ) {
         parent::__construct();
         $this->symfonyStyle = $symfonyStyle;
         $this->projectProvider = $projectProvider;
         $this->phpStanReportSummary = $phpStanReportSummary;
         $this->processFactory = $processFactory;
+        $this->filesystem = $filesystem;
     }
 
     protected function configure(): void
@@ -85,7 +94,14 @@ final class PhpStanCommand extends Command
 
     private function getErrorCountFromTempFile(string $tempFile): int
     {
-        $resultJson = Json::decode(file_get_contents($tempFile), Json::FORCE_ARRAY);
+        try {
+            $resultJson = Json::decode(file_get_contents($tempFile), Json::FORCE_ARRAY);
+        } catch (JsonException $jsonException) {
+            // remove corrupted file and continue
+            $this->filesystem->remove($tempFile);
+
+            throw $jsonException;
+        }
 
         return (int) $resultJson['totals']['file_errors'];
     }
