@@ -42,7 +42,7 @@ final class ProcessFactory
 
     /**
      * This cool trick basically removed current working directory from all paths:
-     *  - /var/www/something/this-repo/bin/command   →   repo/bin/command
+     *  - /var/www/something/this-repo/bin/command   →   repo/bin/command.
      */
     private function relativizePaths(string $commandLine): string
     {
