@@ -75,7 +75,35 @@ final class SprykerProject implements ProjectInterface
                 $this->getVersion()
             )
         );
-        $this->processRunner->runAndReport('composer install --working-dir project/spryker --no-dev --no-interaction');
+        $this->processRunner->runAndReport('composer install --working-dir project/spryker --no-interaction');
+
+        # remove phpstan, it has another version than root one → conflicts
+        $this->processRunner->runAndReport('composer remove phpstan/phpstan');
+
+        # added on Mark's advice - https://github.com/spryker/demoshop/blob/5d8ed7405f754d9aefdad2c412a6eab1866e18c7/.travis.yml#L98-L104
+        $this->processRunner->runAndReport('vendor/bin/console transfer:generate', 'project/spryker', [
+            'APPLICATION_ENV' => 'development'
+        ]);
+//         requires database
+//        $this->processRunner->runAndReport('vendor/bin/console propel:install', 'project/spryker', [
+//            'APPLICATION_ENV' => 'development'
+//        ]);
+        $this->processRunner->runAndReport('vendor/bin/console transfer:generate', 'project/spryker', [
+            'APPLICATION_ENV' => 'development'
+        ]);
+        $this->processRunner->runAndReport('vendor/bin/console dev:ide:generate-auto-completion', 'project/spryker', [
+            'APPLICATION_ENV' => 'development'
+        ]);
+        $this->processRunner->runAndReport('vendor/bin/codecept build --ansi', 'project/spryker', [
+            'APPLICATION_ENV' => 'development'
+        ]);
+        $this->processRunner->runAndReport('vendor/bin/console transfer:databuilder:generate', 'project/spryker', [
+            'APPLICATION_ENV' => 'development'
+        ]);
+//        requires elastic search
+//        $this->processRunner->runAndReport('vendor/bin/console setup:search', 'project/spryker', [
+//            'APPLICATION_ENV' => 'development'
+//        ]);
     }
 
     /**

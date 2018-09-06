@@ -17,9 +17,13 @@ final class ProcessRunner
         $this->symfonyStyle = $symfonyStyle;
     }
 
-    public function runAndReport(string $commandLine): void
+    /**
+     * @param string|null $workingDir
+     * @param mixed[]|null $envVariables
+     */
+    public function runAndReport(string $commandLine, string $workingDir = null, array $envVariables = null): void
     {
-        $process = new Process($commandLine, null, null, null, 200.0);
+        $process = new Process($commandLine, $workingDir, $envVariables, null, 200.0);
         $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
 
         $process->run();

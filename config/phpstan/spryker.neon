@@ -9,9 +9,5 @@ parameters:
         - 'project/spryker/vendor/spryker/data-import/src/Spryker/Zed/DataImport/Business/Model/DataImportStep/TouchAwareStep.php'
         - 'project/spryker/vendor/spryker/product-search/src/Spryker/Zed/ProductSearch/Communication/Table/FilterPreferencesTable.php'
         - 'project/spryker/vendor/spryker/checkout/src/Spryker/Yves/Checkout/Form/Steps/PaymentForm.php'
-        # private package
+        # private package probably - missing "Orm\Zed\Wishlist\Persistence\Base\SpyWishlistQuery" classes
         - '*/project/spryker/vendor/spryker/*/src/Spryker/Zed/*'
-
-    ignoreErrors:
-        # Generated content
-        - '#(.*?)() Generated\\(.*?)#'
