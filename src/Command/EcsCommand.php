@@ -8,6 +8,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use TomasVotruba\ShopsysAnalysis\Contract\ProjectInterface;
 use TomasVotruba\ShopsysAnalysis\Process\ProcessFactory;
 use TomasVotruba\ShopsysAnalysis\ProjectProvider;
@@ -75,12 +76,13 @@ final class EcsCommand extends Command
 
         if (! file_exists($tempFile) || ! file_get_contents($tempFile) || file_get_contents($tempFile) === '') {
             $process = $this->processFactory->createECSProcess($project, $config, $tempFile);
-
-            if ($this->symfonyStyle->isVerbose()) {
-                $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
-            }
+            $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
 
             $process->run();
+
+            if (! $process->isSuccessful()) {
+                throw new ProcessFailedException($process);
+            }
         } else {
             $this->symfonyStyle->note(sprintf('Using cached result file "%s". Remove it to re-run.', $tempFile));
         }

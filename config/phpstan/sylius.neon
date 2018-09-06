@@ -4,5 +4,8 @@ parameters:
 
     exclude_analyse:
         - 'project/sylius/src/Sylius/Bundle/*/test/*'
+        - 'project/sylius/src/Sylius/Component/*/test/*'
         - 'project/sylius/src/Sylius/Bundle/*/Tests/*'
+        - 'project/sylius/src/Sylius/Component/*/Tests/*'
         - 'project/sylius/src/Sylius/Bundle/*/spec/*'
+        - 'project/sylius/src/Sylius/Component/*/spec/*'

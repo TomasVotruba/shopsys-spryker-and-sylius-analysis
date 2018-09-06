@@ -73,6 +73,9 @@ bin/run phpstan
 
 # with specific level only
 bin/run phpstan --level 7
+
+# with top 20 most frequent errors
+bin/run phpstan --level 7 --report
 ```
 
 And it will print summary for every project:
