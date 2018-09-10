@@ -14,10 +14,11 @@
         "symplify/package-builder": "^4.7",
         "symplify/easy-coding-standard": "^4.7",
         "symplify/coding-standard": "^4.7",
-        "phpstan/phpstan-shim": "^0.10.3",
+        "phpstan/phpstan": "^0.10.3",
         "symplify/phpstan-extensions": "@dev",
         "nette/robot-loader": "^3.1",
-        "nette/utils": "^2.5"
+        "nette/utils": "^2.5",
+        "phpstan/phpstan-doctrine": "^0.10.0"
     },
     "require-dev": {
         "tracy/tracy": "^2.5"

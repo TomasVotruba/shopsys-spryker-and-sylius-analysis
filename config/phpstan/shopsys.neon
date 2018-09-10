@@ -1,3 +1,7 @@
+includes:
+    - '../../vendor/symplify/phpstan-extensions/src/config/config.neon'
+    - '../../vendor/phpstan/phpstan-doctrine/extension.neon'
+
 parameters:
     autoload_files:
         - '%currentWorkingDirectory%/project/shopsys/vendor/autoload.php'
