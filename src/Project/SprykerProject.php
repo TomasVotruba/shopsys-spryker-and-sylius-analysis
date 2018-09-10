@@ -88,6 +88,14 @@ final class SprykerProject implements ProjectInterface
 //        $this->processRunner->runAndReport('vendor/bin/console propel:install', 'project/spryker', [
 //            'APPLICATION_ENV' => 'development'
 //        ]);
+        // split
+        $this->processRunner->runAndReport('vendor/bin/console propel:schema:copy', 'project/spryker', [
+            'APPLICATION_ENV' => 'development'
+        ]);
+        $this->processRunner->runAndReport('vendor/bin/console propel:model:build', 'project/spryker', [
+            'APPLICATION_ENV' => 'development'
+        ]);
+
         $this->processRunner->runAndReport('vendor/bin/console transfer:generate', 'project/spryker', [
             'APPLICATION_ENV' => 'development',
         ]);
