@@ -122,12 +122,7 @@ final class PhpStanCommand extends Command
         if (! file_exists($tempFile) || ! file_get_contents($tempFile) || file_get_contents($tempFile) === '') {
             $process = $this->processFactory->createPHPStanProcess($project, $level, $tempFile);
             $this->symfonyStyle->note('Running: ' . $process->getCommandLine());
-
             $process->run();
-
-            if (! $process->isSuccessful()) {
-                throw new ProcessFailedException($process);
-            }
         } else {
             $this->symfonyStyle->note(sprintf('Using cached result file "%s". Remove it to re-run.', $tempFile));
         }
