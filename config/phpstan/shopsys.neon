@@ -1,8 +1,17 @@
 includes:
     - '../../vendor/symplify/phpstan-extensions/src/config/config.neon'
+    # without 1279, with 1184
     - '../../vendor/phpstan/phpstan-doctrine/extension.neon'
 
 parameters:
+    ignoreErrors:
+        # bug in Doctrine
+        - '#Method Doctrine\\Common\\Persistence\\ObjectManager::flush\(\) invoked with 1 parameter, 0 required#'
+        # magic of Translatable
+        - '#Call to an undefined method Prezent\\Doctrine\\Translatable\\TranslationInterface::(get|set)Name\(\)#'
+        # invalid typehint in 3rd party code
+        - '#Iterating over an object of an unknown class Prezent\\Doctrine\\Translatable\\Entity\\ArrayCollection#'
+
     autoload_files:
         - '%currentWorkingDirectory%/project/shopsys/vendor/autoload.php'
         - '%currentWorkingDirectory%/project/shopsys/vendor/squizlabs/php_codesniffer/autoload.php'
@@ -20,6 +29,7 @@ parameters:
         - '%currentWorkingDirectory%/project/shopsys/packages/product-feed-heureka-delivery/src'
         - '%currentWorkingDirectory%/project/shopsys/packages/product-feed-zbozi/src'
         - '%currentWorkingDirectory%/project/shopsys/project-base/src'
+        - '%currentWorkingDirectory%/project/shopsys/vendor/prezent/doctrine-translatable/lib/'
 
     excludes_analyse:
         # this line actually doesn't work and throws 1 false positive :(
@@ -27,3 +37,5 @@ parameters:
         - '%currentWorkingDirectory%/project/shopsys/packages/*/tests/*'
         - '%currentWorkingDirectory%/project/shopsys/vendor/joschi127/doctrine-entity-override-bundle/Tests/Functional/app/AppKernel.php'
         - '%currentWorkingDirectory%/project/shopsys/project-base/src/Shopsys/ShopBundle/Controller/Test/ErrorHandlerController.php'
+        - '%currentWorkingDirectory%/project/shopsys/*/DataFixtures/*'
+        - '%currentWorkingDirectory%/project/shopsys/*/Migrations/*'
