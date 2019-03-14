@@ -22,7 +22,7 @@ final class SprykerProject implements ProjectInterface
      */
     public function getVersion(): string
     {
-        return '2.32';
+        return 'master';
     }
 
     /**
@@ -30,7 +30,7 @@ final class SprykerProject implements ProjectInterface
      */
     public function getGitRepository(): string
     {
-        return 'https://github.com/spryker/demoshop';
+        return 'https://github.com/spryker-shop/suite';
     }
 
     public function getName(): string
@@ -75,7 +75,7 @@ final class SprykerProject implements ProjectInterface
                 $this->getVersion()
             )
         );
-        $this->processRunner->runAndReport('composer install --working-dir project/spryker --no-interaction');
+        $this->processRunner->runAndReport('composer install --working-dir project/spryker --ignore-platform-reqs --no-interaction');
 
         // remove phpstan, it has another version than root one → conflicts
         $this->processRunner->runAndReport('composer remove phpstan/phpstan');
